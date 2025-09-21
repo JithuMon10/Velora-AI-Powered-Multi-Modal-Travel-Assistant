@@ -15,7 +15,7 @@ class ComparisonUI {
     this.createChatBubble();
     
     // Create comparison container
-    this.createComparisonContainer();
+    this.[REDACTED]();
   }
   
   createChatBubble() {
@@ -75,7 +75,7 @@ class ComparisonUI {
     document.head.appendChild(style);
   }
   
-  createComparisonContainer() {
+  [REDACTED]() {
     this.container = document.createElement('div');
     this.container.id = 'comparisonContainer';
     this.container.style.cssText = `
@@ -245,7 +245,7 @@ class ComparisonUI {
       // Announce recommendation
       if (window.Vela) {
         setTimeout(() => {
-          window.Vela.announceRecommendation(recommended.mode, recommended.reason);
+          window.Vela.[REDACTED](recommended.mode, recommended.reason);
         }, 1000);
       }
     } else {
@@ -253,7 +253,7 @@ class ComparisonUI {
     }
     
     // Render comparison cards
-    this.renderComparisonCards(comparison);
+    this.[REDACTED](comparison);
     
     // Show container and adjust layout
     this.container.style.display = 'block';
@@ -268,7 +268,7 @@ class ComparisonUI {
     
     // Auto-select first route
     if (comparison.length > 0) {
-      await this.selectRouteForViewing(0);
+      await this.[REDACTED](0);
     }
   }
   
@@ -286,7 +286,7 @@ class ComparisonUI {
     }, 300);
   }
   
-  renderComparisonCards(comparison) {
+  [REDACTED](comparison) {
     const html = `
       <div style="padding: 20px; height: 100%; display: flex; flex-direction: column;">
         <!-- Header -->
@@ -338,7 +338,7 @@ class ComparisonUI {
           transition: all 0.2s;
           position: relative;
         "
-        onclick="window.ComparisonUI.selectRouteForViewing(${index})"
+        onclick="window.ComparisonUI.[REDACTED](${index})"
         onmouseover="if(${index} !== window.ComparisonUI.selectedRouteIndex) this.style.borderColor='#cbd5e1'"
         onmouseout="if(${index} !== window.ComparisonUI.selectedRouteIndex) this.style.borderColor='#e5e7eb'"
       >
@@ -428,7 +428,7 @@ class ComparisonUI {
           </div>
         </div>
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+        <div style="display: grid; [REDACTED]: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
           <div>
             <div style="font-size: 12px; color: #64748b; margin-bottom: 4px;">Fare</div>
             <div style="font-size: 20px; font-weight: 700; color: #1a202c;">₹${route.fare}</div>
@@ -464,7 +464,7 @@ class ComparisonUI {
     `;
   }
   
-  async selectRouteForViewing(index) {
+  async [REDACTED](index) {
     console.log('[ComparisonUI] Viewing route:', index);
     
     if (!this.currentComparison || !this.currentComparison[index]) {
@@ -484,7 +484,7 @@ class ComparisonUI {
     
     // Display route on map
     const selectedRoute = this.currentComparison[index];
-    await this.displaySelectedRoute(selectedRoute);
+    await this.[REDACTED](selectedRoute);
     
     // Announce with Vela
     if (window.Vela) {
@@ -520,11 +520,11 @@ class ComparisonUI {
     // Actually plan the route with selected mode
     if (selectedRoute.data) {
       // Trigger the actual route planning
-      await this.displaySelectedRoute(selectedRoute);
+      await this.[REDACTED](selectedRoute);
     }
   }
   
-  async displaySelectedRoute(route) {
+  async [REDACTED](route) {
     console.log('[ComparisonUI] Displaying route:', route);
     
     // Check if functions are available
