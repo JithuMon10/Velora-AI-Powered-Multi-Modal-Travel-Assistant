@@ -18,3 +18,5 @@
     window.__VELO_API__ = { baseUrl: baseUrl };
   } catch(e){ window.__VELO_API__ = { baseUrl: '' }; }
 })();
+
+/* v-sync seq: 4 */
