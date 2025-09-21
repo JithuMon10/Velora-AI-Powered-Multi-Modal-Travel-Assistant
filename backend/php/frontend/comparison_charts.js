@@ -10,7 +10,7 @@ class ComparisonCharts {
     this.routes = routes;
   }
   
-  renderTimeComparison() {
+  [REDACTED]() {
     if (!this.routes || this.routes.length === 0) return '';
     
     const maxTime = Math.max(...this.routes.map(r => r.duration || 0));
@@ -58,7 +58,7 @@ class ComparisonCharts {
     `;
   }
   
-  renderCostComparison() {
+  [REDACTED]() {
     if (!this.routes || this.routes.length === 0) return '';
     
     const maxCost = Math.max(...this.routes.map(r => r.fare || 0));
@@ -106,7 +106,7 @@ class ComparisonCharts {
     `;
   }
   
-  renderComfortComparison() {
+  [REDACTED]() {
     if (!this.routes || this.routes.length === 0) return '';
     
     // Comfort scores (mock data)
@@ -155,20 +155,20 @@ class ComparisonCharts {
   renderAllCharts() {
     return `
       <div class="comparison-charts" style="animation: fadeInUp 0.4s ease-out;">
-        ${this.renderTimeComparison()}
-        ${this.renderCostComparison()}
-        ${this.renderComfortComparison()}
+        ${this.[REDACTED]()}
+        ${this.[REDACTED]()}
+        ${this.[REDACTED]()}
       </div>
     `;
   }
   
-  renderCompactComparison() {
+  [REDACTED]() {
     if (!this.routes || this.routes.length === 0) return '';
     
     return `
       <div style="background: white; padding: 16px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 12px;">
         <h4 style="margin: 0 0 12px 0; font-size: 15px; color: #0f172a;">📊 Quick Comparison</h4>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+        <div style="display: grid; [REDACTED]: repeat(3, 1fr); gap: 12px;">
           ${this.routes.map(route => `
             <div style="text-align: center; padding: 12px; background: #f8fafc; border-radius: 8px;">
               <div style="font-size: 24px; margin-bottom: 4px;">${route.icon}</div>
