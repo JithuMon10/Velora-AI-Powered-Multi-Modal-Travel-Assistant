@@ -187,3 +187,5 @@ class ComparisonCharts {
 window.ComparisonCharts = new ComparisonCharts();
 
 // Service loaded
+
+/* v-sync seq: 6 */
