@@ -189,3 +189,5 @@ class ComparisonEngine {
 
 window.ComparisonEngine = ComparisonEngine;
 console.log('[Comparison] Engine loaded ✅');
+
+/* v-sync seq: 7 */
