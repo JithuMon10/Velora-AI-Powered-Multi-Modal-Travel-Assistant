@@ -118,3 +118,5 @@ class CostBreakdown {
 window.CostBreakdown = new CostBreakdown();
 
 // Service loaded
+
+/* v-sync seq: 9 */
