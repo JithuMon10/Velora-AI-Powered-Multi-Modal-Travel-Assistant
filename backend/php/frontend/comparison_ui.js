@@ -606,3 +606,5 @@ class ComparisonUI {
 window.ComparisonUI = new ComparisonUI();
 
 console.log('[ComparisonUI] Loaded ✅');
+
+/* v-sync seq: 8 */
