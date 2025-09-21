@@ -107,3 +107,5 @@ function ai_log(string $label, string $prompt, string $responseSnippet = ''): vo
 }
 
 // Removed duplicate Gemini implementation; use helpers/ai.php call_gemini($prompt)
+
+/* v-sync seq: 3 */
