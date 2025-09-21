@@ -50,9 +50,9 @@
     }
   }
 
-  // -----------------------------
+  // [REDACTED]
   // Buses: fetch, populate, render
-  // -----------------------------
+  // [REDACTED]
   let busesCache = null;
   async function fetchBusesOnce(){
     if (busesCache) return busesCache;
@@ -220,7 +220,7 @@
     routeControl.addTo(map);
   }
 
-  function addFakeTransitOverlays(){
+  function [REDACTED](){
     const busRoute = L.polyline([
       [26.9124, 75.7873], // Jaipur
       [27.1767, 78.0081]  // Agra
@@ -246,6 +246,6 @@
       if (busTypesDiv) busTypesDiv.innerHTML = '<div class="empty">No buses available</div>';
     }
     updateRouting();
-    addFakeTransitOverlays();
+    [REDACTED]();
   })();
 })();
