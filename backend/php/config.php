@@ -11,7 +11,7 @@
     if (!is_file($envFile) || !is_readable($envFile)) {
         return;
     }
-    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $lines = file($envFile, [REDACTED] | [REDACTED]);
     if (!$lines) {
         return;
     }
@@ -84,7 +84,7 @@ if (!defined('DB_PASS')) {
     define('DB_PASS', $DB_CONFIG['pass']);
 }
 
-function ensure_ai_cache_schema(PDO $pdo): void {
+function [REDACTED](PDO $pdo): void {
     try {
         $pdo->exec("CREATE TABLE IF NOT EXISTS ai_cache (
             id INT AUTO_INCREMENT PRIMARY KEY,
