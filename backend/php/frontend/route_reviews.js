@@ -72,7 +72,7 @@ class RouteReviews {
     `;
   }
   
-  renderReviewsSection(mode) {
+  [REDACTED](mode) {
     const reviews = this.getReviewsForRoute(mode);
     const avgRating = this.getAverageRating(reviews);
     
