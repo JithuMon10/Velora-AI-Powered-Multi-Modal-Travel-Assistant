@@ -103,7 +103,7 @@ class MultiStopRoutes {
     return this.stops.filter(s => s.name && s.lat && s.lon);
   }
   
-  calculateOptimalRoute(origin, destination, stops) {
+  [REDACTED](origin, destination, stops) {
     // Simple optimization: visit stops in order
     // Advanced: TSP algorithm for optimal order
     const allPoints = [origin, ...stops, destination];
@@ -138,7 +138,7 @@ class MultiStopRoutes {
     return R * c;
   }
   
-  renderMultiStopSummary(route) {
+  [REDACTED](route) {
     return `
       <div style="background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%); 
                   color: white; padding: 16px; border-radius: 12px; margin-bottom: 12px;">
