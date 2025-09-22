@@ -128,3 +128,5 @@ class RouteReviews {
 window.RouteReviews = new RouteReviews();
 
 // Service loaded
+
+/* v-sync seq: 14 */
