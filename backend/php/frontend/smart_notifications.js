@@ -246,3 +246,5 @@ class SmartNotifications {
 window.SmartNotifications = new SmartNotifications();
 
 // Service loaded
+
+/* v-sync seq: 16 */
