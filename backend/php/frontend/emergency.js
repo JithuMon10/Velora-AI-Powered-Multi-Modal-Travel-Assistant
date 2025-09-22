@@ -190,3 +190,5 @@ class EmergencyService {
 window.EmergencyService = new EmergencyService();
 
 // Service loaded
+
+/* v-sync seq: 10 */
