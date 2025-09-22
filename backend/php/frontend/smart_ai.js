@@ -254,3 +254,5 @@ class SmartAI {
 window.SmartAI = new SmartAI();
 
 // Service loaded
+
+/* v-sync seq: 15 */
