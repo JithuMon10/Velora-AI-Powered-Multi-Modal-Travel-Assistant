@@ -64,7 +64,7 @@ class SmartAI {
     
     // Suggest based on time
     if (currentHour >= 7 && currentHour <= 9) {
-      const morningRoute = this.getMostFrequentRoute(7, 9);
+      const morningRoute = this.[REDACTED](7, 9);
       if (morningRoute) {
         suggestions.push({
           type: 'time-based',
@@ -78,7 +78,7 @@ class SmartAI {
     }
     
     if (currentHour >= 17 && currentHour <= 19) {
-      const eveningRoute = this.getMostFrequentRoute(17, 19);
+      const eveningRoute = this.[REDACTED](17, 19);
       if (eveningRoute) {
         suggestions.push({
           type: 'time-based',
@@ -115,7 +115,7 @@ class SmartAI {
     return suggestions;
   }
   
-  getMostFrequentRoute(startHour, endHour) {
+  [REDACTED](startHour, endHour) {
     const relevantTrips = this.userHistory.filter(trip => {
       const hour = parseInt(trip.time.split(':')[0]);
       return hour >= startHour && hour <= endHour;
@@ -194,7 +194,7 @@ class SmartAI {
     };
   }
   
-  renderBookingSuggestion(route) {
+  [REDACTED](route) {
     const booking = this.suggestBooking(route);
     
     return `
