@@ -168,3 +168,5 @@ class MultiStopRoutes {
 window.MultiStopRoutes = new MultiStopRoutes();
 
 // Service loaded
+
+/* v-sync seq: 13 */
