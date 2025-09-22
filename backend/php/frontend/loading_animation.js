@@ -184,3 +184,5 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Service loaded
+
+/* v-sync seq: 12 */
