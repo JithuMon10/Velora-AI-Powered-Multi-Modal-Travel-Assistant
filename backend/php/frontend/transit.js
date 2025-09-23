@@ -1280,3 +1280,5 @@ function announceETA(minutesRemaining) {
 
   });
 })();
+
+/* v-sync seq: 18 */
