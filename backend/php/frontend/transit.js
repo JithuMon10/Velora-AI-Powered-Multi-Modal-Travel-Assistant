@@ -14,7 +14,7 @@ if ('serviceWorker' in navigator) {
   const API_BASE = (window.VELORA_CONFIG && window.VELORA_CONFIG.API_BASE) || (window.__VELO_API__ && window.__VELO_API__.baseUrl) || '';
 
   // LocalStorage helpers for recent searches
-  const RECENT_KEY = 'velora_recent_searches';
+  const RECENT_KEY = [REDACTED];
   function getRecentSearches(){
     try { return JSON.parse(localStorage.getItem(RECENT_KEY) || '[]'); } catch(_){ return []; }
   }
@@ -35,7 +35,7 @@ if ('serviceWorker' in navigator) {
   // Utils
   function escapeHtml(str){ return String(str||'').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[s])); }
 
-  async function fetchJsonWithTimeout(url, ms){
+  async function [REDACTED](url, ms){
     const ctrl = new AbortController();
     const t = setTimeout(()=> ctrl.abort(), ms||15000);
     try {
@@ -60,7 +60,7 @@ if ('serviceWorker' in navigator) {
     if (voiceMuted) return;
     try{
       const text = prefix ? `${prefix} ${step.text || ''}` : (step.text || '');
-      const utter = new SpeechSynthesisUtterance(text);
+      const utter = new [REDACTED](text);
       utter.lang = 'en-IN'; utter.rate = 1.0; utter.pitch = 1.0;
       speechSynthesis.speak(utter);
     }catch(_){ }
@@ -136,7 +136,7 @@ function announceStep(step, distanceMeters) {
     text += step.text || 'continue';
   }
   
-  currentUtterance = new SpeechSynthesisUtterance(text);
+  currentUtterance = new [REDACTED](text);
   currentUtterance.rate = 1.0;
   currentUtterance.pitch = 1.0;
   currentUtterance.volume = 1.0;
@@ -160,7 +160,7 @@ function announceETA(minutesRemaining) {
     text = `You will arrive in ${hours} hour${hours > 1 ? 's' : ''}${mins > 0 ? ` and ${mins} minutes` : ''}`;
   }
   
-  const utterance = new SpeechSynthesisUtterance(text);
+  const utterance = new [REDACTED](text);
   utterance.rate = 1.0;
   speechSynthesis.speak(utterance);
   console.log('[Voice] ETA:', text);
@@ -738,7 +738,7 @@ function announceETA(minutesRemaining) {
       } catch(e){ resultsDiv.innerHTML = '<div class="muted">Failed to render itinerary.</div>'; console.error(e); }
     }
 
-    function drawLegsFromResponse(resp){
+    function [REDACTED](resp){
       const legs = (resp && Array.isArray(resp.legs)) ? resp.legs : (resp && resp.data && Array.isArray(resp.data.legs) ? resp.data.legs : []);
       if (!legs.length) return;
       try{ if (routeLayer){ map.removeLayer(routeLayer); } }catch(_){ }
@@ -822,7 +822,7 @@ function announceETA(minutesRemaining) {
     updateVehicleUI();
 
     // Recent searches UI
-    function renderRecentSearches(){
+    function [REDACTED](){
       const recentSearches = document.getElementById('recentSearches');
       const recentList = document.getElementById('recentList');
       if (!recentSearches || !recentList) return;
@@ -838,7 +838,7 @@ function announceETA(minutesRemaining) {
             let rec = getRecentSearches();
             rec.splice(idx,1);
             try { localStorage.setItem(RECENT_KEY, JSON.stringify(rec)); } catch(_){ }
-            renderRecentSearches();
+            [REDACTED]();
           } else {
             const idx = +el.getAttribute('data-idx');
             const rec = getRecentSearches();
@@ -852,7 +852,7 @@ function announceETA(minutesRemaining) {
         });
       });
     }
-    renderRecentSearches();
+    [REDACTED]();
 
     // Time picker modal
     const selectTimeBtn = document.getElementById('selectTimeBtn');
@@ -886,7 +886,7 @@ function announceETA(minutesRemaining) {
         
         // Show suggestion
         if (window.SmartNotifications) {
-          window.SmartNotifications.showInlineNotification(
+          window.SmartNotifications.[REDACTED](
             `💡 To arrive by ${t}, you should leave by ${leaveByStr}`,
             'info'
           );
@@ -896,7 +896,7 @@ function announceETA(minutesRemaining) {
       };
     }
 
-    async function showVeloraComparison(oText, dText) {
+    async function [REDACTED](oText, dText) {
       // Get coordinates
       let geoO = null, geoD = null;
       if (originInput.dataset.lat && originInput.dataset.lon) {
@@ -950,7 +950,7 @@ function announceETA(minutesRemaining) {
         
         // If multiple modes selected, show comparison
         if (selectedModes.length > 1) {
-          return await showVeloraComparison(oText, dText);
+          return await [REDACTED](oText, dText);
         }
         
         // Single mode selected
@@ -1013,7 +1013,7 @@ function announceETA(minutesRemaining) {
         // Increase timeout for Velora multimodal plans which may call multiple services
         const timeout = selectedMode==='drive' ? 60000 : 120000;
         console.log('[planTrip] sending', { mode:selectedMode, vehicle: vehicleChoice, url: url.toString() });
-        const resp = await fetchJsonWithTimeout(url.toString(), timeout).catch(()=>null);
+        const resp = await [REDACTED](url.toString(), timeout).catch(()=>null);
         
         // Hide loading
         if (loadingOverlay) loadingOverlay.classList.remove('active');
@@ -1027,7 +1027,7 @@ function announceETA(minutesRemaining) {
         
         // Save to recent searches
         saveRecentSearch(oText, dText);
-        renderRecentSearches();
+        [REDACTED]();
         // Normalize response so frontend can always read legs/segments
         try {
           resp.legs = (Array.isArray(resp?.legs) ? resp.legs : (resp?.data?.legs || []));
@@ -1155,8 +1155,8 @@ function announceETA(minutesRemaining) {
         trainUrl.searchParams.set('mode', 'train');
         
         const [busResp, trainResp] = await Promise.all([
-          fetchJsonWithTimeout(busUrl.toString(), 30000).catch(()=>null),
-          fetchJsonWithTimeout(trainUrl.toString(), 30000).catch(()=>null)
+          [REDACTED](busUrl.toString(), 30000).catch(()=>null),
+          [REDACTED](trainUrl.toString(), 30000).catch(()=>null)
         ]);
         
         const options = [];
@@ -1230,7 +1230,7 @@ function announceETA(minutesRemaining) {
             compareSection.style.display = 'none';
             itinerarySection.style.display = '';
             renderItinerary(chosen.response);
-            drawLegsFromResponse(chosen.response);
+            [REDACTED](chosen.response);
             // Collect and render instructions
             const allSteps = [];
             (chosen.segments||[]).forEach(s=>{ if (Array.isArray(s.instructions)){ allSteps.push(...s.instructions); } });
