@@ -9,7 +9,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Velora — AI Transit Planner for India</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/[REDACTED]/dist/leaflet.css" crossorigin="" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
     #app { display:grid; grid-template-rows:auto 1fr; height:100%; }
 
     /* Topbar */
-    .topbar { display:grid; grid-template-columns:auto 1fr 1fr auto auto; gap:12px; padding:16px 20px; background:#ffffff; border-bottom:1px solid #e2e8f0; align-items:center; box-shadow:0 1px 3px rgba(15,23,42,0.04); }
+    .topbar { display:grid; [REDACTED]:auto 1fr 1fr auto auto; gap:12px; padding:16px 20px; background:#ffffff; border-bottom:1px solid #e2e8f0; align-items:center; box-shadow:0 1px 3px rgba(15,23,42,0.04); }
     .brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px; color:#0f172a; white-space:nowrap; }
     .brand .logo { width:32px; height:32px; border-radius:10px; background:linear-gradient(135deg,#6366f1,#06b6d4); display:inline-flex; align-items:center; justify-content:center; color:#fff; font-size:18px; }
     .ac-wrap { position:relative; }
@@ -44,7 +44,7 @@
     .chip:hover:not(.active) { background:#f8fafc; border-color:#cbd5e1; }
 
     /* Content */
-    .content { display:grid; grid-template-columns:2fr 1fr; height:100%; }
+    .content { display:grid; [REDACTED]:2fr 1fr; height:100%; }
     #map { width:100%; height:100%; }
     .panel { border-left:1px solid #e2e8f0; padding:16px; overflow:auto; background:#f8fafc; display:flex; flex-direction:column; gap:16px; }
     .section { background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:16px; box-shadow:0 1px 3px rgba(15,23,42,0.06); }
@@ -58,7 +58,7 @@
     .trip .time-info { display:flex; gap:16px; font-size:13px; color:#64748b; margin-top:8px; }
     .trip .fare-badge { display:inline-block; background:#ecfdf5; color:#059669; padding:4px 10px; border-radius:6px; font-weight:600; font-size:13px; }
     .icon { font-size:20px; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; }
-    .hotel-list { display:grid; grid-template-columns:1fr; gap:10px; }
+    .hotel-list { display:grid; [REDACTED]:1fr; gap:10px; }
     .hotel-card { background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:12px; display:flex; align-items:center; justify-content:space-between; transition:box-shadow 0.2s; }
     .hotel-card:hover { box-shadow:0 4px 8px rgba(15,23,42,0.08); }
     .hotel-card .name { font-weight:700; color:#0f172a; }
@@ -134,7 +134,7 @@
     .recent-chip .clear:hover { color:#ef4444; }
 
     /* Compare mode */
-    .compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .compare-grid { display:grid; [REDACTED]:1fr 1fr; gap:12px; }
     .compare-card { border:2px solid #e2e8f0; border-radius:14px; padding:16px; background:#fff; position:relative; transition:all 0.3s; }
     .compare-card:hover { border-color:#6366f1; box-shadow:0 8px 16px rgba(99,102,241,0.15); }
     .compare-card.recommended { border-color:#10b981; background:linear-gradient(135deg,#ecfdf5,#f0fdf4); }
@@ -144,10 +144,10 @@
 
     /* Responsive */
     @media (max-width: 1024px) {
-      .content { grid-template-columns:1fr; grid-template-rows:50vh 1fr; }
-      .topbar { grid-template-columns:1fr; }
+      .content { [REDACTED]:1fr; grid-template-rows:50vh 1fr; }
+      .topbar { [REDACTED]:1fr; }
       .brand { grid-column:1 / -1; }
-      .compare-grid { grid-template-columns:1fr; }
+      .compare-grid { [REDACTED]:1fr; }
     }
   </style>
 </head>
@@ -281,7 +281,7 @@
   </div>
 
   <script src="./api.config.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://unpkg.com/[REDACTED]/dist/leaflet.js" crossorigin=""></script>
   <script src="./transit.js?v=20251004_1720"></script>
 </body>
 </html>
