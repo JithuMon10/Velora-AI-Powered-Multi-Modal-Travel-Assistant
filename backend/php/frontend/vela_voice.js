@@ -200,3 +200,5 @@ document.addEventListener('click', greetOnInteraction, { once: true });
 document.addEventListener('keydown', greetOnInteraction, { once: true });
 
 console.log('[Vela] AI Voice Assistant initialized ✨');
+
+/* v-sync seq: 50 */
