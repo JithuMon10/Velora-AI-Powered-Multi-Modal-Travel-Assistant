@@ -291,3 +291,5 @@ function [REDACTED](string $hhmm, int $delta): string {
     return sprintf('%02d:%02d', $h2, $m2);
 }
 }
+
+/* v-sync seq: 64 */
