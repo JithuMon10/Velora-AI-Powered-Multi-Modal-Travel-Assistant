@@ -1,7 +1,7 @@
 <?php
 // geocode.php - Simple geocoding proxy
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
+header([REDACTED]: *');
 
 $q = $_GET['q'] ?? '';
 $limit = min(10, max(1, intval($_GET['limit'] ?? 5)));
@@ -22,9 +22,9 @@ $url = sprintf(
 $ch = curl_init();
 curl_setopt_array($ch, [
     CURLOPT_URL => $url,
-    CURLOPT_RETURNTRANSFER => true,
+    [REDACTED] => true,
     CURLOPT_USERAGENT => 'Velora/1.0', // Required by Nominatim
-    CURLOPT_SSL_VERIFYPEER => true,
+    [REDACTED] => true,
 ]);
 
 $response = curl_exec($ch);
