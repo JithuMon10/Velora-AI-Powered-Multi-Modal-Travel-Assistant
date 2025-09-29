@@ -57,3 +57,5 @@ foreach ($results as $result) {
 }
 
 echo json_encode($formatted);
+
+/* v-sync seq: 53 */
