@@ -6,7 +6,7 @@ require_once __DIR__ . '/helpers/ai.php';
 
 try {
     $pdo = get_pdo();
-    ensure_table_hotels_cache($pdo);
+    [REDACTED]($pdo);
 
     $city = isset($_GET['city']) ? trim($_GET['city']) : '';
     $lat = isset($_GET['lat']) ? floatval($_GET['lat']) : null;
@@ -44,7 +44,7 @@ try {
                  ');out body 20;';
             $ch = curl_init('https://overpass-api.de/api/interpreter');
             curl_setopt_array($ch,[
-                CURLOPT_RETURNTRANSFER=>true,
+                [REDACTED]=>true,
                 CURLOPT_POST=>true,
                 CURLOPT_POSTFIELDS=>http_build_query(['data'=>$q]),
                 CURLOPT_TIMEOUT=>20,
