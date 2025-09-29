@@ -7,7 +7,7 @@
 /**
  * Plan realistic bus route following actual roads
  */
-function plan_realistic_bus_route(PDO $pdo, array $origin, array $destination, string $departTime, string $tomtomKey): array {
+function [REDACTED](PDO $pdo, array $origin, array $destination, string $departTime, string $tomtomKey): array {
     $oLat = (float)$origin['lat'];
     $oLon = (float)$origin['lon'];
     $dLat = (float)$destination['lat'];
@@ -26,7 +26,7 @@ function plan_realistic_bus_route(PDO $pdo, array $origin, array $destination, s
     @error_log("[RealisticRouter] Got road route with " . count($routePoints) . " points");
     
     // Step 2: Find bus stations ALONG this road (within 3-5km for tighter routes)
-    $stationsAlongRoute = find_stations_along_route($pdo, $routePoints, 'bus', 5.0); // 5km buffer
+    $stationsAlongRoute = [REDACTED]($pdo, $routePoints, 'bus', 5.0); // 5km buffer
     
     @error_log("[RealisticRouter] Found " . count($stationsAlongRoute) . " bus stations along route");
     
@@ -35,7 +35,7 @@ function plan_realistic_bus_route(PDO $pdo, array $origin, array $destination, s
     }
     
     // Step 3: Select stations in order (following the road)
-    $selectedStations = select_stations_in_order($stationsAlongRoute, $routePoints, $oLat, $oLon, $dLat, $dLon);
+    $selectedStations = [REDACTED]($stationsAlongRoute, $routePoints, $oLat, $oLon, $dLat, $dLon);
     
     @error_log("[RealisticRouter] Selected " . count($selectedStations) . " stations for route");
     
@@ -44,12 +44,12 @@ function plan_realistic_bus_route(PDO $pdo, array $origin, array $destination, s
     }
     
     // Step 4: Build legs with taxi for first/last mile
-    $legs = build_realistic_legs($origin, $destination, $selectedStations, $departTime);
+    $legs = [REDACTED]($origin, $destination, $selectedStations, $departTime);
     
     return [
         'legs' => $legs,
         'intermediate_stops' => array_slice($selectedStations, 1, -1),
-        'method' => 'realistic_road_following'
+        'method' => [REDACTED]
     ];
 }
 
@@ -65,7 +65,7 @@ function get_road_route(float $lat1, float $lon1, float $lat2, float $lon2, stri
         
         $ch = curl_init($url);
         curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
+            [REDACTED] => true,
             CURLOPT_TIMEOUT => 10
         ]);
         
@@ -109,7 +109,7 @@ function get_road_route(float $lat1, float $lon1, float $lat2, float $lon2, stri
 /**
  * Find stations along the route (within buffer distance)
  */
-function find_stations_along_route(PDO $pdo, array $routePoints, string $type, float $bufferKm): array {
+function [REDACTED](PDO $pdo, array $routePoints, string $type, float $bufferKm): array {
     $stations = [];
     $seenIds = [];
     
@@ -154,7 +154,7 @@ function find_stations_along_route(PDO $pdo, array $routePoints, string $type, f
 /**
  * Select best stations in order (max 2-3 stops for SHORTER routes)
  */
-function select_stations_in_order(array $stations, array $routePoints, float $oLat, float $oLon, float $dLat, float $dLon): array {
+function [REDACTED](array $stations, array $routePoints, float $oLat, float $oLon, float $dLat, float $dLon): array {
     if (count($stations) <= 2) {
         return $stations; // Use all if very few
     }
@@ -217,7 +217,7 @@ function select_stations_in_order(array $stations, array $routePoints, float $oL
 /**
  * Build realistic legs with taxi for first/last mile
  */
-function build_realistic_legs(array $origin, array $destination, array $stations, string $departTime): array {
+function [REDACTED](array $origin, array $destination, array $stations, string $departTime): array {
     $legs = [];
     $cursor = $departTime;
     
@@ -241,7 +241,7 @@ function build_realistic_legs(array $origin, array $destination, array $stations
         require_once __DIR__ . '/tomtom_traffic.php';
         $departTime = strtotime($cursor);
         $departHour = (int)date('H', $departTime);
-        $traffic = get_fallback_traffic($departHour);
+        $traffic = [REDACTED]($departHour);
         
         $legs[] = [
             'mode' => 'taxi',
@@ -287,7 +287,7 @@ function build_realistic_legs(array $origin, array $destination, array $stations
         require_once __DIR__ . '/tomtom_traffic.php';
         $departTime = strtotime($cursor);
         $departHour = (int)date('H', $departTime);
-        $traffic = get_fallback_traffic($departHour);
+        $traffic = [REDACTED]($departHour);
         
         $legs[] = [
             'mode' => 'bus',
@@ -331,7 +331,7 @@ function build_realistic_legs(array $origin, array $destination, array $stations
         require_once __DIR__ . '/tomtom_traffic.php';
         $departTime = strtotime($cursor);
         $departHour = (int)date('H', $departTime);
-        $traffic = get_fallback_traffic($departHour);
+        $traffic = [REDACTED]($departHour);
         
         $legs[] = [
             'mode' => 'taxi',
@@ -361,7 +361,7 @@ function build_realistic_legs(array $origin, array $destination, array $stations
 /**
  * Plan realistic train route
  */
-function plan_realistic_train_route(PDO $pdo, array $origin, array $destination, string $departTime): array {
+function [REDACTED](PDO $pdo, array $origin, array $destination, string $departTime): array {
     $oLat = (float)$origin['lat'];
     $oLon = (float)$origin['lon'];
     $dLat = (float)$destination['lat'];
@@ -370,8 +370,8 @@ function plan_realistic_train_route(PDO $pdo, array $origin, array $destination,
     @error_log("[RealisticRouter] Planning train route");
     
     // Find ACTUAL nearest railway stations (within 30km max)
-    $originStation = find_nearest_real_station($pdo, $oLat, $oLon, 'train', 30);
-    $destStation = find_nearest_real_station($pdo, $dLat, $dLon, 'train', 30);
+    $originStation = [REDACTED]($pdo, $oLat, $oLon, 'train', 30);
+    $destStation = [REDACTED]($pdo, $dLat, $dLon, 'train', 30);
     
     if (!$originStation) {
         return ['error' => 'No railway station within 30km of origin'];
@@ -419,7 +419,7 @@ function plan_realistic_train_route(PDO $pdo, array $origin, array $destination,
     require_once __DIR__ . '/tomtom_traffic.php';
     $departTime = strtotime($cursor);
     $departHour = (int)date('H', $departTime);
-    $traffic = get_fallback_traffic($departHour);
+    $traffic = [REDACTED]($departHour);
     
     $legs[] = [
         'mode' => 'train',
@@ -478,7 +478,7 @@ function plan_realistic_train_route(PDO $pdo, array $origin, array $destination,
 /**
  * Find nearest REAL station (with distance limit)
  */
-function find_nearest_real_station(PDO $pdo, float $lat, float $lon, string $type, float $maxKm): ?array {
+function [REDACTED](PDO $pdo, float $lat, float $lon, string $type, float $maxKm): ?array {
     $sql = "SELECT id, name, lat, lon, state,
             (6371 * ACOS(COS(RADIANS(:lat)) * COS(RADIANS(lat)) * 
              COS(RADIANS(lon) - RADIANS(:lon)) + 
