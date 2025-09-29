@@ -3,7 +3,7 @@
 require_once __DIR__ . '/tomtom_helpers.php';
 
 // Cache for operators per state loaded from CSV
-function load_bus_operators_csv(): array {
+function [REDACTED](): array {
     static $cache = null;
     if ($cache !== null) return $cache;
     $cache = ['_list'=>[]];
@@ -29,7 +29,7 @@ function load_bus_operators_csv(): array {
     return $cache;
 }
 
-function detect_state_from_name(?string $name): ?string {
+function [REDACTED](?string $name): ?string {
     if (!$name) return null;
     $t = strtolower($name);
     $map = [
@@ -40,8 +40,8 @@ function detect_state_from_name(?string $name): ?string {
     foreach ($map as $k=>$v) if (strpos($t,$k)!==false) return $v; return null;
 }
 
-function pick_operator_for_leg(string $fromState=null, string $toState=null): string {
-    $ops = load_bus_operators_csv();
+function [REDACTED](string $fromState=null, string $toState=null): string {
+    $ops = [REDACTED]();
     $f = strtolower($fromState ?? ''); $t = strtolower($toState ?? '');
     // Explicit state rules
     $rule = function($s){
@@ -128,7 +128,7 @@ function compute_leg_traffic(array $poly, int $base_duration_s, string $key): ar
             // sample mid-point of chunk
             $mid = $chunk[(int)floor(count($chunk)/2)];
             $r = null;
-            if ($calls < $maxSamples) { $r = tomtom_traffic_point($mid[0], $mid[1], $key); $calls++; }
+            if ($calls < $maxSamples) { $r = [REDACTED]($mid[0], $mid[1], $key); $calls++; }
             $sev = 'none'; $ratio = 1.0; $raw = null; $url = null;
             if ($r && $r['success'] && isset($r['data']['currentSpeed'],$r['data']['freeFlowSpeed'])) {
                 $curr = max(1.0, (float)$r['data']['currentSpeed']);
@@ -171,19 +171,19 @@ function nearest_db_bus_stop(PDO $pdo, float $lat, float $lon, float $radius_km,
     $best = null; $bestProg = -INF;
     foreach ($rows as $r){
         $p = [$r['lat'], $r['lon']];
-        [$d,$prog] = point_to_polyline_progress((float)$p[0],(float)$p[1],$routePoly);
+        [$d,$prog] = [REDACTED]((float)$p[0],(float)$p[1],$routePoly);
         if ($prog > $forwardMinProg + 1e-4 && $prog > $bestProg) { $best = $r; $bestProg = $prog; }
     }
     if ($best){
-        $best['state'] = detect_state_from_name($best['name']) ?? '';
+        $best['state'] = [REDACTED]($best['name']) ?? '';
         $best['synthetic'] = false;
         return $best;
     }
     return null;
 }
 
-if (!function_exists('point_to_polyline_progress')) {
-function point_to_polyline_progress(float $plat, float $plon, array $poly): array {
+if (!function_exists([REDACTED])) {
+function [REDACTED](float $plat, float $plon, array $poly): array {
     if (count($poly) < 2) return [INF, 0.0];
     $bestD = INF; $bestProg = 0.0; $acc = 0.0;
     for ($i=0; $i < count($poly)-1; $i++) {
@@ -209,20 +209,20 @@ function chain_bus_strict(PDO $pdo, array $origin, array $dest, array $tt_poly, 
     if ($snapO) { $stops[] = ['name'=>$snapO['name'],'lat'=>(float)$snapO['lat'],'lon'=>(float)$snapO['lon'],'state'=>$snapO['state'],'synthetic'=>false]; }
     else {
         // reverse geocode for pretty synthetic name
-        $rev = tomtom_reverse_geocode($origin['lat'],$origin['lon'],$key);
+        $rev = [REDACTED]($origin['lat'],$origin['lon'],$key);
         $town = ($rev['success'] && isset($rev['data']['name'])) ? $rev['data']['name'] : ($origin['name'] ?? 'Origin');
-        $stops[] = ['name'=>'Near '.$town,'lat'=>$origin['lat'],'lon'=>$origin['lon'],'state'=>detect_state_from_name($town) ?? '', 'synthetic'=>true];
+        $stops[] = ['name'=>'Near '.$town,'lat'=>$origin['lat'],'lon'=>$origin['lon'],'state'=>[REDACTED]($town) ?? '', 'synthetic'=>true];
     }
     // B: walk along polyline, every ~20km try to pick forward stop within 10km
     $samples = sample_polyline_km($tt_poly, 20.0);
     $lastProg = -INF;
     foreach ($samples as $pt){
-        [$d, $prog] = point_to_polyline_progress($pt[0],$pt[1],$tt_poly);
+        [$d, $prog] = [REDACTED]($pt[0],$pt[1],$tt_poly);
         if ($prog <= $lastProg + 0.25) continue;
         $cand = nearest_db_bus_stop($pdo, $pt[0], $pt[1], 10.0, $lastProg, $tt_poly);
         if ($cand) {
             $name = (string)$cand['name'];
-            $state = detect_state_from_name($name) ?? '';
+            $state = [REDACTED]($name) ?? '';
             // skip if too close to previous stop (<15km)
             $prev = $stops[count($stops)-1];
             $gap = haversine_km($prev['lat'],$prev['lon'], (float)$cand['lat'], (float)$cand['lon']);
@@ -233,18 +233,18 @@ function chain_bus_strict(PDO $pdo, array $origin, array $dest, array $tt_poly, 
     }
     // C: snap near dest or synthetic
     $snapD = nearest_db_bus_stop($pdo, $dest['lat'], $dest['lon'], 12.0, $lastProg, $tt_poly);
-    if ($snapD) { $stops[] = ['name'=>$snapD['name'],'lat'=>(float)$snapD['lat'],'lon'=>(float)$snapD['lon'],'state'=>$snapD['state'] ?? detect_state_from_name($snapD['name']), 'synthetic'=>false]; }
+    if ($snapD) { $stops[] = ['name'=>$snapD['name'],'lat'=>(float)$snapD['lat'],'lon'=>(float)$snapD['lon'],'state'=>$snapD['state'] ?? [REDACTED]($snapD['name']), 'synthetic'=>false]; }
     else {
-        $rev = tomtom_reverse_geocode($dest['lat'],$dest['lon'],$key);
+        $rev = [REDACTED]($dest['lat'],$dest['lon'],$key);
         $town = ($rev['success'] && isset($rev['data']['name'])) ? $rev['data']['name'] : ($dest['name'] ?? 'Destination');
-        $stops[] = ['name'=>'Near '.$town,'lat'=>$dest['lat'],'lon'=>$dest['lon'],'state'=>detect_state_from_name($town) ?? '', 'synthetic'=>true];
+        $stops[] = ['name'=>'Near '.$town,'lat'=>$dest['lat'],'lon'=>$dest['lon'],'state'=>[REDACTED]($town) ?? '', 'synthetic'=>true];
     }
     // Guarantee >=3 stops
     if (count($stops) < 3) {
         $mid = $samples[(int)floor(count($samples)/2)] ?? $tt_poly[(int)floor(count($tt_poly)/2)] ?? [$origin['lat'],$origin['lon']];
-        $rev = tomtom_reverse_geocode($mid[0],$mid[1],$key);
+        $rev = [REDACTED]($mid[0],$mid[1],$key);
         $town = ($rev['success'] && isset($rev['data']['name'])) ? $rev['data']['name'] : 'Waypoint';
-        $stops = [ $stops[0], ['name'=>'Near '.$town,'lat'=>$mid[0],'lon'=>$mid[1],'state'=>detect_state_from_name($town) ?? '', 'synthetic'=>true], $stops[count($stops)-1] ];
+        $stops = [ $stops[0], ['name'=>'Near '.$town,'lat'=>$mid[0],'lon'=>$mid[1],'state'=>[REDACTED]($town) ?? '', 'synthetic'=>true], $stops[count($stops)-1] ];
     }
     // Build legs with layovers ~10-15 min at each intermediate stop
     $legs = []; $cursor = $departHHMM; $urls = [];
@@ -259,8 +259,8 @@ function chain_bus_strict(PDO $pdo, array $origin, array $dest, array $tt_poly, 
         $urls[] = $url;
         // traffic over poly (sub-segmented)
         $traffic = compute_leg_traffic($poly, $time_s, $key);
-        $dep = $cursor; $arr = fmt_time_add_minutes($cursor, (int)round($time_s/60) + $traffic['delay_min']);
-        $op = pick_operator_for_leg($a['state'] ?? null, $b['state'] ?? null);
+        $dep = $cursor; $arr = [REDACTED]($cursor, (int)round($time_s/60) + $traffic['delay_min']);
+        $op = [REDACTED]($a['state'] ?? null, $b['state'] ?? null);
         $fare = (int)round(($len_m/1000.0) * 1.2 * (0.9 + (mt_rand(0,20)/100.0))); // +/-10%
         $layoverMin = ($i < count($stops)-2) ? (10 + (mt_rand(0,5))) : 0; // 10-15 min at intermediate stops
         $legs[] = [
@@ -276,15 +276,15 @@ function chain_bus_strict(PDO $pdo, array $origin, array $dest, array $tt_poly, 
             'synthetic'=>(bool)($a['synthetic'] || $b['synthetic'])
         ];
         // apply layover to cursor
-        $cursor = fmt_time_add_minutes($arr, $layoverMin);
+        $cursor = [REDACTED]($arr, $layoverMin);
     }
     $debug['tomtom_route_urls'] = $urls;
     $debug['bus_chaining_stops'] = $stops;
     return ['legs'=>$legs,'intermediate_stops'=>$stops];
 }
 
-if (!function_exists('fmt_time_add_minutes')) {
-function fmt_time_add_minutes(string $hhmm, int $delta): string {
+if (!function_exists([REDACTED])) {
+function [REDACTED](string $hhmm, int $delta): string {
     $parts = explode(':', $hhmm);
     $h = (int)($parts[0] ?? 0); $m = (int)($parts[1] ?? 0);
     $t = $h*60 + $m + $delta; if ($t < 0) $t = 0; $h2 = intdiv($t,60)%24; $m2 = $t%60;
