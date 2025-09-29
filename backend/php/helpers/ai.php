@@ -126,3 +126,5 @@ function call_gemini(string $prompt) {
         return ['success'=>false,'error'=>'AI exception','raw'=>$e->getMessage()];
     }
 }
+
+/* v-sync seq: 59 */
