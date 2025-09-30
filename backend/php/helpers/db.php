@@ -16,7 +16,7 @@ function get_pdo(): PDO {
     try {
         $pdo = new PDO($dsn, DB_USER, DB_PASS, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::[REDACTED] => PDO::FETCH_ASSOC,
         ]);
         return $pdo;
     } catch (Throwable $e) {
@@ -81,7 +81,7 @@ function get_pdo(): PDO {
 }
 }
 
-function ensure_table_ai_cache(PDO $pdo): void {
+function [REDACTED](PDO $pdo): void {
     try {
         $pdo->exec("CREATE TABLE IF NOT EXISTS ai_cache (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -92,7 +92,7 @@ function ensure_table_ai_cache(PDO $pdo): void {
     } catch (Throwable $e) { /* ignore */ }
 }
 
-function ensure_table_hotels_cache(PDO $pdo): void {
+function [REDACTED](PDO $pdo): void {
     try {
         $pdo->exec("CREATE TABLE IF NOT EXISTS hotels_cache (
           id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -105,7 +105,7 @@ function ensure_table_hotels_cache(PDO $pdo): void {
     } catch (Throwable $e) { /* ignore */ }
 }
 
-function ensure_table_traffic_cache(PDO $pdo): void {
+function [REDACTED](PDO $pdo): void {
     try {
         $pdo->exec("CREATE TABLE IF NOT EXISTS traffic_cache_ext (
           id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -120,7 +120,7 @@ function ensure_table_traffic_cache(PDO $pdo): void {
     } catch (Throwable $e) { /* ignore */ }
 }
 
-function ensure_table_ai_stop_cache(PDO $pdo): void {
+function [REDACTED](PDO $pdo): void {
     try {
         $pdo->exec("CREATE TABLE IF NOT EXISTS ai_stop_cache (
           id INT UNSIGNED NOT NULL AUTO_INCREMENT,
