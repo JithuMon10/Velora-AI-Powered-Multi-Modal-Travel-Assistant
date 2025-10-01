@@ -29,3 +29,5 @@ Provide version of Operating system, JVM and GraphHopper
 If applicable, add screenshots and log output.
 
 In case of a routing problem include a link to [GraphHopper Maps](https://graphhopper.com/maps/). Also tell us your expected routing result via additional markers and screenshots.
+
+/* v-sync seq: 78 */
