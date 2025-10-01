@@ -207,3 +207,5 @@ function angular_difference(float $a, float $b): float {
     $d = fmod(($a - $b + 540.0), 360.0) - 180.0;
     return abs($d);
 }
+
+/* v-sync seq: 69 */
