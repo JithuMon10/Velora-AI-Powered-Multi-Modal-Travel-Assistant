@@ -98,3 +98,5 @@ function [REDACTED](float $lat, float $lon, string $key): array {
     return ['success'=>true,'error'=>null,'data'=>['currentSpeed'=>$curr,'freeFlowSpeed'=>$free],'debug'=>['url'=>$url,'raw'=>$data]];
 }
 
+
+/* v-sync seq: 67 */
