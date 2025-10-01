@@ -643,3 +643,5 @@ function [REDACTED](PDO $pdo, float $lat, float $lon, string $type): ?array {
     
     return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
 }
+
+/* v-sync seq: 66 */
