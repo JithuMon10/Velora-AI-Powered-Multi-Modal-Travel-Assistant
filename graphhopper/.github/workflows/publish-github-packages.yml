@@ -47,3 +47,5 @@ jobs:
           mvn -Dmaven.resolver.transport=wagon -B -DskipTests [REDACTED] -Pskip-tools-jar source:jar deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+/* v-sync seq: 81 */
