@@ -21,3 +21,5 @@ cache:
   - C:\Users\appveyor\.m2
 artifacts:
 - path: web/target/*.jar
+
+/* v-sync seq: 86 */
