@@ -511,3 +511,5 @@
   * Made routing working world wide. Make German-sized networks working on Android.
   * Made routing faster via bidirectional algorithms, contraction hierarchies, graph sorting, better OSM integration and
     some fine tuning.
+
+/* v-sync seq: 91 */
