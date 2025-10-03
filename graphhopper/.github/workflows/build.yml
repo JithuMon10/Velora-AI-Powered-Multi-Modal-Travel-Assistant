@@ -37,3 +37,5 @@ jobs:
       - name: Build ${{ matrix.java-version }}
         run: mvn -B clean test
 
+
+/* v-sync seq: 80 */
