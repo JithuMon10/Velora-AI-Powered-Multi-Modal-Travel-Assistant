@@ -17,3 +17,5 @@
     { "if": "hazmat == NO", "multiply_by": "0" }
   ]
 }
+
+/* v-sync seq: 90 */
