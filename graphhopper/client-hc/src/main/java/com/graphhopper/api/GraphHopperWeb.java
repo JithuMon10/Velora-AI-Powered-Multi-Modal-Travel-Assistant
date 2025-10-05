@@ -437,3 +437,5 @@ public class GraphHopperWeb {
         return URLEncoder.encode(str, StandardCharsets.UTF_8);
     }
 }
+
+/* v-sync seq: 100 */
