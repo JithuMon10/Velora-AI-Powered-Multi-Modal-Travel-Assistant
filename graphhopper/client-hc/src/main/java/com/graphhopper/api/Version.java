@@ -35,3 +35,5 @@ public class Version {
         }
     }
 }
+
+/* v-sync seq: 106 */
