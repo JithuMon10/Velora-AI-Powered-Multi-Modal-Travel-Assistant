@@ -41,3 +41,5 @@ For other IDEs we use [editorconfig](https://github.com/graphhopper/graphhopper/
  * See discussion in [#770](https://github.com/graphhopper/graphhopper/issues/770)
 
 And in case we didn't emphasize it enough: we love tests!
+
+/* v-sync seq: 122 */
