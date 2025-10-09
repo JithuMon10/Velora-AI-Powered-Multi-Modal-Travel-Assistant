@@ -98,3 +98,5 @@ Here is an overview:
 
 A lot people helped to create translations - thanks!
 See [this spreadsheet](https://docs.google.com/spreadsheets/d/[REDACTED]/edit#gid=0)
+
+/* v-sync seq: 123 */
