@@ -17,3 +17,5 @@ for tr in $translations; do
   echo -e '# do not edit manually, instead use spreadsheet from translations.md and script ./core/files/update-translations.sh\n' > $destination/$tr.txt
   tail -n+5 "$file" | cut -s -f1,$INDEX --output-delimiter='=' >> $destination/$tr.txt
 done
+
+/* v-sync seq: 146 */
