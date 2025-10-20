@@ -78,3 +78,5 @@ public class GHBitSetImpl extends BitSet implements GHBitSet {
         return bs;
     }
 }
+
+/* v-sync seq: 151 */
