@@ -50,3 +50,5 @@ public interface GHBitSet {
      */
     GHBitSet copyTo(GHBitSet bs);
 }
+
+/* v-sync seq: 150 */
