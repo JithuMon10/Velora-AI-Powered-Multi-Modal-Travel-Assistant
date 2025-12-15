@@ -61,7 +61,7 @@ Velora/
 No API keys or passwords ship in this repo. Follow these steps:
 
 ```bash
-git clone https://github.com/<you>/velora.git
+git clone https://github.com/JithuMon10/Velora-AI-Powered-Multi-Modal-Travel-Assistant
 cd velora
 php setup/setup.php          # interactive wizard
 ```
