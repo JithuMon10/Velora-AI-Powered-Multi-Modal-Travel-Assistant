@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Velora Map</title>
+  <!-- Velora Configuration -->
+  <script src="/config.js"></script>
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <!-- Leaflet Routing Machine CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"
+  />
+  <style>
+    html, body { height: 100%; margin: 0; }
+    #map { height: 100%; width: 100%; }
+
+    .controls {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 1000;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      padding: 12px;
+      width: 320px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+    .controls h2 {
+      font-size: 16px;
+      margin: 0 0 8px 0;
+    }
+    .form-row { display: flex; gap: 8px; margin-bottom: 8px; }
+    .form-row input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px; }
+    .btn { cursor: pointer; background: #2563eb; color: white; border: none; padding: 10px 12px; border-radius: 6px; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .subtle { color: #555; font-size: 12px; margin-top: 6px; }
+
+    .mode-row { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    .mode-row button { background: #f3f4f6; color: #111827; border: 1px solid #e5e7eb; padding: 6px 8px; border-radius: 6px; cursor: pointer; }
+    .mode-row button.active { background: #111827; color: #fff; }
+
+    /* Buses panel (top-right) */
+    .buses-panel {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 1000;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      padding: 12px;
+      width: 340px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+    .buses-panel h2 { font-size: 16px; margin: 0 0 8px 0; }
+    .buses-panel .row { display: flex; gap: 8px; margin-bottom: 8px; }
+    .buses-panel select { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px; }
+    .bus-types { max-height: 220px; overflow: auto; border: 1px solid #eee; border-radius: 6px; padding: 8px; }
+    .bus-types .empty { color: #555; font-size: 12px; }
+    .bus-types ul { list-style: none; padding: 0; margin: 0; }
+    .bus-types li { padding: 6px; border-bottom: 1px solid #f0f0f0; }
+    .bus-types li:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Buses browsing panel -->
+  <div class="buses-panel">
+    <h2>Browse Buses</h2>
+    <div class="row">
+      <select id="busState">
+        <option value="">All States</option>
+      </select>
+      <select id="busOperator" disabled>
+        <option value="">All Operators</option>
+      </select>
+    </div>
+    <div class="bus-types" id="busTypes">
+      <div class="empty">No buses available</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <h2>Save Location</h2>
+    <div class="form-row">
+      <input id="place" placeholder="Place Name" />
+    </div>
+    <div class="form-row">
+      <input id="lat" placeholder="Latitude (e.g., 28.6139)" />
+      <input id="lng" placeholder="Longitude (e.g., 77.2090)" />
+    </div>
+    <div class="form-row">
+      <button id="saveBtn" class="btn">Save</button>
+    </div>
+    <div class="subtle">Click the map to fill lat/lng, then enter a name and press Save.</div>
+
+    <h2 style="margin-top:12px;">Routing (demo)</h2>
+    <div class="mode-row">
+      <button data-mode="car" class="active">Car</button>
+      <button data-mode="bike">Bike</button>
+      <button data-mode="bus">Bus</button>
+      <button data-mode="train">Train</button>
+    </div>
+    <div class="subtle">Drag route endpoints on the map. This uses OSRM demo routing. GraphHopper can be wired later.</div>
+  </div>
+
+  <!-- Global API config (sets window.__VELO_API__.baseUrl) -->
+  <script src="./api.config.js"></script>
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <!-- Leaflet Routing Machine + OSRM dependency -->
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+  <script src="https://unpkg.com/@mapbox/polyline@1.1.1/src/polyline.js"></script>
+
+  <!-- App JS -->
+  <script src="./app.js"></script>
+</body>
+</html>

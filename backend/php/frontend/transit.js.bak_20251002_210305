@@ -1,0 +1,1149 @@
+  // Configuration
+  window.VELORA_CONFIG = window.VELORA_CONFIG || {
+    API_BASE: '',  // Root-relative by default
+    TOMTOM_KEY: 'O2PPzBBcqkm6gIjAtNVQYR4nZtpPTTwO'  // From your config.php
+  };
+
+  // Simple haversine for UI (km)
+  function haversineKm(a,b){
+    const R=6371; const [lat1,lon1]=a,[lat2,lon2]=b;
+    const dLat=(lat2-lat1)*Math.PI/180, dLon=(lon2-lon1)*Math.PI/180;
+    const s=Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+    return 2*R*Math.asin(Math.sqrt(s));
+  }
+
+  // Navigation along route_poly with leg durations
+  function startNavigation(route_poly, legs){
+    if (!Array.isArray(route_poly) || route_poly.length < 2) return;
+    if (navMarker){ try { map.removeLayer(navMarker); } catch(_){} navMarker = null; }
+    const latlngs = route_poly.map(p=>[p[0],p[1]]);
+    navMarker = L.circleMarker(latlngs[0], { radius:6, color:'#0ea5e9', fillColor:'#0ea5e9', fillOpacity:1 }).addTo(map);
+    activeLayers.push(navMarker);
+    // Build durations timeline from legs
+    let totalMs = 0; const segMs = [];
+    for (const s of (legs||[])){
+      const ms = (parseInt(s.duration_s||0,10) + parseInt(s.traffic_delay||0,10)*60) * 1000;
+      segMs.push(Math.max(1000, ms)); totalMs += Math.max(1000, ms);
+    }
+    // Fallback uniform duration if legs missing
+    if (!segMs.length) { const ms = 60000; for (let i=0;i<latlngs.length-1;i++) segMs.push(ms); totalMs = ms * (latlngs.length-1); }
+    const started = Date.now();
+    let idx = 0; let segIndex = 0; let segStepLen = Math.max(1, Math.floor((latlngs.length-1) / Math.max(1, segMs.length)));
+    const timer = setInterval(()=>{
+      idx++;
+      const i = Math.min(latlngs.length-1, idx);
+      navMarker.setLatLng(latlngs[i]);
+      const elapsed = Date.now() - started;
+      const pct = Math.min(100, Math.round((elapsed/totalMs)*100));
+      if (progressText) progressText.textContent = `Progress: ${pct}%`;
+      if (i >= latlngs.length-1) { clearInterval(timer); }
+      if (idx % segStepLen === 0) segIndex++;
+    }, 200);
+  }
+
+  // moved startNav/reset bindings inside DOMContentLoaded after elements are defined
+
+  // Default time = Now (on load)
+  try {
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2,'0');
+    const mm = String(now.getMinutes()).padStart(2,'0');
+    document.getElementById('arriveBy').value = `${hh}:${mm}:00`;
+    const pretty = now.toLocaleString(undefined, { month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+    const st = document.getElementById('selectedTimeText');
+    if (st) st.textContent = `Planning for: ${pretty}`;
+  } catch(_) {}
+
+document.addEventListener('DOMContentLoaded', function(){
+  const API_BASE = (window.__VELO_API__ && window.__VELO_API__.baseUrl) || '';
+  const GH_BASE = (window.__VELO_API__ && window.__VELO_API__.ghBase) || 'http://127.0.0.1:8989';
+
+  // Map
+  const map = L.map('map').setView([20.5937, 78.9629], 5);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+  const stopMarkers = L.layerGroup().addTo(map);
+  let routeLayer = null; // legacy single-layer
+  let activeLayers = [];
+  let navMarker = null;
+  let navState = { latlngs: [], segLens: [], totalMeters: 0, idx: 0 };
+  let tripCounter = 1;
+  let selectedMode = 'velora'; // 'velora' | 'drive'
+
+  // Elements
+  const originInput = document.getElementById('originInput');
+  const destInput = document.getElementById('destInput');
+  const originIdEl = document.getElementById('originId');
+  const destIdEl = document.getElementById('destId');
+  const originList = document.getElementById('originList');
+  const destList = document.getElementById('destList');
+  const arriveByInput = document.getElementById('arriveBy');
+  const planBtn = document.getElementById('planBtn');
+  const selectTimeBtn = document.getElementById('selectTimeBtn');
+  const selectedTimeText = document.getElementById('selectedTimeText');
+  const modeVelora = document.getElementById('modeVelora');
+  const modeDrive = document.getElementById('modeDrive');
+  const vehicleGroup = document.getElementById('vehicleGroup');
+  const chipVehYes = document.getElementById('chipVehYes');
+  const chipVehNo = document.getElementById('chipVehNo');
+  const vehicleYes = document.getElementById('vehicleYes');
+  const vehicleNo = document.getElementById('vehicleNo');
+  const chipVelora = document.getElementById('chipVelora');
+  const chipDrive = document.getElementById('chipDrive');
+  const hotelsAsk = document.getElementById('hotelsAsk');
+  const timeModal = document.getElementById('timeModal');
+  const dateInput = document.getElementById('dateInput');
+  const todRange = document.getElementById('todRange');
+  const todLabel = document.getElementById('todLabel');
+  const cancelTimeBtn = document.getElementById('cancelTimeBtn');
+  const confirmTimeBtn = document.getElementById('confirmTimeBtn');
+  const planDate = document.getElementById('planDate');
+  const resultsDiv = document.getElementById('results');
+  const formMsg = document.getElementById('formMsg');
+  const startNavBtn = document.getElementById('startNavBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const etaText = document.getElementById('etaText');
+  const progressText = document.getElementById('progressText');
+  const instructionsList = document.getElementById('instructionsList');
+
+  let stopsCache = [];
+  let vehicleChoice = 'no'; // default
+
+  // --- Geocoding with cache (DB stops + fallback Nominatim) ---
+  const GEO_CACHE_KEY = 'velo_geocode_cache_v1';
+  const GEO_TTL_MS = 24 * 60 * 60 * 1000; // 24h
+  const geoMem = new Map();
+  function fetchWithTimeout(url, ms){
+    const c = new AbortController();
+    const id = setTimeout(()=>c.abort(), ms);
+    return fetch(url, { signal: c.signal }).finally(()=> clearTimeout(id));
+  }
+  async function fetchJsonWithTimeout(url, ms){
+    const c = new AbortController();
+    const id = setTimeout(()=>c.abort(), ms);
+    try {
+      const res = await fetch(url, { signal: c.signal });
+      const body = await res.text();
+      if (!res.ok) {
+        throw new Error(`Request failed (${res.status}): ${body.slice(0, 160)}`);
+      }
+      try {
+        return JSON.parse(body);
+      } catch (err) {
+        console.error('Invalid JSON response for', url, body.slice(0, 200));
+        throw new Error('Received non-JSON response from server');
+      }
+    } finally {
+      clearTimeout(id);
+    }
+  }
+  (function loadGeoCache(){
+    try {
+      const raw = localStorage.getItem(GEO_CACHE_KEY);
+      if (!raw) return;
+      const obj = JSON.parse(raw);
+      const now = Date.now();
+      for (const k in obj) {
+        const v = obj[k];
+        if (v && (now - v.ts) < GEO_TTL_MS) geoMem.set(k, v.results);
+      }
+    } catch(_){}
+  });
+  function saveGeoCache(){
+    try {
+      const now = Date.now();
+      const obj = {};
+      geoMem.forEach((results, k) => { obj[k] = { ts: now, results }; });
+      localStorage.setItem(GEO_CACHE_KEY, JSON.stringify(obj));
+    } catch(_){}
+  }
+  // Geocoding function using PHP geocoder
+  async function geocode(query) {
+    const q = (query || '').trim();
+    if (!q) return [];
+    
+    // Check memory cache first
+    if (geoMem.has(q)) {
+      const cached = geoMem.get(q);
+      console.log(`geocode: cache hit for "${q}" (${cached.length} results)`);
+      return cached;
+    }
+    
+    try {
+      console.log(`geocode: querying PHP geocoder for "${q}"`);
+      const response = await fetch(`/geocode.php?q=${encodeURIComponent(q)}&limit=5`);
+      const body = await response.text();
+      if (!response.ok) {
+        throw new Error(`Geocoding service error (${response.status}): ${body.slice(0, 160)}`);
+      }
+      let data;
+      try {
+        data = JSON.parse(body);
+      } catch (err) {
+        console.error('geocode: PHP geocoder returned non-JSON:', body.slice(0, 200));
+        throw new Error('PHP geocoder returned invalid JSON');
+      }
+      
+      if (Array.isArray(data) && data.length > 0) {
+        const results = data.map(item => ({
+          name: item.name || (item.display_name || '').split(',').slice(0, 3).join(',').trim(),
+          lat: parseFloat(item.lat || item.latitude || 0),
+          lon: parseFloat(item.lon || item.longitude || item.lng || 0),
+          source: 'PHP Geocoder',
+          _cached: Date.now()
+        }));
+        
+        console.log(`geocode: returned ${results.length} results for "${q}"`);
+        geoMem.set(q, results);
+        saveGeoCache();
+        return results;
+      }
+      
+      // If we get here, no results were found
+      console.warn(`geocode: no results found for "${q}" in PHP geocoder`);
+    } catch (error) {
+      console.warn('PHP geocoding failed:', error);
+    }
+    
+    // Fallback to Nominatim if PHP geocoder fails
+    try {
+      console.log(`geocode: trying Nominatim as fallback for "${q}"`);
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=5&addressdetails=1`);
+      
+      if (!response.ok) {
+        throw new Error(`Nominatim error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (Array.isArray(data) && data.length > 0) {
+        const results = data.map(item => ({
+          name: item.display_name.split(',').slice(0, 3).join(',').trim(),
+          lat: parseFloat(item.lat),
+          lon: parseFloat(item.lon),
+          source: 'Nominatim',
+          _cached: Date.now()
+        }));
+        
+        console.log(`geocode: Nominatim returned ${results.length} results for "${q}"`);
+        geoMem.set(q, results);
+        saveGeoCache();
+        return results;
+      }
+    } catch (error) {
+      console.warn('Nominatim geocoding failed:', error);
+    }
+    try {
+      console.log(`geocode: falling back to Nominatim for "${q}"`);
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&countrycodes=in&format=json&limit=5&addressdetails=1`;
+      const response = await fetch(url, {
+        headers: {
+          'User-Agent': 'Velora/1.0 (your-email@example.com)'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Nominatim error: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (Array.isArray(data) && data.length > 0) {
+        const results = data.map(item => ({
+          name: item.display_name.split(',').slice(0, 3).join(',').trim(),
+          lat: parseFloat(item.lat),
+          lon: parseFloat(item.lon),
+          source: 'Nominatim',
+          _cached: Date.now()
+        }));
+        
+        console.log(`geocode: Nominatim returned ${results.length} results for "${q}"`);
+        geoMem.set(q, results);
+        saveGeoCache();
+        return results;
+      }
+    } catch (error) {
+      console.error('Geocoding failed:', error);
+    }
+    
+    // If all else fails, return empty array and cache the empty result
+    console.warn(`geocode: no results found for "${q}"`);
+    geoMem.set(q, []);
+    saveGeoCache();
+    return [];
+  }
+
+  // TomTom Routing API helper
+  async function getRoute(origin, destination, mode = 'car') {
+    const { lat: lat1, lon: lon1 } = origin;
+    const { lat: lat2, lon: lon2 } = destination;
+    const tomtomKey = window.VELORA_CONFIG.TOMTOM_KEY;
+    
+    if (!tomtomKey) {
+      console.error('TomTom API key not configured');
+      return null;
+    }
+
+    try {
+      const url = `https://api.tomtom.com/routing/1/calculateRoute/${lat1},${lon1}:${lat2},${lon2}/json?key=${tomtomKey}&routeType=fastest&traffic=true&travelMode=${mode}`;
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error(`TomTom API error: ${response.status}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching route from TomTom:', error);
+      return null;
+    }
+  }
+
+  // Client-side routing using TomTom
+
+  function classifyOperatorByKm(km){
+    return km <= 700 ? 'Bus' : 'Flight';
+  }
+
+  function synthesizeFareTime(km, operatorType){
+    const basePerKm = operatorType === 'Flight' ? 3.0 : 1.0; // bus 1, flight 3
+    const speed = operatorType === 'Flight' ? 600 : 50; // km/h
+    const hours = km / speed + (operatorType==='Flight' ? 0.5 : 0);
+    const minutes = Math.max(15, Math.round(hours * 60));
+    const fare = Math.round(km * basePerKm * (1 + (Math.random()*0.3 - 0.15))); // ±15%
+    const now = new Date();
+    const dep = new Date(now.getTime() + 15*60000); // 15 min from now
+    const arr = new Date(dep.getTime() + minutes*60000);
+    const hhmmss = (d)=> d.toTimeString().slice(0,8);
+    return { fare, dep: hhmmss(dep), arr: hhmmss(arr) };
+  }
+
+  // Load stops and initialize autocomplete
+  async function loadStops(){
+    const res = await fetch(`/get_stops.php`);
+    const json = await res.json();
+    console.log('[get_stops] response:', json);
+    if (json.error) throw new Error(json.error);
+    stopsCache = Array.isArray(json.data) ? json.data : [];
+
+    // Clear markers and add
+    stopMarkers.clearLayers();
+    stopsCache.forEach(s => {
+      if (s.latitude && s.longitude) {
+        const m = L.marker([parseFloat(s.latitude), parseFloat(s.longitude)])
+          .bindPopup(`<strong>${escapeHtml(s.stop_name)}</strong><br>${escapeHtml(s.operator_name || '')}<br>${escapeHtml(s.city || '')}`);
+        m.addTo(stopMarkers);
+      }
+    });
+
+    initAutocomplete(originInput, originList, originIdEl);
+    initAutocomplete(destInput, destList, destIdEl);
+    updatePlanBtnState();
+
+  // --- Mode choice interactions ---
+  function updateModeChips(){
+    if (chipVelora) chipVelora.classList.toggle('active', selectedMode==='velora');
+    chipDrive.classList.toggle('active', selectedMode==='drive');
+    if (vehicleGroup) vehicleGroup.style.display = (selectedMode==='velora') ? '' : 'none';
+  }
+  function setMode(val){ selectedMode = val; try { window.__VELO_LAST_MODE__ = val; } catch(_){} updateModeChips(); }
+
+  // Vehicle choice handlers
+  if (chipVehYes) chipVehYes.addEventListener('click', ()=>{ vehicleChoice = 'yes'; chipVehYes.classList.add('active'); chipVehNo.classList.remove('active'); if (vehicleYes) vehicleYes.checked=true; });
+  if (chipVehNo) chipVehNo.addEventListener('click', ()=>{ vehicleChoice = 'no'; chipVehNo.classList.add('active'); chipVehYes.classList.remove('active'); if (vehicleNo) vehicleNo.checked=true; });
+  // Initialize default
+  if (chipVehNo) chipVehNo.classList.add('active');
+  if (modeVelora) modeVelora.addEventListener('change', ()=> setMode('velora'));
+  if (modeDrive) modeDrive.addEventListener('change', ()=> setMode('drive'));
+  updateModeChips();
+
+  // --- Time picker modal ---
+  function openTimeModal(){ if (timeModal) timeModal.style.display = 'flex'; }
+  function closeTimeModal(){ if (timeModal) timeModal.style.display = 'none'; }
+  if (selectTimeBtn) selectTimeBtn.addEventListener('click', openTimeModal);
+  if (cancelTimeBtn) cancelTimeBtn.addEventListener('click', closeTimeModal);
+  if (todRange) todRange.addEventListener('input', ()=>{
+    const v = parseInt(todRange.value, 10);
+    const labels = ['Morning (08:00)', 'Afternoon (12:00)', 'Evening (18:00)', 'Night (21:00)'];
+    todLabel.textContent = labels[v] || labels[1];
+  });
+  if (confirmTimeBtn) confirmTimeBtn.addEventListener('click', ()=>{
+    // Map slider to HH:MM
+    const map = ['08:00', '12:00', '18:00', '21:00'];
+    const timeStr = map[parseInt(todRange.value,10)] || '12:00';
+    const dateStr = dateInput && dateInput.value ? dateInput.value : '';
+    const pretty = (dateStr ? new Date(dateStr+'T'+timeStr+':00') : new Date());
+    const nice = pretty.toLocaleString(undefined, { month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+    selectedTimeText.textContent = `Planning for: ${nice}`;
+    // Save to hidden inputs for backend
+    document.getElementById('arriveBy').value = timeStr+':00';
+    if (planDate) planDate.value = dateStr;
+    closeTimeModal();
+  });
+  }
+
+  function escapeHtml(str){ return String(str||'').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[s])); }
+
+  // --- AI Traffic Prediction (simple heuristic) ---
+  function predictTrafficText(departureTime){
+    // departureTime: HH:MM:SS -> produce context-aware text
+    try {
+      const [h, m] = (departureTime || '12:00:00').split(':').map(x=>parseInt(x,10));
+      const minutes = (h%24)*60 + (isNaN(m)?0:m);
+      if (minutes >= 480 && minutes <= 600) return 'Traffic forecast: moderate morning rush, minor delays possible'; // 08:00-10:00
+      if (minutes >= 1020 && minutes <= 1200) return 'Predicted delay: +12 min due to evening congestion'; // 17:00-20:00
+      if (minutes >= 720 && minutes <= 900) return 'Traffic forecast: steady midday flow, near on-time arrival expected'; // 12:00-15:00
+      return 'Traffic forecast: smooth, expected arrival on time';
+    } catch(_) {
+      return 'Traffic forecast: smooth, expected arrival on time';
+    }
+  }
+
+  // --- Booking Links ---
+  function getBookingUrl(operatorType, destinationCity){
+    const cityParam = destinationCity ? encodeURIComponent(destinationCity) : '';
+    switch ((operatorType||'Bus').toLowerCase()) {
+      case 'train':
+        return 'https://www.irctc.co.in';
+      case 'flight':
+        return 'https://www.makemytrip.com/flights/';
+      default:
+        return 'https://www.redbus.in' + (cityParam?`/search?to=${cityParam}`:'');
+    }
+  }
+
+  function getOperatorIcon(operatorType){
+    const t = (operatorType||'Bus').toLowerCase();
+    if (t === 'train') return '🚆';
+    if (t === 'flight') return '✈️';
+    return '🚌';
+  }
+
+  // --- Hotel Suggestions (static) ---
+  const HOTEL_DB = {
+    'Mumbai': [
+      { name: 'Hotel Marine View', price: 2899, url: 'https://www.booking.com' },
+      { name: 'Colaba Stay Inn', price: 2199, url: 'https://www.booking.com' },
+      { name: 'Bandra Bay Suites', price: 3499, url: 'https://www.booking.com' },
+    ],
+    'Delhi': [
+      { name: 'Connaught Place Hotel', price: 2599, url: 'https://www.booking.com' },
+      { name: 'Aerocity Express Inn', price: 3199, url: 'https://www.booking.com' },
+      { name: 'Karol Bagh Residency', price: 1899, url: 'https://www.booking.com' },
+    ],
+    'Bengaluru': [
+      { name: 'MG Road Comforts', price: 2399, url: 'https://www.booking.com' },
+      { name: 'Indiranagar Suites', price: 2899, url: 'https://www.booking.com' },
+      { name: 'Koramangala Hub Hotel', price: 2099, url: 'https://www.booking.com' },
+    ],
+    'Hyderabad': [
+      { name: 'Hitech City Inn', price: 2299, url: 'https://www.booking.com' },
+      { name: 'Charminar Heritage Stay', price: 1799, url: 'https://www.booking.com' },
+      { name: 'Banjara Hills Hotel', price: 2699, url: 'https://www.booking.com' },
+    ],
+  };
+
+  function getHotelsFor(city){
+    if (!city) return [];
+    // exact match first, else try capitalized
+    const exact = HOTEL_DB[city];
+    if (exact) return exact;
+    const cap = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+    return HOTEL_DB[cap] || [];
+  }
+
+  // --- Autocomplete ---
+  function initAutocomplete(inputEl, listEl, hiddenIdEl){
+    let currentItems = [];
+    let activeIndex = -1;
+    let debounceId = null;
+
+    function closeList(){ listEl.style.display = 'none'; listEl.innerHTML = ''; activeIndex = -1; }
+    function openList(){ listEl.style.display = 'block'; }
+
+    function setSelection(item){
+      const label = item.name || item.stop_name || '';
+      inputEl.value = label;
+      hiddenIdEl.value = item.id;
+      if (item.lat != null && item.lon != null) {
+        inputEl.dataset.lat = String(item.lat);
+        inputEl.dataset.lon = String(item.lon);
+      } else if (item.latitude != null && item.longitude != null) {
+        inputEl.dataset.lat = String(item.latitude);
+        inputEl.dataset.lon = String(item.longitude);
+      } else {
+        delete inputEl.dataset.lat; delete inputEl.dataset.lon;
+      }
+      closeList();
+      updatePlanBtnState();
+      formMsg.textContent = '';
+    }
+
+    function renderList(items){
+      listEl.innerHTML = items.map((it, idx) => {
+        const label = it.name || it.stop_name || '';
+        const sub = it.city || it.source || '';
+        return `<div class="ac-item${idx===activeIndex?' active':''}" data-idx="${idx}">
+           <div class="name">${escapeHtml(label)}</div>
+           <div class="city">${escapeHtml(sub)}</div>
+         </div>`;
+      }).join('');
+      openList();
+    }
+
+    async function filter(query){
+      const q = query.trim();
+      if (!q){ closeList(); return; }
+      // Merge DB stops (fast local filter) with remote geocode hits
+      const ql = q.toLowerCase();
+      const itemsStops = stopsCache.filter(s => (
+        (s.stop_name && s.stop_name.toLowerCase().includes(ql)) ||
+        (s.city && s.city.toLowerCase().includes(ql))
+      )).slice(0, 5).map(s => ({...s, name: s.stop_name, lat: s.latitude, lon: s.longitude, source: 'Stops'}));
+      let itemsGeo = [];
+      try { itemsGeo = await geocode(q); } catch(_){ itemsGeo = []; }
+      const items = [...itemsGeo, ...itemsStops];
+      currentItems = items;
+      activeIndex = -1;
+      if (items.length) renderList(items); else closeList();
+    }
+
+    inputEl.addEventListener('input', () => {
+      hiddenIdEl.value = '';
+      delete inputEl.dataset.lat; delete inputEl.dataset.lon;
+      if (debounceId) clearTimeout(debounceId);
+      debounceId = setTimeout(() => { filter(inputEl.value); }, 300);
+      updatePlanBtnState();
+    });
+
+    inputEl.addEventListener('focus', () => {
+      if (inputEl.value) filter(inputEl.value);
+    });
+
+    inputEl.addEventListener('keydown', (e) => {
+      if (listEl.style.display === 'none') return;
+      if (e.key === 'ArrowDown') { activeIndex = Math.min(activeIndex + 1, currentItems.length - 1); renderList(currentItems); e.preventDefault(); }
+      else if (e.key === 'ArrowUp') { activeIndex = Math.max(activeIndex - 1, 0); renderList(currentItems); e.preventDefault(); }
+      else if (e.key === 'Enter') { if (activeIndex >= 0) { setSelection(currentItems[activeIndex]); e.preventDefault(); } }
+      else if (e.key === 'Escape') { closeList(); }
+    });
+
+    listEl.addEventListener('mousedown', (e) => {
+      const itemEl = e.target.closest('.ac-item');
+      if (!itemEl) return;
+      const idx = parseInt(itemEl.getAttribute('data-idx'), 10);
+      if (!isNaN(idx) && currentItems[idx]) setSelection(currentItems[idx]);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!listEl.contains(e.target) && e.target !== inputEl) closeList();
+    });
+  }
+
+  function updatePlanBtnState(){
+    // Always enabled to allow free-text GraphHopper routing when IDs are not selected
+    if (planBtn) planBtn.disabled = false;
+  }
+
+  // Plan trip
+  async function planTrip() {
+    try {
+      const oText = originInput.value.trim();
+      const dText = destInput.value.trim();
+      const selectedMode = document.querySelector('input[name="travel-mode"]:checked')?.value || 'drive';
+      const vehicleChoice = document.querySelector('input[name="vehicle-option"]:checked')?.value || 'no';
+
+      if (!oText || !dText) {
+        formMsg.textContent = 'Enter origin and destination (city or place), or pick stops.';
+        renderResults({message:'Please provide origin and destination.'});
+        return;
+      }
+      
+      formMsg.textContent = selectedMode === 'drive' ? 'Routing for driving...' : 'Planning multimodal itinerary...';
+      
+      // Prefer pre-selected coordinates on the inputs; fallback to geocode
+      let geoO = null, geoD = null;
+      
+      // Get origin coordinates
+      if (originInput.dataset.lat && originInput.dataset.lon) {
+        const lat = parseFloat(originInput.dataset.lat);
+        const lon = parseFloat(originInput.dataset.lon);
+        if (!Number.isNaN(lat) && !Number.isNaN(lon)) {
+          geoO = { lat, lon, name: oText };
+        }
+      }
+      
+      // Get destination coordinates
+      if (destInput.dataset.lat && destInput.dataset.lon) {
+        const lat = parseFloat(destInput.dataset.lat);
+        const lon = parseFloat(destInput.dataset.lon);
+        if (!Number.isNaN(lat) && !Number.isNaN(lon)) {
+          geoD = { lat, lon, name: dText };
+        }
+      }
+      
+      // Geocode if coordinates not available
+      if (!geoO || !geoD) {
+        const [originResults, destResults] = await Promise.all([
+          geoO ? Promise.resolve([geoO]) : geocode(oText),
+          geoD ? Promise.resolve([geoD]) : geocode(dText)
+        ]);
+        
+        if (!geoO) geoO = originResults && originResults[0] ? originResults[0] : null;
+        if (!geoD) geoD = destResults && destResults[0] ? destResults[0] : null;
+      }
+      
+      if (!geoO || !geoD) {
+        formMsg.textContent = 'Could not geocode one or both places.';
+        return;
+      }
+      
+      // Common URL parameters
+      const url = new URL(`/plan_trip.php`, window.location.origin);
+      url.searchParams.set('origin_lat', geoO.lat);
+      url.searchParams.set('origin_lon', geoO.lon);
+      url.searchParams.set('dest_lat', geoD.lat);
+      url.searchParams.set('dest_lon', geoD.lon);
+      url.searchParams.set('origin_name', oText);
+      url.searchParams.set('dest_name', dText);
+      url.searchParams.set('depart_time', arriveByInput.value || '08:00');
+      url.searchParams.set('vehicle', vehicleChoice === 'yes' ? 'yes' : 'no');
+      
+      // Set mode-specific parameters
+      if (selectedMode === 'drive') {
+        url.searchParams.set('mode', 'drive');
+        formMsg.textContent = 'Routing for driving...';
+      } else {
+        url.searchParams.set('mode', 'velora');
+        formMsg.textContent = 'Planning multimodal itinerary...';
+      }
+      
+      // Make the API request
+      const timeout = selectedMode === 'drive' ? 20000 : 12000;
+      const resp = await fetchJsonWithTimeout(url.toString(), timeout).catch(() => null);
+      // Normalize response: accept top-level or nested under data
+      const norm = resp || {};
+      // Prefer segments; fall back to legs from either top-level or data
+      let segments = Array.isArray(norm.segments) ? norm.segments : [];
+      if (!segments.length && norm.data && Array.isArray(norm.data.segments)) segments = norm.data.segments;
+      if (!segments.length && Array.isArray(norm.legs)) segments = norm.legs;
+      if (!segments.length && norm.data && Array.isArray(norm.data.legs)) segments = norm.data.legs;
+      console.debug('[planTrip] normalized response:', { hasTopSegments: Array.isArray(norm.segments), hasDataSegments: !!(norm.data && Array.isArray(norm.data.segments)), hasTopLegs: Array.isArray(norm.legs), hasDataLegs: !!(norm.data && Array.isArray(norm.data.legs)), count: segments.length });
+      if (Array.isArray(norm.data) && norm.data.length && !segments.length) {
+        // Some legacy responses might just return array
+        norm.segments = norm.data;
+      }
+      // If backend indicated an error, show it explicitly
+      if (norm && norm.success === false) {
+        const msg = norm.error || 'Server error';
+        const det = norm.detail ? ` (${norm.detail})` : '';
+        formMsg.textContent = `${msg}${det}`;
+        clearRoute();
+        renderResults({message: `${msg}${det}`});
+        return;
+      }
+      // Use top-level route_poly, or nested under data (no debug fallbacks)
+      let routePoly = norm.route_poly || (norm.data && norm.data.route_poly) || null;
+      // If the server provided legs, use them and skip TomTom fallback
+      if (norm && Array.isArray(norm.legs) && norm.legs.length > 0) {
+        console.log('[planTrip] Using server-provided legs, skipping TomTom fallback.');
+        renderItinerary(norm);
+        drawLegsFromResponse(norm);
+        return;
+      }
+      // If still absent, we may load a route_file later below
+      if ((!segments || segments.length === 0) && routePoly && Array.isArray(routePoly) && routePoly.length >= 2) {
+        // We have geometry; proceed to draw even without segments
+        console.debug('[planTrip] segments empty but route_poly present; proceeding to draw');
+      } else if (!segments || segments.length === 0) {
+  if (selectedMode === 'drive' && geoO && geoD) {
+    console.warn('[planTrip] No segments/route_poly; attempting TomTom fallback for drive');
+    try {
+      const tt = await getRoute({ lat: geoO.lat, lon: geoO.lon }, { lat: geoD.lat, lon: geoD.lon }, 'car');
+      if (tt && tt.routes && tt.routes[0] && tt.routes[0].legs && tt.routes[0].legs[0] && tt.routes[0].legs[0].points) {
+        const latlngs = tt.routes[0].legs[0].points.map(p => [p.latitude, p.longitude]);
+        try { if (window.currentRouteLayer) { map.removeLayer(window.currentRouteLayer); window.currentRouteLayer = null; } } catch(_){}
+        window.currentRouteLayer = L.polyline(latlngs, { color:'#1e88e5', weight:5, opacity:0.9 }).addTo(map);
+        map.fitBounds(window.currentRouteLayer.getBounds(), { padding: [30,30] });
+        formMsg.textContent = 'Using TomTom fallback route';
+      } else {
+        const latlngs = [ { lat: geoO.lat, lng: geoO.lon }, { lat: geoD.lat, lng: geoD.lon } ];
+        const routeLine = L.polyline(latlngs, { color: '#1e88e5', weight: 4, opacity: 0.6 }).addTo(map);
+        activeLayers.push(routeLine);
+        map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+        const startMarker = L.marker(latlngs[0], { icon: L.divIcon({ html: '??', className: 'vehicle-icon', iconSize: [24,24] }) }).addTo(map);
+        const endMarker = L.marker(latlngs[1], { icon: L.divIcon({ html: '', className: 'destination-icon', iconSize: [24,24] }) }).addTo(map);
+        activeLayers.push(startMarker, endMarker);
+        formMsg.textContent = 'Showing approximate route (fallback)';
+      }
+    } catch (_) {
+      const latlngs = [ { lat: geoO.lat, lng: geoO.lon }, { lat: geoD.lat, lng: geoD.lon } ];
+      const routeLine = L.polyline(latlngs, { color: '#1e88e5', weight: 4, opacity: 0.6 }).addTo(map);
+      activeLayers.push(routeLine);
+      map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+      const startMarker = L.marker(latlngs[0], { icon: L.divIcon({ html: '', className: 'vehicle-icon', iconSize: [24,24] }) }).addTo(map);
+      const endMarker = L.marker(latlngs[1], { icon: L.divIcon({ html: '', className: 'destination-icon', iconSize: [24,24] }) }).addTo(map);
+      activeLayers.push(startMarker, endMarker);
+      formMsg.textContent = 'Showing approximate route (fallback)';
+    }
+  } else {
+          formMsg.textContent = selectedMode === 'drive' ? 'No driving route found.' : 'No itinerary found.';
+          clearRoute();
+          renderResults({message: 'No route found'});
+        }
+        return;
+      }
+      
+      formMsg.textContent = '';
+      clearRoute();
+      
+      try { 
+        window.__VELO_LAST_RESP__ = norm; 
+      } catch(_) {}
+      
+      // Try to load from external file if provided
+      if ((!routePoly || !Array.isArray(routePoly) || routePoly.length < 2) && (norm.route_file || (norm.data && norm.data.route_file))) {
+        try {
+          const rf = norm.route_file || (norm.data && norm.data.route_file);
+          const res = await fetch(rf, { cache: 'no-cache' });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.route_poly)) {
+              routePoly = data.route_poly;
+            }
+          }
+        } catch(e) { 
+          console.warn('Failed to load route file', e); 
+        }
+      }
+      
+      if (selectedMode === 'drive') {
+        if (routePoly && routePoly.length >= 2) {
+          // Convert to latlngs format if needed
+          const latlngs = routePoly.map(p => 
+            Array.isArray(p) ? { lat: p[0], lng: p[1] } : p
+          );
+          // Clear any existing current route layer
+          try { if (window.currentRouteLayer) { map.removeLayer(window.currentRouteLayer); window.currentRouteLayer = null; } } catch(_){ }
+          // Draw the route as a single active polyline
+          window.currentRouteLayer = L.polyline(latlngs, { color: '#1e88e5', weight: 5, opacity: 0.9 }).addTo(map);
+          
+          // Fit bounds with some padding
+          map.fitBounds(window.currentRouteLayer.getBounds(), { padding: [30, 30] });
+          
+          // Add markers for start/end
+          const startMarker = L.marker(latlngs[0], {
+            icon: L.divIcon({
+              html: '🚗', 
+              className: 'vehicle-icon', 
+              iconSize: [24, 24]
+            })
+          }).addTo(map);
+          
+          const endMarker = L.marker(latlngs[latlngs.length - 1], {
+            icon: L.divIcon({
+              html: '📍', 
+              className: 'destination-icon', 
+              iconSize: [24, 24]
+            })
+          }).addTo(map);
+          
+          activeLayers.push(startMarker, endMarker);
+          
+          // Render the itinerary
+          // Ensure itinerary renderer receives normalized response
+          renderItinerary(norm);
+        } else {
+          formMsg.textContent = 'Invalid route data received';
+          console.warn('Invalid route data:', norm);
+        }
+      } else {
+        // For non-drive modes, use drawSegments (single polyline)
+        await drawSegments(segments, routePoly);
+        renderItinerary(norm);
+      }
+      return;
+    } catch (error) {
+      console.error('Error in planTrip:', error);
+      formMsg.textContent = 'An error occurred while planning your trip.';
+      formMsg.className = 'error';
+      clearRoute();
+    }
+
+    // Velora multimodal
+    const url = new URL(`${API_BASE}/plan_trip.php`);
+    url.searchParams.set('origin_lat', geoO.lat);
+    url.searchParams.set('origin_lon', geoO.lon);
+    url.searchParams.set('dest_lat', geoD.lat);
+    url.searchParams.set('dest_lon', geoD.lon);
+    url.searchParams.set('origin_name', oText);
+    url.searchParams.set('dest_name', dText);
+    url.searchParams.set('depart_time', arriveByInput.value || '08:00');
+    url.searchParams.set('mode', 'velora');
+    url.searchParams.set('vehicle', vehicleChoice === 'yes' ? 'yes' : 'no');
+    formMsg.textContent = 'Planning multimodal itinerary...';
+    const resp = await fetchJsonWithTimeout(url.toString(), 12000).catch(()=>null);
+    if (!resp || !Array.isArray(resp.segments) || resp.segments.length===0){
+      formMsg.textContent = 'No itinerary found.';
+      clearRoute();
+      renderResults({message:'No route found'});
+      return;
+    }
+    formMsg.textContent = '';
+    clearRoute();
+    try { window.__VELO_LAST_RESP__ = resp; } catch(_){}
+    // route_file fallback if needed
+    let routePoly = resp.route_poly;
+    if ((!routePoly || !Array.isArray(routePoly) || routePoly.length < 2) && resp.route_file) {
+      try {
+        const rf = await fetch(resp.route_file, { cache:'no-cache' }).then(r=> r.ok ? r.json() : null);
+        if (rf && Array.isArray(rf.route_poly)) routePoly = rf.route_poly;
+      } catch(e){ console.warn('route_file fetch failed', e); }
+    }
+    await drawSegments(resp.segments, routePoly);
+    renderItinerary(resp);
+    // Hotels prompt chip
+    try {
+      if (hotelsAsk) {
+        hotelsAsk.style.display = 'inline-flex';
+        hotelsAsk.onclick = async ()=>{
+          hotelsAsk.textContent = 'Loading hotels...';
+          await loadHotelsForDestination(resp);
+          hotelsAsk.style.display = 'none';
+          const panel = document.getElementById('hotelsPanel');
+          if (panel) panel.style.display = '';
+        };
+      }
+    } catch(_){}
+  }
+
+  function clearRoute(){
+    if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
+    if (activeLayers && activeLayers.length){
+      for (const layer of activeLayers){ try { map.removeLayer(layer); } catch(_){} }
+      activeLayers = [];
+    }
+    if (navMarker){ try { map.removeLayer(navMarker); } catch(_){} navMarker = null; }
+  }
+
+  async function drawSegments(segments, route_poly){
+    // Build single route coordinate list (yesterday behavior)
+    let routeCoords = [];
+    if (Array.isArray(route_poly) && route_poly.length >= 2){
+      routeCoords = route_poly.map(p => Array.isArray(p) ? [p[0], p[1]] : [p.lat, p.lng]);
+    } else if (Array.isArray(segments) && segments.length){
+      for (const s of segments){
+        if (Array.isArray(s.polyline) && s.polyline.length >= 2){
+          const pts = s.polyline.map(p => Array.isArray(p) ? [p[0], p[1]] : [p.lat, p.lng]);
+          if (!routeCoords.length) routeCoords = pts; else routeCoords.push(...pts);
+        } else if (s.from_lat!=null && s.from_lon!=null) {
+          routeCoords.push([parseFloat(s.from_lat), parseFloat(s.from_lon)]);
+          if (s.to_lat!=null && s.to_lon!=null) routeCoords.push([parseFloat(s.to_lat), parseFloat(s.to_lon)]);
+        }
+      }
+    }
+    if (routeCoords.length < 2) return;
+    // Before drawing new route
+    try { if (window.currentRouteLayer) { map.removeLayer(window.currentRouteLayer); window.currentRouteLayer = null; } } catch(_){ }
+    // Draw new route as a single active polyline
+    
+  // Prepare nav state for animation
+  navState.latlngs = routeCoords.slice();
+  navState.segLens = []; navState.totalMeters = 0; for (let i=1;i<routeCoords.length;i++){ navState.totalMeters += haversineMeters(routeCoords[i-1], routeCoords[i]); navState.segLens.push(haversineMeters(routeCoords[i-1], routeCoords[i])); }
+    try { map.fitBounds(window.currentRouteLayer.getBounds(), { padding: [30,30] }); } catch(_){ }
+  }
+
+  function renderItinerary(resp){
+    const segs = resp.segments || [];
+    // Draw intermediate stop markers if present
+    try {
+      if (resp.chaining && Array.isArray(resp.intermediate_stops)){
+        resp.intermediate_stops.forEach(st => {
+          if (st && st.lat!=null && st.lon!=null){
+            const c = L.circleMarker([parseFloat(st.lat), parseFloat(st.lon)], { radius:5, color:'#2563eb', weight:2, fillOpacity:0.7 });
+            c.addTo(map); activeLayers.push(c);
+          }
+        });
+      }
+    } catch(_){ }
+    const iconFor = (mode)=>{
+      const m = String(mode||'').toLowerCase();
+      if (m==='bus') return '🚌';
+      if (m==='train') return '🚆';
+      if (m==='flight') return '✈️';
+      if (m==='car') return '🚗';
+      if (m==='metro') return '🚇';
+      return '•';
+    };
+    // Group by mode: Bus -> Train -> Flight -> Metro -> Car
+    const order = ['bus','train','flight','metro','car'];
+    const groups = new Map();
+    for (const s of segs){
+      const m = String(s.mode||'').toLowerCase();
+      if (!groups.has(m)) groups.set(m, []);
+      groups.get(m).push(s);
+    }
+    const items = [];
+    // Decision banner (respect backend decision exactly)
+    try {
+      const decision = (resp && (resp.decision || (resp.data && resp.data.decision))) || '';
+      if (decision) {
+        const label = (d=>{
+          const x = String(d).toLowerCase();
+          if (x==='bus_chain') return 'BUS';
+          if (x==='train') return 'TRAIN';
+          if (x==='flight') return 'FLIGHT';
+          if (x==='drive' || x==='car') return 'CAR';
+          return x.toUpperCase();
+        })(decision);
+        items.push(`<div class="trip" style="border-color:#c7d2fe;background:#eef2ff"><div class="header"><strong>Velora decided:</strong> ${label} <span class="muted" style="margin-left:6px;">Best option</span></div></div>`);
+      }
+    } catch(_){ }
+    for (const m of order){
+      if (!groups.has(m)) continue;
+      const arr = groups.get(m);
+      const header = `<div class="muted" style="margin:6px 0 2px 0; font-weight:600;">${iconFor(m)} ${m.toUpperCase()}</div>`;
+      items.push(header);
+      const sevLabelFromColor = (sev)=>{
+        const s = String(sev||'').toLowerCase();
+        if (s==='blue' || s==='none') return 'Clear';
+        if (s==='green' || s==='low') return 'Low';
+        if (s==='orange' || s==='medium') return 'Medium';
+        if (s==='red' || s==='high') return 'High';
+        return s ? (s.charAt(0).toUpperCase()+s.slice(1)) : '';
+      };
+      const sevDot = (sev)=>{
+        const t = String(sev||'').toLowerCase();
+        if (t==='high'||t==='red') return '🔴';
+        if (t==='medium'||t==='orange') return '🟠';
+        if (t==='low'||t==='green') return '🟢';
+        return '🔵';
+      };
+      const toMinutes = (hhmm)=>{ try{const [h,m]=String(hhmm||'').split(':').map(x=>parseInt(x,10)); return (isNaN(h)?0:h)*60+(isNaN(m)?0:m);}catch{return 0;} };
+      const fmtKM = (km)=> isFinite(km) ? `${km.toFixed(1)} km` : '';
+      const guessKm = (s)=>{
+        if (s.distance_km!=null) return parseFloat(s.distance_km);
+        const a=[parseFloat(s.from_lat),parseFloat(s.from_lon)], b=[parseFloat(s.to_lat),parseFloat(s.to_lon)];
+        if (isFinite(a[0])&&isFinite(a[1])&&isFinite(b[0])&&isFinite(b[1])) return haversineKm(a,b);
+        return NaN;
+      };
+      for (const s of arr){
+        const delay = s.traffic_delay != null ? ` (+${s.traffic_delay} min)` : '';
+        const sevText = (s.mode==='bus'||s.mode==='car') && s.traffic_severity ? ` • ${sevDot(s.traffic_severity)} Traffic: ${escapeHtml(sevLabelFromColor(s.traffic_severity))}${delay}` : '';
+        const op = s.operator_name || s.operator || '';
+        const fromName = (s.from_stop && s.from_stop.name) ? s.from_stop.name : s.from;
+        const toName = (s.to_stop && s.to_stop.name) ? s.to_stop.name : s.to;
+        const km = guessKm(s);
+        const depM = toMinutes(s.departure), arrM = toMinutes(s.arrival);
+        let dur = arrM - depM; if (dur<=0) dur = Math.abs(dur) % (24*60);
+        const distDur = `${fmtKM(km)} • ${Math.max(1,Math.round(dur))} min`;
+        items.push(`
+          <div class="trip">
+            <div class="header"><span class="icon">${iconFor(s.mode)}</span> <strong>${escapeHtml(op.toString())}</strong> — ${escapeHtml((s.mode||'').toString())}</div>
+            <div>${escapeHtml(String(fromName||''))} → ${escapeHtml(String(toName||''))}</div>
+            <div class="muted">${escapeHtml(distDur)}</div>
+            <div>Departs: ${escapeHtml(String(s.departure||''))}, Arrives: ${escapeHtml(String(s.arrival||''))}${sevText}</div>
+            <div>Fare: ₹${escapeHtml(String(s.fare||0))}</div>
+            <details class="muted"><summary>Details</summary>
+              <div>From: ${escapeHtml(String(fromName||''))} (${escapeHtml(String(s.from_lat||''))}, ${escapeHtml(String(s.from_lon||''))})</div>
+              <div>To: ${escapeHtml(String(toName||''))} (${escapeHtml(String(s.to_lat||''))}, ${escapeHtml(String(s.to_lon||''))})</div>
+            </details>
+          </div>`);
+      }
+    }
+    const header = `<h4 style="margin:6px 0;">Trip #${tripCounter}</h4>`;
+    const summary = `<div class="muted">Total fare: ₹${escapeHtml(String(resp.total_fare||0))} • Total time: ${escapeHtml(resp.total_time||'-')}</div>`;
+    let stopsHtml = '';
+    if (resp.chaining && Array.isArray(resp.intermediate_stops) && resp.intermediate_stops.length){
+      const chips = resp.intermediate_stops.map(s=>{
+        const badge = s.synthetic ? '<span class="muted" style="margin-left:6px;">AI-suggested</span>' : '';
+        return `<span class="chip">${escapeHtml(s.name||'Stop')}${badge}</span>`;
+      }).join(' ');
+      stopsHtml = `<div class="muted" style="margin:8px 0;">Intermediate stops: ${chips}</div>`;
+    }
+    resultsDiv.innerHTML = header + summary + stopsHtml + items.join('');
+    tripCounter += 1;
+  }
+
+  async function loadHotelsForDestination(resp){
+    const segs = resp.segments || [];
+    if (!segs.length) return;
+    const last = segs[segs.length-1];
+    const lat = parseFloat(last.to_lat), lon = parseFloat(last.to_lon);
+    if (!isFinite(lat) || !isFinite(lon)) return;
+    const url = new URL(`/get_hotels.php`, window.location.origin);
+    url.searchParams.set('lat', String(lat));
+    url.searchParams.set('lon', String(lon));
+    const data = await fetch(url.toString()).then(r=>r.json()).catch(()=>null);
+    if (!data || !Array.isArray(data.data)) return;
+    paintHotelsPanel(data.data || []);
+  }
+
+  function paintHotelsPanel(items){
+    const panel = document.getElementById('hotelsPanel');
+    const list = document.getElementById('hotelList');
+    if (!panel || !list) return;
+    if (!items.length){ panel.style.display = 'none'; return; }
+    panel.style.display = '';
+    list.innerHTML = items.slice(0,5).map(h => `
+      <div class="hotel-card">
+        <div>
+          <div class="name">${escapeHtml(h.hotel_name || h.name || 'Hotel')}</div>
+          <div class="muted">${escapeHtml(h.city || '')}</div>
+        </div>
+        <div class="price">₹${escapeHtml(String(h.price_per_night || ''))}/night</div>
+      </div>
+    `).join('');
+    // add pins
+    items.slice(0,5).forEach(h => {
+      const lat = h.latitude!=null ? parseFloat(h.latitude) : (h.lat!=null ? parseFloat(h.lat) : null);
+      const lon = h.longitude!=null ? parseFloat(h.longitude) : (h.lon!=null ? parseFloat(h.lon) : null);
+      if (isFinite(lat) && isFinite(lon)){
+        const m = L.marker([lat, lon]).bindPopup(`<strong>${escapeHtml(h.hotel_name||h.name||'Hotel')}</strong><br>₹${escapeHtml(String(h.price_per_night||''))}/night`);
+        m.addTo(map); activeLayers.push(m);
+      }
+    });
+  }
+
+  async function renderHotels(resp){
+    // Prefer server-provided hotels[]; else query API by coords
+    const hotels = Array.isArray(resp.hotels) ? resp.hotels : [];
+    if (hotels.length){ paintHotelsPanel(hotels); return; }
+    await loadHotelsForDestination(resp);
+  }
+
+  // For legacy results (DB stops path), fetch hotels using last stop coordinates
+  function loadHotelsForLegacyResult(result){
+    try {
+      const stops = Array.isArray(result && result.stops) ? result.stops : [];
+      if (!stops.length) return;
+      const last = stops[stops.length-1];
+      if (!last || last.latitude==null || last.longitude==null) return;
+      const resp = { segments: [ { to_lat: parseFloat(last.latitude), to_lon: parseFloat(last.longitude) } ] };
+      loadHotelsForDestination(resp);
+    } catch(_) {}
+  }
+
+  function drawRoute(result){
+    clearRoute();
+    const latlngs = (result.stops || []).map(s => [parseFloat(s.latitude), parseFloat(s.longitude)]);
+    if (!latlngs.length) return;
+    routeLayer = L.polyline(latlngs, { color:'#111827', weight:5 }).addTo(map);
+    try { map.fitBounds(routeLayer.getBounds(), { padding: [30,30] }); } catch(_){}
+  }
+
+  function renderInstructions(instructions){
+    if (!instructions || !instructions.length){
+      instructionsList.innerHTML = '<div class="muted">No directions available.</div>';
+      return;
+    }
+    const toKm = m => (m/1000).toFixed(1);
+    const toMin = ms => Math.round(ms/60000);
+    instructionsList.innerHTML = instructions.map((i, idx) => (
+      `<div class="step"><strong>${idx+1}.</strong> ${escapeHtml(i.text)} <span class="muted">(${toKm(i.distance)} km, ${toMin(i.time)} min)</span></div>`
+    )).join('');
+  }
+
+  function resetNav(){
+    navState.idx = 0;
+    if (navMarker){ map.removeLayer(navMarker); navMarker = null; }
+    updateProgress(0, navState.totalMeters, 0);
+  }
+
+  function startNav(latlngs, distance_m, time_ms){
+    // Precompute segment lengths
+    navState.latlngs = latlngs.slice();
+    navState.segLens = [];
+    navState.totalMeters = 0;
+    for (let i=1;i<latlngs.length;i++){
+      const d = haversineMeters(latlngs[i-1], latlngs[i]);
+      navState.segLens.push(d); navState.totalMeters += d;
+    }
+    // Set ETA at start
+    const eta = new Date(Date.now() + time_ms);
+    etaText.textContent = `ETA: ${eta.toTimeString().slice(0,8)}`;
+    updateProgress(0, navState.totalMeters, navState.totalMeters);
+    // Place marker
+    if (navMarker) { map.removeLayer(navMarker); navMarker=null; }
+    navMarker = L.marker(latlngs[0], { icon: L.divIcon({className:'', html:'<div style="transform:rotate(0deg);font-size:20px;">➤</div>'}) });
+    navMarker.addTo(map);
+  }
+
+  function metersRemaining(idx){
+    if (navState.segLens.length === 0) return 0;
+    let rem = 0;
+    for (let i=idx; i<navState.segLens.length; i++) rem += navState.segLens[i];
+    return rem;
+  }
+
+  function updateProgress(idx, total, remaining){
+    const done = Math.max(0, total - remaining);
+    const pct = total>0 ? Math.round((done/total)*100) : 0;
+    progressText.textContent = `Progress: ${pct}% (${(remaining/1000).toFixed(1)} km remaining)`;
+  }
+
+  // No autoplay; movement is manual via keyboard (or future geolocation)
+
+  function step(delta){
+    if (!navState.latlngs.length) return;
+    navState.idx = Math.max(0, Math.min(navState.idx + delta, navState.latlngs.length-1));
+    if (navMarker) navMarker.setLatLng(navState.latlngs[navState.idx]);
+    const rem = metersRemaining(navState.idx);
+    updateProgress(navState.idx, navState.totalMeters, rem);
+  }
+
+  function haversineMeters(a, b){
+    const R = 6371000; // meters
+    const toRad = d => d * Math.PI / 180;
+    const dLat = toRad(b[0]-a[0]);
+    const dLon = toRad(b[1]-a[1]);
+    const lat1 = toRad(a[0]);
+    const lat2 = toRad(b[0]);
+    const h = Math.sin(dLat/2)**2 + Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;
+    return 2*R*Math.asin(Math.sqrt(h));
+  }
+
+  // Controls
+  if (startNavBtn) startNavBtn.addEventListener('click', () => {
+    if (!navState.latlngs.length) return; // already prepared by last route
+    // Ensure marker exists at start
+    if (!navMarker && navState.latlngs.length) {
+      navMarker = L.marker(navState.latlngs[0], { icon: L.divIcon({className:'', html:'<div style=\"transform:rotate(0deg);font-size:20px;\">➤</div>'}) });
+      navMarker.addTo(map);
+    }
+  });
+  if (resetBtn) resetBtn.addEventListener('click', resetNav);
+  window.addEventListener('keydown', (e)=>{
+    if (e.key === 'ArrowRight') { step(5); }
+    if (e.key === 'ArrowLeft') { step(-5); }
+  });
+
+  function renderResults({message, results}){
+    if (message){ resultsDiv.innerHTML = `<div class="muted">${escapeHtml(message)}</div>`; return; }
+    const parts = results.map(r => {
+      const hotel = r.hotel ? `
+        <div>Hotel: ${escapeHtml(r.hotel.hotel_name || '')} (${escapeHtml(String(r.hotel.stars || ''))}★, ₹${escapeHtml(String(r.hotel.price_per_night || ''))}/night)</div>
+      ` : '';
+      return (
+        `<div class="trip">
+          <div><strong>${escapeHtml(r.operator_name || '')}</strong> — ${escapeHtml(r.operator_type || '')}</div>
+          <div>Route #${escapeHtml(r.route_id)} • Trip #${escapeHtml(r.trip_id || '')}</div>
+          <div>Departs: ${escapeHtml(r.departure_time || '')}, Arrives: ${escapeHtml(r.arrival_time || '')}</div>
+          <div>Base fare: ${r.base_fare != null ? '₹' + escapeHtml(String(r.base_fare)) : 'N/A'}</div>
+          ${hotel}
+        </div>`
+      );
+    });
+    resultsDiv.innerHTML = parts.join('');
+  }
+
+  // init
+  loadStops().catch(err => {
+    console.error(err);
+    resultsDiv.innerHTML = '<div class="muted">Failed to load stops.</div>';
+    // Ensure plan is still possible with free-text
+    updatePlanBtnState();
+  });
+
+  // Bind plan click after elements exist
+  if (planBtn) planBtn.addEventListener('click', (e) => { e.preventDefault(); planTrip(); });
+});
