@@ -1,133 +1,114 @@
-# ✨ Velora – AI-Powered Multi-Modal Travel Assistant
+# <p align="center"><img src="./icon.png" width="400" height="400" alt="Velora Logo" /><br />✨ Velora – AI-Powered Multi-Modal Travel Assistant</p>
 
-```
-           __     __          _
-__   __  / /__  / /_  ____  (_)___  ____ _
-\ \ / / / / _ \/ __ \/ __ \/ / __ \/ __ `/
- \ V / / /  __/ /_/ / / / / / / / / /_/ /
-  \_/ /_/\___/_.___/_/ /_/_/_/ /_/\__, /
-                                /____/
-```
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&pause=1000&color=00FFCC&center=true&vCenter=true&lines=Smart+Routes+for+Complex+Journeys;AI+Assisted+Routing;Multi-Modal+Optimization;Built+with+200%2B+Hours+of+Dedication" alt="Animated Typing" />
+</p>
 
-Velora plans 🚍 bus, 🚆 train, ✈️ flight, and 🚕 taxi hops in one intelligent route.  
-It plugs AI reasoning + GraphHopper routing + TomTom geocoding into a PHP backend with a sleek JS frontend.
+<p align="center">
+  <img src="https://img.shields.io/badge/STATUS-ACTIVE-success?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/AI-GOOGLE%20GEMINI-blue?style=for-the-badge&logo=google-gemini&logoColor=white" />
+  <img src="https://img.shields.io/badge/ROUTING-GRAPHHOPPER-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/EFFORT-200%2B%20HOURS%20INVESTED-ff69b4?style=for-the-badge&logo=d3-dot-js&logoColor=white" />
+</p>
+
+<p align="center">
+  <strong>Velora is an intelligent transit planner that combines AI, smart routing, and real-world mapping to orchestrate seamless multi-modal trips.</strong>
+  <br />
+  From bus and train hops to last-mile taxi legs, Velora handles the complexity of travel planning in one unified interface.
+</p>
 
 ---
 
-## 🚀 Feature Highlights
+## 🚀 Feature Highlights (Complex Interactions, Simplified Experience)
 
 | Capability | Description |
-| --- | --- |
-| **Smart Mode Selector** | Auto-picks the best transport combo based on distance & cost heuristics. |
-| **GraphHopper Routing** | Precise pathfinding with OSM data + TomTom legs for last-mile taxi legs. |
-| **AI Personalization** | `smart_ai.js` learns frequent routes/time windows and nudges suggestions. |
-| **Fare & Time Simulator** | Breakdown per leg with live traffic-aware TomTom estimates. |
-| **Interactive Transit UI** | Leaflet map overlays, comparison charts, and multi-stop previews. |
+| :--- | :--- |
+| 🧠 **AI-Driven Mode Selector** | Dynamically chooses optimal transport paths based on real-time factors like time, distance, and cost. |
+| 📍 **Precision GraphHopper Routing** | Utilizes advanced OpenStreetMap (OSM) data for highly accurate, granular pathfinding. |
+| 🤖 **Personalized AI Suggestions** | Employs Google Gemini for intuitive route suggestions, learning from user patterns. |
+| ⏱️ **Real-time Cost & Time Estimates** | Provides immediate, traffic-aware breakdowns for every segment of the journey. |
+| 🗺️ **Interactive Map Visualization** | Dynamic Leaflet.js maps offer clear multi-stop route previews and comparisons. |
 
 ---
 
-## 🧱 Tech Stack
+## 🧱 Powering Velora: The Tech Behind the Intelligence
 
-- **Backend**: PHP 8+, PDO, custom helpers (`backend/php`)
-- **Frontend**: Vanilla JS modules, Leaflet, custom UI components
-- **Routing**: GraphHopper (Java, Maven) with bundled configs
-- **Data**: MySQL (`velora_db`) + optional SQLite fallback for quick demos
-- **AI**: Google Gemini (JSON-only wrapper) for insights & summaries
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=php,js,mysql,java,maven,html,css,firebase,aws&theme=dark" />
+</p>
+
+* **Backend:** PHP 8+ (Robust & Secure PDO Architecture)
+* **Frontend:** Dynamic Vanilla JS & Leaflet.js (Fluid UI/UX)
+* **Router:** GraphHopper (Java/Maven) (High-Performance Routing Engine)
+* **AI Engine:** Google Gemini (Intelligent Decision Making)
+* **Data Layer:** OpenStreetMap (OSM) + Custom CSV Transit Data
 
 ---
 
-## 🗂️ Project Layout
+## 🔐 Built with a Security-First Mindset
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Security-ZERO%20LEAK-red?style=for-the-badge&logo=dependabot&logoColor=white" />
+  <img src="https://img.shields.io/badge/Data-ENCRYPTED%20&%20ISOLATED-blueviolet?style=for-the-badge&logo=vault&logoColor=white" />
+</p>
+
+* **Zero-Leak Policy:** Critical API keys and secrets are never committed to version control.
+* **Secure Provisioning:** Dedicated `setup.php` wizard ensures a safe, local environment setup.
+* **Database Integrity:** Utilizes PDO prepared statements to actively prevent SQL Injection vulnerabilities.
+* **Isolated Services:** Routing engine operates as a separate, contained microservice.
+
+---
+
+## ⚙️ Quick Deployment & Test Flight
+
+### 1. Rapid Setup (One-Time)
+```bash
+git clone [https://github.com/JithuMon10/Velora-AI-Powered-Multi-Modal-Travel-Assistant.git](https://github.com/JithuMon10/Velora-AI-Powered-Multi-Modal-Travel-Assistant.git)
+cd Velora-AI-Powered-Multi-Modal-Travel-Assistant
+php setup/setup.php  # Interactive wizard for API keys & DB configuration
 ```
+
+### 2. Launch Services (Two Simple Commands)
+
+| Component | Command | Access URL |
+| :--- | :--- | :--- |
+| **PHP API Backend** | `php -S localhost:9000 -t backend/php` | `http://localhost:9000` |
+| **GraphHopper Router** | `java -jar graphhopper/target/graphhopper-web-*.jar server config.yml` | `http://localhost:8989` |
+
+**First Test:** Once running, navigate your browser to the PHP API URL. We recommend testing a route like **Mallappally → Kochi** to witness the multi-modal orchestration.
+
+---
+
+## 📂 Under the Hood: Core Architecture
+
+```text
 Velora/
-├── backend/
-│   ├── php/
-│   │   ├── plan_trip.php        # Main API controller
-│   │   ├── config.php           # Loads .env (no secrets committed)
-│   │   ├── helpers/             # DB, TomTom, AI glue code
-│   │   └── frontend/            # JS app (app.js, transit.js, smart_ai.js, etc.)
-│   └── tests/ (optional local harnesses)
-├── graphhopper/                 # Embedded routing engine (Java/Maven)
-├── setup/setup.php              # NEW interactive wizard (creates .env, bootstraps DB)
-├── .env.example                 # Template for API keys & DB settings
-├── Report/                      # Project documentation + flowcharts
-└── stations*.csv                # Station datasets (ignored in git by default)
+├── backend/php/    # Core API, Trip Planning Logic, AI Integration
+├── frontend/       # User Interface, Interactive Maps, Frontend JS Logic
+├── graphhopper/    # Self-Contained Java Routing Engine
+├── setup/          # Environment Setup & Database Provisioning
+├── Report/         # Detailed System Documentation & Flowcharts
+└── stations*.csv   # Geographic & Transit Data Sources
 ```
 
 ---
 
-## 🔐 Zero-Leak Setup (New!)
+## 🤝 Connect & Collaborate
 
-No API keys or passwords ship in this repo. Follow these steps:
+**Project Lead:** Jithendra V Anand (JithuMon10) – *Cyber Security & Full-Stack Development Expert*
 
-```bash
-git clone https://github.com/JithuMon10/Velora-AI-Powered-Multi-Modal-Travel-Assistant
-cd velora
-php setup/setup.php          # interactive wizard
-```
-
-The wizard will:
-1. Ask for TomTom + Gemini API keys.
-2. Collect MySQL host/user/password (or SQLite path).
-3. Generate `.env`.
-4. (Optional) Create the database + import `import_all_stations.sql`.
-
-> `.env` is git-ignored. Commit only `.env.example`.
+<p align="center">
+  <a href="https://www.linkedin.com/in/jithu2006/">
+    <img src="https://img.shields.io/badge/LinkedIn-Connect%20with%20Jithu-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  <a href="https://github.com/JithuMon10">
+    <img src="https://img.shields.io/badge/GitHub-Follow%20My%20Work-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+</p>
 
 ---
 
-## ⚙️ Running the App
-
-```bash
-# Terminal 1 – PHP API
-php -S localhost:9000 -t backend/php
-
-# Terminal 2 – GraphHopper
-cd graphhopper
-mvn clean install -DskipTests    # first time only
-java -jar web/target/graphhopper-web-*.jar server config-example.yml
-
-# Open in browser
-http://localhost:9000/frontend/transit.html
-```
-
-Recommended first test: **Mallappally → Kochi** (short bus demo already seeded).
-
----
-
-## 🛠️ Customization & Extensibility
-
-- **New data sources**: drop CSVs in root + reference via import scripts.
-- **Modes**: extend `plan_trip.php` decision tree (`$decision` + legs array).
-- **UI Themes**: edit `frontend/styles.css` + component JS for views.
-- **Analytics**: hook into `helpers/ai.php` and `smart_ai.js` event emitters.
-
----
-
-## 🤝 Contributing
-
-1. Fork + clone
-2. Run `php setup/setup.php`
-3. Create feature branch: `git checkout -b feat/<name>`
-4. Open a PR with before/after screenshots or curl logs
-
-Issues / ideas welcome via GitHub Issues.
-
----
-
-## 📚 Documentation
-
-- `VELORA_MASTER_GUIDE.md` – in-depth architecture
-- `velora_abstract.md` – academic abstract with chapter breakdown
-- `Report/velora_flowchart.md` – Mermaid diagrams
-
----
-
-## 🧾 License
-
-📌 Developed as part of the **Velora** college project.  
-Reuse for educational purposes is encouraged—credit appreciated!
-
----
-
-**Built with ❤️ for smarter Indian transit.**
+<p align="center">
+  <i>"Velora: Turning complex travel logistics into a smart, secure, and seamless journey."</i><br>
+  <img src="https://komarev.com/ghpvc/?username=JithuMon10&label=PROJECT%20VIEWS&color=00CCFF&style=flat" alt="Project Views" />
+</p>
