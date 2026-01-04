@@ -1,7 +1,7 @@
-# <p align="center"><img src="./icon.png" width="400" height="400" alt="Velora Logo" /><br />✨ Velora – AI-Powered Multi-Modal Travel Assistant</p>
+# <p align="center"><img src="icon.png" width="500" height="500" alt="Velora Logo" /><br />✨ Velora – AI-Powered Multi-Modal Travel Assistant</p>
 
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&pause=1000&color=00FFCC&center=true&vCenter=true&lines=Smart+Routes+for+Complex+Journeys;AI+Assisted+Routing;Multi-Modal+Optimization;Built+with+200%2B+Hours+of+Dedication" alt="Animated Typing" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&pause=1000&color=00FFCC&center=true&vCenter=true&width=650&lines=Smart%20Routes%20for%20Complex%20Journeys;AI%20Assisted%20Routing;Multi-Modal%20Optimization;Built%20with%20200%2B%20Hours%20of%20Dedication" alt="Animated Typing" />
 </p>
 
 <p align="center">
@@ -14,7 +14,7 @@
 <p align="center">
   <strong>Velora is an intelligent transit planner that combines AI, smart routing, and real-world mapping to orchestrate seamless multi-modal trips.</strong>
   <br />
-  From bus and train hops to last-mile taxi legs, Velora handles the complexity of travel planning in one unified interface.
+  From bus and train hops to last-mile taxi legs, Velora handles the ity of travel planning in one unified interface.
 </p>
 
 ---
@@ -109,6 +109,6 @@ Velora/
 ---
 
 <p align="center">
-  <i>"Velora: Turning complex travel logistics into a smart, secure, and seamless journey."</i><br>
+  <i>"Velora: Turning  travel logistics into a smart, secure, and seamless journey."</i><br>
   <img src="https://komarev.com/ghpvc/?username=JithuMon10&label=PROJECT%20VIEWS&color=00CCFF&style=flat" alt="Project Views" />
 </p>
