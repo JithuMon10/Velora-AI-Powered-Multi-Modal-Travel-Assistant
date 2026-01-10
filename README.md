@@ -4,6 +4,7 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&pause=1000&color=00FFCC&center=true&vCenter=true&width=650&lines=Smart%20Routes%20for%20Complex%20Journeys;AI%20Assisted%20Routing;Multi-Modal%20Optimization;Built%20with%20200%2B%20Hours%20of%20Dedication" alt="Animated Typing" />
 </p>
 
+
 <p align="center">
   <img src="https://img.shields.io/badge/STATUS-ACTIVE-success?style=for-the-badge" />
   <img src="https://img.shields.io/badge/AI-GOOGLE%20GEMINI-blue?style=for-the-badge&logo=google-gemini&logoColor=white" />
