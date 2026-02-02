@@ -9,7 +9,7 @@
 // - Parse: return json_decode(text) or null
 // - Always log raw API response to backend/logs/ai_debug.log
 
-function ai_get_api_key_simple(): string {
+function [REDACTED](): string {
     // 1) Environment variable takes precedence
     $k = getenv('VELO_GEMINI_KEY');
     if ($k && trim($k) !== '') return trim($k);
@@ -27,7 +27,7 @@ function ai_get_api_key_simple(): string {
     if (isset($GLOBALS['API_KEYS']['gemini']) && trim((string)$GLOBALS['API_KEYS']['gemini']) !== '') {
         return trim((string)$GLOBALS['API_KEYS']['gemini']);
     }
-    // 5) Also check local variable created by include-from-function
+    // 5) Also check local variable created by [REDACTED]
     if (isset($API_KEYS) && isset($API_KEYS['gemini']) && trim((string)$API_KEYS['gemini']) !== '') {
         return trim((string)$API_KEYS['gemini']);
     }
@@ -45,7 +45,7 @@ function ai_log_raw(string $prompt, string $raw): void {
 }
 
 function call_gemini(string $prompt) {
-    $apiKey = ai_get_api_key_simple();
+    $apiKey = [REDACTED]();
     if ($apiKey === '') return ['success'=>false,'error'=>'No API key','raw'=>''];
     $url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
     $instruction = "You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {\"error\":\"unavailable\"}.";
@@ -53,11 +53,11 @@ function call_gemini(string $prompt) {
     $payload = json_encode([
         'contents' => [[ 'parts' => [[ 'text' => $wrapped ]]]],
         'generationConfig' => [ 'responseMimeType' => 'application/json' ]
-    ], JSON_UNESCAPED_SLASHES);
+    ], [REDACTED]);
     try {
         $ch = curl_init($url);
         curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
+            [REDACTED] => true,
             CURLOPT_POST => true,
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',
@@ -89,10 +89,10 @@ function call_gemini(string $prompt) {
         $retryPayload = json_encode([
             'contents' => [[ 'parts' => [[ 'text' => $retryPrompt ]]]],
             'generationConfig' => [ 'responseMimeType' => 'application/json' ]
-        ], JSON_UNESCAPED_SLASHES);
+        ], [REDACTED]);
         $ch2 = curl_init($url);
         curl_setopt_array($ch2, [
-            CURLOPT_RETURNTRANSFER => true,
+            [REDACTED] => true,
             CURLOPT_POST => true,
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',
@@ -126,3 +126,5 @@ function call_gemini(string $prompt) {
         return ['success'=>false,'error'=>'AI exception','raw'=>$e->getMessage()];
     }
 }
+
+/* v-sync seq: 59 */

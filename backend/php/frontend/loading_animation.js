@@ -128,9 +128,9 @@ class LoadingAnimation {
     overlay.firstElementChild.appendChild(vehicle);
     
     // Add animation CSS if not exists
-    if (!document.getElementById('vehicleAnimationStyle')) {
+    if (!document.getElementById([REDACTED])) {
       const style = document.createElement('style');
-      style.id = 'vehicleAnimationStyle';
+      style.id = [REDACTED];
       style.textContent = `
         @keyframes driveAcross {
           0% { left: -100px; }
@@ -184,3 +184,5 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Service loaded
+
+/* v-sync seq: 12 */

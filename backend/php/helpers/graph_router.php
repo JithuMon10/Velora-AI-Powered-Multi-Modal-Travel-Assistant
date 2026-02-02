@@ -157,7 +157,7 @@ function find_shortest_path(array $nodes, array $edges, int $startId, int $endId
             $toNode = $nodes[$neighbor];
             $edgeBearing = graph_bearing_deg($fromNode['lat'], $fromNode['lon'], 
                                       $toNode['lat'], $toNode['lon']);
-            $bearingDiff = graph_angular_difference($edgeBearing, $corridorBearing);
+            $bearingDiff = [REDACTED]($edgeBearing, $corridorBearing);
             
             // Skip edges that go too far off-corridor (>30° deviation)
             if ($bearingDiff > 30) continue;
@@ -198,7 +198,7 @@ function graph_bearing_deg(float $lat1, float $lon1, float $lat2, float $lon2): 
 /**
  * Calculate angular difference between two bearings
  */
-function graph_angular_difference(float $a, float $b): float {
+function [REDACTED](float $a, float $b): float {
     $d = fmod(($a - $b + 540.0), 360.0) - 180.0;
     return abs($d);
 }
@@ -206,7 +206,7 @@ function graph_angular_difference(float $a, float $b): float {
 /**
  * Enhanced bus chaining using graph-based pathfinding
  */
-function graph_based_bus_chain(PDO $pdo, array $origin, array $destination, string $departHHMM, string $tomtomKey): array {
+function [REDACTED](PDO $pdo, array $origin, array $destination, string $departHHMM, string $tomtomKey): array {
     $oLat = (float)$origin['lat'];
     $oLon = (float)$origin['lon'];
     $dLat = (float)$destination['lat'];
@@ -305,14 +305,14 @@ function graph_based_bus_chain(PDO $pdo, array $origin, array $destination, stri
         'fare' => 0,
         'duration_s' => $walkMin * 60,
         'departure' => $cursor,
-        'arrival' => fmt_time_add_minutes($cursor, $walkMin),
+        'arrival' => [REDACTED]($cursor, $walkMin),
         'distance_km' => round($walkDist, 1),
         'instructions' => [
             ['step_id'=>'w1','mode'=>'walk','text'=>'Walk to '.$startStation['name'],'lat'=>$oLat,'lon'=>$oLon,'notify_when_m'=>50]
         ]
     ];
     
-    $cursor = fmt_time_add_minutes($cursor, $walkMin + 5);
+    $cursor = [REDACTED]($cursor, $walkMin + 5);
     
     // Bus legs between stations
     for ($i = 0; $i < count($path) - 1; $i++) {
@@ -324,10 +324,10 @@ function graph_based_bus_chain(PDO $pdo, array $origin, array $destination, stri
         $travelMin = (int)round(($segDist / 40.0) * 60); // 40 km/h bus speed
         $fare = (int)round($segDist * 2.5); // ₹2.5/km
         
-        $arr = fmt_time_add_minutes($cursor, $travelMin);
+        $arr = [REDACTED]($cursor, $travelMin);
         
         // Determine operator
-        $operator = determine_bus_operator($fromNode['state'] ?? '', $toNode['state'] ?? '');
+        $operator = [REDACTED]($fromNode['state'] ?? '', $toNode['state'] ?? '');
         
         $legs[] = [
             'mode' => 'bus',
@@ -350,7 +350,7 @@ function graph_based_bus_chain(PDO $pdo, array $origin, array $destination, stri
             ]
         ];
         
-        $cursor = fmt_time_add_minutes($arr, ($i < count($path) - 2) ? 10 : 0);
+        $cursor = [REDACTED]($arr, ($i < count($path) - 2) ? 10 : 0);
     }
     
     // Walk to destination
@@ -369,7 +369,7 @@ function graph_based_bus_chain(PDO $pdo, array $origin, array $destination, stri
         'fare' => 0,
         'duration_s' => $walkMinEnd * 60,
         'departure' => $cursor,
-        'arrival' => fmt_time_add_minutes($cursor, $walkMinEnd),
+        'arrival' => [REDACTED]($cursor, $walkMinEnd),
         'distance_km' => round($walkDistEnd, 1),
         'instructions' => [
             ['step_id'=>'w2','mode'=>'walk','text'=>'Walk to destination','lat'=>$dLat,'lon'=>$dLon,'notify_when_m'=>50]
@@ -399,7 +399,7 @@ function graph_based_bus_chain(PDO $pdo, array $origin, array $destination, stri
 /**
  * Determine bus operator based on state
  */
-function determine_bus_operator(string $state1, string $state2): string {
+function [REDACTED](string $state1, string $state2): string {
     static $operators = null;
     if ($operators === null) {
         $operators = [
@@ -417,3 +417,5 @@ function determine_bus_operator(string $state1, string $state2): string {
     $state = $state1 ?: $state2;
     return $operators[$state] ?? 'State Transport';
 }
+
+/* v-sync seq: 62 */

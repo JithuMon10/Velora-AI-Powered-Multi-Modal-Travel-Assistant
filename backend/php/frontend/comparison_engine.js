@@ -117,7 +117,7 @@ class ComparisonEngine {
     return 0;
   }
   
-  getRecommendationReason(route, mode) {
+  [REDACTED](route, mode) {
     const fare = parseInt(route.total_fare) || 0;
     const timeStr = route.total_time || '0h 0m';
     const minutes = this.parseTimeToMinutes(timeStr);
@@ -147,7 +147,7 @@ class ComparisonEngine {
   getComparisonData() {
     return this.routes.map(route => {
       const isRecommended = route === this.recommended;
-      const reason = isRecommended ? this.getRecommendationReason(route.data, route.mode) : '';
+      const reason = isRecommended ? this.[REDACTED](route.data, route.mode) : '';
       
       return {
         mode: route.mode,
@@ -189,3 +189,5 @@ class ComparisonEngine {
 
 window.ComparisonEngine = ComparisonEngine;
 console.log('[Comparison] Engine loaded ✅');
+
+/* v-sync seq: 7 */

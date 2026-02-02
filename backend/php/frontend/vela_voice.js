@@ -85,7 +85,7 @@ class VelaVoice {
       this.synthesis.cancel();
     }
     
-    const utterance = new SpeechSynthesisUtterance(text);
+    const utterance = new [REDACTED](text);
     utterance.voice = this.voice;
     utterance.lang = 'en-US';
     utterance.rate = options.rate || 0.85; // Much slower, more natural
@@ -129,7 +129,7 @@ class VelaVoice {
     // Don't announce when routes are found - too annoying
   }
   
-  announceRecommendation(mode, reason) {
+  [REDACTED](mode, reason) {
     const messages = [
       `Perfect! I found the best option for you. Take the ${mode} - ${reason}`,
       `Great news! The ${mode} looks ideal. ${reason}`,
@@ -200,3 +200,5 @@ document.addEventListener('click', greetOnInteraction, { once: true });
 document.addEventListener('keydown', greetOnInteraction, { once: true });
 
 console.log('[Vela] AI Voice Assistant initialized ✨');
+
+/* v-sync seq: 50 */

@@ -34,7 +34,7 @@ set_error_handler(function($severity, $message, $file, $line){
 });
 
 // Catch fatal errors and timeouts
-register_shutdown_function(function(){
+[REDACTED](function(){
     $err = error_get_last();
     if ($err && in_array($err['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
         @error_log("Fatal error in plan_trip.php: ".$err['message']." in ".$err['file']." on line ".$err['line']);
@@ -53,8 +53,8 @@ register_shutdown_function(function(){
 });
 
 // SAFE WRAPPERS (global scope) to prevent undefined function errors
-if (!function_exists('build_drive_instructions')) {
-    function build_drive_instructions(float $oLat,float $oLon,float $dLat,float $dLon,string $key, string $prefix='d'): array {
+if (!function_exists([REDACTED])) {
+    function [REDACTED](float $oLat,float $oLon,float $dLat,float $dLon,string $key, string $prefix='d'): array {
         // Fallback simple 3-step guidance using distance/time estimates
         $length_m = (int)round(haversine_km($oLat,$oLon,$dLat,$dLon)*1000);
         $time_s = (int)round(max(1.0, ($length_m/1000)/30.0)*3600);
@@ -66,25 +66,25 @@ if (!function_exists('build_drive_instructions')) {
         ];
     }
 }
-if (!function_exists('tomtom_route_instructions_detailed')) {
-    function tomtom_route_instructions_detailed(...$args): array {
+if (!function_exists([REDACTED])) {
+    function [REDACTED](...$args): array {
         // TEMP safe fallback until detailed mapping is guaranteed available
         try {
             if (count($args) >= 5) {
                 [$oLat,$oLon,$dLat,$dLon,$key] = $args;
                 $prefix = $args[5] ?? 'd';
-                return build_drive_instructions((float)$oLat,(float)$oLon,(float)$dLat,(float)$dLon,(string)$key,(string)$prefix);
+                return [REDACTED]((float)$oLat,(float)$oLon,(float)$dLat,(float)$dLon,(string)$key,(string)$prefix);
             }
             if (count($args) === 1 && is_array($args[0])) {
                 $j = $args[0];
-                return build_drive_instructions((float)($j['from_lat']??0),(float)($j['from_lon']??0),(float)($j['to_lat']??0),(float)($j['to_lon']??0),(string)($j['key']??''),'d');
+                return [REDACTED]((float)($j['from_lat']??0),(float)($j['from_lon']??0),(float)($j['to_lat']??0),(float)($j['to_lon']??0),(string)($j['key']??''),'d');
             }
         } catch (Throwable $e) { /* ignore */ }
         return [];
     }
 }
 // Build simplified driving steps; fallback if TomTom details unavailable
-function build_drive_instructions(float $oLat,float $oLon,float $dLat,float $dLon,string $key, string $prefix='d'): array {
+function [REDACTED](float $oLat,float $oLon,float $dLat,float $dLon,string $key, string $prefix='d'): array {
     $steps = [];
     // Try to fetch a basic route summary
     $route = tomtom_route($oLat,$oLon,$dLat,$dLon,$key);
@@ -149,7 +149,7 @@ function select_bus_chain(PDO $pdo, float $oLat, float $oLon, float $dLat, float
     }
     
     // Get corridor candidates between the two bus stops
-    $cands = bus_corridor_candidates($pdo, (float)$originStop['lat'], (float)$originStop['lon'], (float)$destStop['lat'], (float)$destStop['lon'], 18.0);
+    $cands = [REDACTED]($pdo, (float)$originStop['lat'], (float)$originStop['lon'], (float)$destStop['lat'], (float)$destStop['lon'], 18.0);
     
     // Progressive selection toward destination
     $chain = [$originStop];
@@ -189,7 +189,7 @@ function select_bus_chain(PDO $pdo, float $oLat, float $oLon, float $dLat, float
  * between origin and destination. Returns ordered list by progress (no endpoints).
  * Tightened to 15-20km radius for realistic routing.
  */
-function bus_corridor_candidates(PDO $pdo, float $oLat, float $oLon, float $dLat, float $dLon, float $corridorRadiusKm=18.0, int $limit=500): array {
+function [REDACTED](PDO $pdo, float $oLat, float $oLon, float $dLat, float $dLon, float $corridorRadiusKm=18.0, int $limit=500): array {
     // Bounding box with small padding for initial filter
     $minLat = min($oLat, $dLat) - 0.3;
     $maxLat = max($oLat, $dLat) + 0.3;
@@ -207,7 +207,7 @@ function bus_corridor_candidates(PDO $pdo, float $oLat, float $oLon, float $dLat
     $skipped = 0;
     foreach ($rows as $r){
         $lat = (float)$r['lat']; $lon = (float)$r['lon'];
-        [$d, $prog] = point_to_polyline_progress($lat, $lon, $poly);
+        [$d, $prog] = [REDACTED]($lat, $lon, $poly);
         
         // Exclude near endpoints
         if ($prog <= 0.01 || $prog >= 0.99) continue;
@@ -248,8 +248,8 @@ if (!isset($_GET['quick']) || (string)$_GET['quick'] !== '1') {
 }
 
 // ---- Stations helpers (OSM-derived table) ----
-if (!function_exists('ensure_stations_schema')) {
-  function ensure_stations_schema(PDO $pdo): void {
+if (!function_exists([REDACTED])) {
+  function [REDACTED](PDO $pdo): void {
       try {
           // Create if missing with flexible type and state column
           $pdo->exec("CREATE TABLE IF NOT EXISTS stations (
@@ -287,8 +287,8 @@ if (!function_exists('nearest_station')) {
 }
 
 // TomTom Directions API: fetch text instructions for driving
-if (!function_exists('tomtom_directions_instructions')) {
-function tomtom_directions_instructions(float $oLat, float $oLon, float $dLat, float $dLon, string $apiKey, ?string $departTime = null): array {
+if (!function_exists([REDACTED])) {
+function [REDACTED](float $oLat, float $oLon, float $dLat, float $dLon, string $apiKey, ?string $departTime = null): array {
     // Quick mode: no external call
     global $IS_QUICK; if ($IS_QUICK) { return []; }
     $base = "https://api.tomtom.com/routing/1/calculateRoute/{$oLat},{$oLon}:{$dLat},{$dLon}/json";
@@ -302,7 +302,7 @@ function tomtom_directions_instructions(float $oLat, float $oLon, float $dLat, f
     $url = $base . '?' . http_build_query($qs);
     try {
         $ch = curl_init($url);
-        curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>3, CURLOPT_CONNECTTIMEOUT=>2]);
+        curl_setopt_array($ch, [[REDACTED]=>true, CURLOPT_TIMEOUT=>3, [REDACTED]=>2]);
         $res = curl_exec($ch);
         if ($res === false) return [];
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -331,11 +331,11 @@ function http_get_json(string $url): array {
     $ch = curl_init();
     curl_setopt_array($ch, [
         CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
+        [REDACTED] => true,
         CURLOPT_TIMEOUT => 3,
-        CURLOPT_CONNECTTIMEOUT => 2,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_SSL_VERIFYPEER => false,
+        [REDACTED] => 2,
+        [REDACTED] => true,
+        [REDACTED] => false,
     ]);
     $resp = curl_exec($ch);
     $err = curl_error($ch);
@@ -393,9 +393,9 @@ function tomtom_traffic(float $lat,float $lon,string $key): array {
     try {
         $ch = curl_init($url);
         curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER=>true,
+            [REDACTED]=>true,
             CURLOPT_TIMEOUT=>3,
-            CURLOPT_CONNECTTIMEOUT=>2
+            [REDACTED]=>2
         ]);
         $res = curl_exec($ch);
         if ($res === false) {
@@ -472,7 +472,7 @@ function sample_polyline_km(array $poly, float $stepKm = 30.0): array {
 }
 
 // Find the nearest bus stop to a point that lies "ahead" along the polyline, given a minimum progress
-function nearest_bus_stop_forward(PDO $pdo, float $plat, float $plon, array $poly, float $minProg, float $maxSnapKm = 3.0): ?array {
+function [REDACTED](PDO $pdo, float $plat, float $plon, array $poly, float $minProg, float $maxSnapKm = 3.0): ?array {
     $best = null; $bestD = 1e18;
     // Query nearby candidates within 10km, ordered by distance
     try {
@@ -484,27 +484,27 @@ function nearest_bus_stop_forward(PDO $pdo, float $plat, float $plon, array $pol
     } catch (Throwable $e) { $rows = []; }
     foreach ($rows as $r){
         $lat = (float)$r['lat']; $lon = (float)$r['lon'];
-        [$d, $prog] = point_to_polyline_progress($lat,$lon,$poly);
+        [$d, $prog] = [REDACTED]($lat,$lon,$poly);
         if ($prog > $minProg + 1e-3) { // ensure forward
             $dist = haversine_km($plat,$plon,$lat,$lon);
             if ($dist <= $maxSnapKm && $dist < $bestD) { $bestD = $dist; $best = ['name'=>(string)$r['name'],'lat'=>$lat,'lon'=>$lon]; }
         }
     }
     if ($best) {
-        $best['state'] = detect_state_from_text($best['name']) ?: '';
+        $best['state'] = [REDACTED]($best['name']) ?: '';
     }
     return $best;
 }
 
-function pick_operator_based_on_state(PDO $pdo, ?string $fromState, ?string $toState, string $fromName, string $toName): string {
+function [REDACTED](PDO $pdo, ?string $fromState, ?string $toState, string $fromName, string $toName): string {
     $state = $toState ?: $fromState ?: '';
     if ($state !== '') {
-        return get_ai_operator_with_cache($pdo, $state, 'bus', function() use($pdo,$fromName,$toName){ return get_bus_operator($pdo, $fromName, $toName); });
+        return [REDACTED]($pdo, $state, 'bus', function() use($pdo,$fromName,$toName){ return get_bus_operator($pdo, $fromName, $toName); });
     }
     return get_bus_operator($pdo, $fromName, $toName);
 }
 
-function calc_fare_and_duration_s(float $fromLat, float $fromLon, float $toLat, float $toLon, float $farePerKm = 1.2, float $speedKmh = 45.0): array {
+function [REDACTED](float $fromLat, float $fromLon, float $toLat, float $toLon, float $farePerKm = 1.2, float $speedKmh = 45.0): array {
     $km = max(0.1, haversine_km($fromLat,$fromLon,$toLat,$toLon));
     $fare = (int)round($km * $farePerKm);
     $hours = $km / max(1.0, $speedKmh);
@@ -540,14 +540,14 @@ function build_bus_chaining(PDO $pdo, array $origin, array $destination, array $
         } else {
             $current = ['name'=>$origin['name'] ?? 'Origin', 'lat'=>(float)$origin['lat'], 'lon'=>(float)$origin['lon'], 'synthetic'=>true];
         }
-        $current['state'] = detect_state_from_text((string)$current['name']) ?: '';
+        $current['state'] = [REDACTED]((string)$current['name']) ?: '';
         $stops = [$current];
 
         // Try corridor-based real bus stations between origin and destination
         $endBus = nearest_bus_station($pdo, (float)$destination['lat'], (float)$destination['lon']);
         $endStop = null;
         if ($endBus) {
-            $endStop = ['id'=>$endBus[4] ?? null,'name'=>$endBus[0].' (Bus Station)','lat'=>$endBus[1],'lon'=>$endBus[2],'state'=>detect_state_from_text((string)$endBus[0]) ?: '', 'type'=>'bus', 'synthetic'=>false];
+            $endStop = ['id'=>$endBus[4] ?? null,'name'=>$endBus[0].' (Bus Station)','lat'=>$endBus[1],'lon'=>$endBus[2],'state'=>[REDACTED]((string)$endBus[0]) ?: '', 'type'=>'bus', 'synthetic'=>false];
         } else {
             $endStop = ['name'=>$destination['name'] ?? 'Destination', 'lat'=>(float)$destination['lat'], 'lon'=>(float)$destination['lon'], 'state'=>'', 'type'=>'point', 'synthetic'=>true];
         }
@@ -556,7 +556,7 @@ function build_bus_chaining(PDO $pdo, array $origin, array $destination, array $
         $totalKm = max(1.0, haversine_km((float)$current['lat'],(float)$current['lon'], (float)$endStop['lat'], (float)$endStop['lon']));
         $corrWidthKm = ($totalKm < 150.0) ? 8.0 : (($totalKm > 200.0) ? 15.0 : 12.0);
 
-        $cands = bus_corridor_candidates($pdo, (float)$current['lat'], (float)$current['lon'], (float)$endStop['lat'], (float)$endStop['lon'], $corrWidthKm);
+        $cands = [REDACTED]($pdo, (float)$current['lat'], (float)$current['lon'], (float)$endStop['lat'], (float)$endStop['lon'], $corrWidthKm);
         // Smart stop selection: forward-direction corridor with scoring and no backtracking
         $picked = [];
         $maxChainKm = $totalKm * 1.15; // Allow 15% detour
@@ -590,7 +590,7 @@ function build_bus_chaining(PDO $pdo, array $origin, array $destination, array $
             $bdiff = $ang_diff($b, $corrBearing);
             // Distance to corridor line via polyline projection (best-effort)
             $distToCorr = 0.0; $prog = 0.0;
-            try { [$distToCorr, $prog] = point_to_polyline_progress($lat, $lon, $polyline); } catch (Throwable $e) { $distToCorr = 0.0; }
+            try { [$distToCorr, $prog] = [REDACTED]($lat, $lon, $polyline); } catch (Throwable $e) { $distToCorr = 0.0; }
             if ($bdiff <= 15.0 && $distToCorr <= $corrWidthKm) {
                 $row['_bearing_diff'] = $bdiff;
                 $kept[] = $row; $diffs[] = $bdiff;
@@ -664,17 +664,17 @@ function build_bus_chaining(PDO $pdo, array $origin, array $destination, array $
         } else {
         // Fallback to existing sampling-based approach along the TomTom/GraphHopper polyline
         $samples = sample_polyline_km($polyline, 50.0);
-        [$d0,$prog0] = point_to_polyline_progress($current['lat'],$current['lon'],$polyline);
+        [$d0,$prog0] = [REDACTED]($current['lat'],$current['lon'],$polyline);
         $minProg = $prog0;
         foreach ($samples as $pt){
             $pLat = (float)$pt[0]; $pLon = (float)$pt[1];
-            $next = nearest_bus_stop_forward($pdo, $pLat, $pLon, $polyline, $minProg, 5.0);
+            $next = [REDACTED]($pdo, $pLat, $pLon, $polyline, $minProg, 5.0);
             if ($next) {
                 $dupe = false;
                 foreach ($stops as $s){ if (haversine_km($s['lat'],$s['lon'],$next['lat'],$next['lon']) < 0.5) { $dupe = true; break; } }
                 if (!$dupe) {
                     $next['synthetic'] = $next['synthetic'] ?? false;
-                    $stops[] = $next; $minProg = point_to_polyline_progress($next['lat'],$next['lon'],$polyline)[1];
+                    $stops[] = $next; $minProg = [REDACTED]($next['lat'],$next['lon'],$polyline)[1];
                 }
             }
             $dToDest = haversine_km($pLat,$pLon,(float)$destination['lat'],(float)$destination['lon']);
@@ -686,7 +686,7 @@ function build_bus_chaining(PDO $pdo, array $origin, array $destination, array $
         if (count($stops) < 3) {
             $more = sample_polyline_km($polyline, 50.0);
             foreach ($more as $pt){
-                $cand = nearest_bus_stop_forward($pdo, (float)$pt[0], (float)$pt[1], $polyline, $minProg, 5.0);
+                $cand = [REDACTED]($pdo, (float)$pt[0], (float)$pt[1], $polyline, $minProg, 5.0);
                 if ($cand){
                     $exists = false; foreach ($stops as $s){ if (haversine_km($s['lat'],$s['lon'],$cand['lat'],$cand['lon']) < 0.5) { $exists=true; break; } }
                     if (!$exists) { $cand['synthetic'] = $cand['synthetic'] ?? false; $stops[] = $cand; }
@@ -747,7 +747,7 @@ function build_bus_chaining(PDO $pdo, array $origin, array $destination, array $
         'fare' => 0,
         'duration_s' => $walk_min * 60,
         'departure' => $cursor,
-        'arrival' => fmt_time_add_minutes($cursor, $walk_min),
+        'arrival' => [REDACTED]($cursor, $walk_min),
         'distance_km' => round($distToFirst,2),
         'instructions' => [
             [
@@ -808,13 +808,13 @@ function build_bus_chaining(PDO $pdo, array $origin, array $destination, array $
 
     for ($i=0; $i < count($chain)-1; $i++){
         $from = $chain[$i]; $to = $chain[$i+1];
-        [$fare, $duration_s, $km] = calc_fare_and_duration_s($from['lat'],$from['lon'],$to['lat'],$to['lon']);
+        [$fare, $duration_s, $km] = [REDACTED]($from['lat'],$from['lon'],$to['lat'],$to['lon']);
         $midLat = ($from['lat'] + $to['lat'])/2.0; $midLon = ($from['lon'] + $to['lon'])/2.0;
         [$delay, $sev, $raw] = tomtom_traffic($midLat,$midLon,$tomtomKey);
         $travel_min = (int)round($duration_s/60) + (int)$delay;
-        $arr = fmt_time_add_minutes($cursor, $travel_min);
+        $arr = [REDACTED]($cursor, $travel_min);
         $layover_min = ($i < count($chain)-2) ? (10 + mt_rand(0,5)) : 0;
-        $arr_with_layover = $layover_min > 0 ? fmt_time_add_minutes($arr, $layover_min) : $arr;
+        $arr_with_layover = $layover_min > 0 ? [REDACTED]($arr, $layover_min) : $arr;
         // Determine operator by state (prefer explicit stop state, else geofence from coords)
         $state = (string)($to['state'] ?? $from['state'] ?? '');
         if ($state === '' || strtolower($state) === 'unknown') {
@@ -874,7 +874,7 @@ function build_bus_chaining(PDO $pdo, array $origin, array $destination, array $
             'fare' => 0,
             'duration_s' => $walk_min2 * 60,
             'departure' => $cursor,
-            'arrival' => fmt_time_add_minutes($cursor, $walk_min2),
+            'arrival' => [REDACTED]($cursor, $walk_min2),
             'distance_km' => round($distFromLast,2),
             'instructions' => [
                 [
@@ -890,9 +890,9 @@ function build_bus_chaining(PDO $pdo, array $origin, array $destination, array $
     // 5) If final destination not at a bus stand → add Taxi leg
     if (!is_near_bus_stop($pdo, (float)$destination['lat'], (float)$destination['lon'])){
         $last = $stops[count($stops)-1];
-        [$fareT, $durT, $kmT] = calc_fare_and_duration_s($last['lat'],$last['lon'], (float)$destination['lat'], (float)$destination['lon'], 10.0, 30.0);
+        [$fareT, $durT, $kmT] = [REDACTED]($last['lat'],$last['lon'], (float)$destination['lat'], (float)$destination['lon'], 10.0, 30.0);
         [$delayT, $sevT, $rawT] = get_ai_traffic($pdo, (string)$last['name'], (string)($destination['name'] ?? 'Destination'), $cursor, $kmT, 'road');
-        $arrT = fmt_time_add_minutes($cursor, (int)round($durT/60) + $delayT);
+        $arrT = [REDACTED]($cursor, (int)round($durT/60) + $delayT);
         $legs[] = [
             'mode' => 'car', 'operator' => 'Taxi',
             'from' => $last['name'], 'to' => ($destination['name'] ?? 'Destination'),
@@ -1102,7 +1102,7 @@ function get_ai_traffic(PDO $pdo, string $origin, string $dest, string $hourHH, 
 /**
  * AI-first operator selection with cache. Falls back to DB mapping if AI not available.
  */
-function get_ai_operator_with_cache(PDO $pdo, string $state, string $mode, callable $fallback): string {
+function [REDACTED](PDO $pdo, string $state, string $mode, callable $fallback): string {
     try {
         $pdo->exec("CREATE TABLE IF NOT EXISTS operator_cache (
           id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -1136,7 +1136,7 @@ function get_ai_operator_with_cache(PDO $pdo, string $state, string $mode, calla
     return $fallback();
 }
 
-function detect_state_from_text(string $txt): ?string {
+function [REDACTED](string $txt): ?string {
     $t = strtolower($txt);
     $map = ['kerala'=>'Kerala','karnataka'=>'Karnataka','tamil nadu'=>'Tamil Nadu','maharashtra'=>'Maharashtra','delhi'=>'Delhi','rajasthan'=>'Rajasthan','uttar pradesh'=>'Uttar Pradesh'];
     foreach ($map as $k=>$v){ if (strpos($t,$k)!==false) return $v; }
@@ -1144,7 +1144,7 @@ function detect_state_from_text(string $txt): ?string {
 }
 
 function get_bus_operator(PDO $pdo, string $origin_name, string $dest_name): string {
-    $state = detect_state_from_text($origin_name) ?: detect_state_from_text($dest_name);
+    $state = [REDACTED]($origin_name) ?: [REDACTED]($dest_name);
     if (!$state) return 'KSRTC';
     // Optional CSV map: data/bus_data.csv with headers: state,operator
     static $csvMap = null;
@@ -1202,7 +1202,7 @@ function sample_polyline(array $poly, float $sample_m = 500.0): array {
  * Find DB stops near polyline by scanning once and ordering by progress.
  * radius_km: inclusion radius; sample_m: sampling resolution.
  */
-function find_db_stops_near_polyline(PDO $pdo, array $poly, float $radius_km=1.5, float $sample_m=500.0, ?string $stopType=null): array {
+function [REDACTED](PDO $pdo, array $poly, float $radius_km=1.5, float $sample_m=500.0, ?string $stopType=null): array {
     // Prefer OSM bus_stations when stopType=bus; fallback to legacy stops table
     $rows = [];
     if ($stopType && strtolower($stopType)==='bus'){
@@ -1221,7 +1221,7 @@ function find_db_stops_near_polyline(PDO $pdo, array $poly, float $radius_km=1.5
     $cands = [];
     foreach ($rows as $r) {
         $lat = (float)$r['latitude']; $lon=(float)$r['longitude'];
-        [$d,$prog] = point_to_polyline_progress($lat,$lon,$poly);
+        [$d,$prog] = [REDACTED]($lat,$lon,$poly);
         if ($d <= $radius_km) {
             $cands[] = [
                 'id'=>(int)$r['id'],
@@ -1326,7 +1326,7 @@ function ai_infer_stops(PDO $pdo, string $origin_name, string $dest_name, array 
  * Get AI traffic delay with caching and severity classification.
  * Returns [delay_min:int, severity:string(low|medium|high)].
  */
-function get_ai_traffic_with_cache(PDO $pdo, string $city, string $hhmm, float $distance_km): array {
+function [REDACTED](PDO $pdo, string $city, string $hhmm, float $distance_km): array {
     $city = trim($city) ?: 'City';
     $hour = (int)explode(':', $hhmm ?: '08:00')[0];
     $weekday = (int)date('N');
@@ -1386,10 +1386,10 @@ function gh_route_points(float $olat, float $olon, float $dlat, float $dlon): ar
         rtrim($base,'/'), $olat, $olon, $dlat, $dlon);
     try {
         $ch = curl_init($url);
-        curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>3, CURLOPT_CONNECTTIMEOUT=>2]);
+        curl_setopt_array($ch, [[REDACTED]=>true, CURLOPT_TIMEOUT=>3, [REDACTED]=>2]);
         $res = curl_exec($ch);
         if ($res === false) return [];
-        $code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE); curl_close($ch);
+        $code = curl_getinfo($ch, [REDACTED]); curl_close($ch);
         if ($code < 200 || $code >= 300) return [];
         $j = json_decode($res, true);
         if (!isset($j['paths'][0]['points']['coordinates'])) return [];
@@ -1417,11 +1417,11 @@ function osrm_snap_route(float $olat, float $olon, float $dlat, float $dlon): ar
     try {
         $ch = curl_init($url);
         curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER=>true, 
+            [REDACTED]=>true, 
             CURLOPT_TIMEOUT=>5,
-            CURLOPT_CONNECTTIMEOUT=>3,
+            [REDACTED]=>3,
             CURLOPT_USERAGENT=>'Velora/1.0',
-            CURLOPT_FOLLOWLOCATION=>true
+            [REDACTED]=>true
         ]);
         $res = curl_exec($ch);
         if ($res === false) {
@@ -1429,7 +1429,7 @@ function osrm_snap_route(float $olat, float $olon, float $dlat, float $dlon): ar
             curl_close($ch);
             return [[$olat,$olon],[$dlat,$dlon]];
         }
-        $code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE); curl_close($ch);
+        $code = curl_getinfo($ch, [REDACTED]); curl_close($ch);
         if ($code < 200 || $code >= 300) {
             @error_log('OSRM snap HTTP error: '.$code);
             return [[$olat,$olon],[$dlat,$dlon]];
@@ -1476,7 +1476,7 @@ function fetch_route_traffic(array $polyline, string $tomtomKey): array {
 /**
  * Compute nearest distance (km) and progress (segment index + fraction) of a point to a polyline.
  */
-function point_to_polyline_progress(float $plat, float $plon, array $poly): array {
+function [REDACTED](float $plat, float $plon, array $poly): array {
     if (count($poly) < 2) return [INF, 0.0];
     $bestD = INF; $bestProg = 0.0; $acc = 0.0;
     for ($i=0; $i < count($poly)-1; $i++) {
@@ -1518,14 +1518,14 @@ function inferOperatorType(?string $operatorName): string {
     return 'Bus';
 }
 
-function fmt_time_add_minutes(string $hhmm, int $delta): string {
+function [REDACTED](string $hhmm, int $delta): string {
     $parts = explode(':', $hhmm);
     $h = (int)($parts[0] ?? 0); $m = (int)($parts[1] ?? 0);
     $t = $h*60 + $m + $delta; if ($t < 0) $t = 0; $h2 = intdiv($t,60)%24; $m2 = $t%60;
     return sprintf('%02d:%02d', $h2, $m2);
 }
 
-function call_gemini_delay_minutes(?string $city, ?string $hhmm): int {
+function [REDACTED](?string $city, ?string $hhmm): int {
     $city = $city ?: 'city'; $hhmm = $hhmm ?: '08:00';
     $fallback = (int)(15 + (crc32($city.$hhmm) % 16)); // 15..30
     $prompt = "Predict traffic delay in minutes for $city at $hhmm on a weekday. Respond ONLY with JSON {minutes:int}.";
@@ -1557,8 +1557,8 @@ try {
     // Optional debug container (only returned when debug=true)
     $debug = null;
     // Ensure schema tables exist
-    try { ensure_table_traffic_cache($pdo); } catch (Throwable $e) {}
-    try { ensure_table_ai_stop_cache($pdo); } catch (Throwable $e) {}
+    try { [REDACTED]($pdo); } catch (Throwable $e) {}
+    try { [REDACTED]($pdo); } catch (Throwable $e) {}
     // Ensure caches exist (idempotent)
     try {
         $pdo->exec("CREATE TABLE IF NOT EXISTS traffic_cache (
@@ -1667,12 +1667,12 @@ try {
             
             // Use realistic router (follows actual roads)
             @error_log('Using realistic road-following bus router...');
-            $built = plan_realistic_bus_route($pdo, $originArr, $destArr, $cursor, $TOMTOM_KEY);
+            $built = [REDACTED]($pdo, $originArr, $destArr, $cursor, $TOMTOM_KEY);
             
             // Fallback to graph-based if realistic fails
             if (isset($built['error']) || empty($built['legs'])) {
                 @error_log('Realistic routing failed, trying graph fallback');
-                $built = graph_based_bus_chain($pdo, $originArr, $destArr, $cursor, $TOMTOM_KEY);
+                $built = [REDACTED]($pdo, $originArr, $destArr, $cursor, $TOMTOM_KEY);
             }
             
             // Final fallback to corridor
@@ -1717,7 +1717,7 @@ try {
             @error_log('Mode: train, distance='.$dist_km.'km');
             $decision = 'train';
             // Use realistic train router
-            $trainResult = plan_realistic_train_route($pdo, ['name'=>$origin_name,'lat'=>$origin_lat,'lon'=>$origin_lon], 
+            $trainResult = [REDACTED]($pdo, ['name'=>$origin_name,'lat'=>$origin_lat,'lon'=>$origin_lon], 
                                                      ['name'=>$dest_name,'lat'=>$dest_lat,'lon'=>$dest_lon], $cursor);
             if (isset($trainResult['error'])) {
                 $resp = ['success'=>false,'error'=>$trainResult['error'],'detail'=>'train_unavailable'];
@@ -1799,7 +1799,7 @@ try {
                 $poly = sample_polyline($poly, 1000.0);
             }
             $traffic = compute_leg_traffic($poly, $time_s, $TOMTOM_KEY);
-            $arrive = fmt_time_add_minutes($cursor, (int)round($time_s/60) + $traffic['delay_min']);
+            $arrive = [REDACTED]($cursor, (int)round($time_s/60) + $traffic['delay_min']);
             $segments = [[
                 'mode'=>'car','operator'=>'TomTom','from'=>$origin_name,'to'=>$dest_name,
                 'from_lat'=>$origin_lat,'from_lon'=>$origin_lon,'to_lat'=>$dest_lat,'to_lon'=>$dest_lon,
@@ -1838,7 +1838,7 @@ try {
             foreach ($segments as $idx => $seg) {
                 $m = strtolower((string)($seg['mode'] ?? ''));
                 if ($m==='car' || $m==='taxi' || $m==='drive') {
-                    $segments[$idx]['instructions'] = tomtom_route_instructions_detailed((float)$seg['from_lat'], (float)$seg['from_lon'], (float)$seg['to_lat'], (float)$seg['to_lon'], $TOMTOM_KEY, 'd'.($idx+1));
+                    $segments[$idx]['instructions'] = [REDACTED]((float)$seg['from_lat'], (float)$seg['from_lon'], (float)$seg['to_lat'], (float)$seg['to_lon'], $TOMTOM_KEY, 'd'.($idx+1));
                 }
             }
             $payload = [
@@ -1959,7 +1959,7 @@ try {
                         'from'=>$origin_name ?: 'Origin','to'=>$fromName,
                         'from_lat'=>$origin_lat,'from_lon'=>$origin_lon,'to_lat'=>$fromLat,'to_lon'=>$fromLon,
                         'departure'=>$cursor,
-                        'arrival'=> fmt_time_add_minutes($cursor, $mins_fm + $delay_fm),
+                        'arrival'=> [REDACTED]($cursor, $mins_fm + $delay_fm),
                         'fare'=> (int)round($km_fm * ($has_vehicle ? 0 : 10)),
                         'distance_km'=> round($km_fm,1),
                         'duration_s'=> ($mins_fm + $delay_fm)*60,
@@ -1983,7 +1983,7 @@ try {
                     'from_lat' => $fromLat, 'from_lon' => $fromLon,
                     'to_lat' => $toLat, 'to_lon' => $toLon,
                     'departure' => $cursor,
-                    'arrival' => fmt_time_add_minutes($cursor, $minutes + $delayTrain),
+                    'arrival' => [REDACTED]($cursor, $minutes + $delayTrain),
                     'fare' => (int)round($train_km * $fare_per_km),
                     'distance_km' => round($train_km,1),
                     'duration_s' => ($minutes + $delayTrain)*60,
@@ -2004,8 +2004,8 @@ try {
                         'mode'=>'car','operator_name'=> ($has_vehicle ? 'Self-drive' : 'Taxi'),
                         'from'=>$toName,'to'=>$dest_name ?: 'Destination',
                         'from_lat'=>$toLat,'from_lon'=>$toLon,'to_lat'=>$dest_lat,'to_lon'=>$dest_lon,
-                        'departure'=> fmt_time_add_minutes($cursor, 2),
-                        'arrival'=> fmt_time_add_minutes($cursor, 2 + $mins_lm + $delay_lm),
+                        'departure'=> [REDACTED]($cursor, 2),
+                        'arrival'=> [REDACTED]($cursor, 2 + $mins_lm + $delay_lm),
                         'fare'=> (int)round($km_lm * ($has_vehicle ? 0 : 10)),
                         'distance_km'=> round($km_lm,1),
                         'duration_s'=> ($mins_lm + $delay_lm + 2)*60,
@@ -2029,7 +2029,7 @@ try {
                 }
                 if (isset($_GET['debug'])){
                     $debug = $debug ?? [];
-                    $debug['matched_rail_stations'] = [$fromName, $toName];
+                    $debug[[REDACTED]] = [$fromName, $toName];
                     $debug['operators'] = ($debug['operators'] ?? []);
                     $debug['operators'][] = ['mode'=>'train','operator'=>'IRCTC'];
                 }
@@ -2055,7 +2055,7 @@ try {
                 $lenD = $rtD['success'] ? (float)($rtD['data']['length_m'] ?? 0) : (haversine_km($origin_lat,$origin_lon,$dest_lat,$dest_lon)*1000);
                 $timeD= $rtD['success'] ? (int)($rtD['data']['time_s'] ?? 0) : (int)round(($lenD/1000)/50*3600);
                 $trafD= compute_leg_traffic($polyD, $timeD, $TOMTOM_KEY);
-                $arrD = fmt_time_add_minutes($cursor, (int)round($timeD/60) + $trafD['delay_min']);
+                $arrD = [REDACTED]($cursor, (int)round($timeD/60) + $trafD['delay_min']);
                 $segD = [[
                     'mode'=>'car','operator'=>'TomTom','from'=>$origin_name,'to'=>$dest_name,
                     'from_lat'=>$origin_lat,'from_lon'=>$origin_lon,'to_lat'=>$dest_lat,'to_lon'=>$dest_lon,
@@ -2115,7 +2115,7 @@ try {
                 'from' => $origin_name ?: 'Origin', 'to' => $aName.' Airport',
                 'from_lat'=>$origin_lat,'from_lon'=>$origin_lon,'to_lat'=>$aLat,'to_lon'=>$aLon,
                 'departure' => $cursor,
-                'arrival' => fmt_time_add_minutes($cursor, $mins_fm + $delay_fm),
+                'arrival' => [REDACTED]($cursor, $mins_fm + $delay_fm),
                 'fare' => (int)round($km_fm * ($has_vehicle ? 0 : 12)),
                 'distance_km' => round($km_fm,1),
                 'duration_s' => ($mins_fm + $delay_fm)*60,
@@ -2140,13 +2140,13 @@ try {
                 max(60, (int)round((haversine_km($aLat,$aLon,$bLat,$bLon)/750)*60 + 30));
             // CO2: flight 250 g/km
             $co2_f = (int)round(haversine_km($aLat,$aLon,$bLat,$bLon) * 250);
-            $flightOp = get_ai_operator_with_cache($pdo, ($bName ?: '') , 'flight', function() use($flight_op){ return $flight_op; });
+            $flightOp = [REDACTED]($pdo, ($bName ?: '') , 'flight', function() use($flight_op){ return $flight_op; });
             $segments[] = [
                 'mode' => 'flight','operator_name'=>$flightOp,
                 'from' => $aName, 'to' => $bName,
                 'from_lat'=>$aLat,'from_lon'=>$aLon,'to_lat'=>$bLat,'to_lon'=>$bLon,
-                'departure' => fmt_time_add_minutes($cursor, 30),
-                'arrival' => fmt_time_add_minutes($cursor, 30 + $flight_minutes),
+                'departure' => [REDACTED]($cursor, 30),
+                'arrival' => [REDACTED]($cursor, 30 + $flight_minutes),
                 'fare' => (int)($flight['fare'] ?? max(3500, (int)round(haversine_km($aLat,$aLon,$bLat,$bLon)*6.2))),
                 'distance_km' => round(haversine_km($aLat,$aLon,$bLat,$bLon),1),
                 'duration_s' => $flight_minutes*60,
@@ -2164,8 +2164,8 @@ try {
                 'mode'=>'car','operator_name'=> ($has_vehicle ? 'Self-drive' : 'Taxi'),
                 'from' => $bName.' Airport','to'=>$dest_name ?: 'Destination',
                 'from_lat'=>$bLat,'from_lon'=>$bLon,'to_lat'=>$dest_lat,'to_lon'=>$dest_lon,
-                'departure'=> fmt_time_add_minutes($cursor, 5),
-                'arrival'  => fmt_time_add_minutes($cursor, 5 + $mins_local + $delay_local),
+                'departure'=> [REDACTED]($cursor, 5),
+                'arrival'  => [REDACTED]($cursor, 5 + $mins_local + $delay_local),
                 'fare' => (int)round($km_local * ($has_vehicle ? 0 : 12)),
                 'distance_km' => round($km_local,1),
                 'duration_s' => ($mins_local + $delay_local)*60,
@@ -2199,7 +2199,7 @@ try {
         // Station fallback for train: insert taxi legs to nearest stations when endpoints lack a station
         try {
             // Ensure schema exists (no-op if already there)
-            ensure_stations_schema($pdo);
+            [REDACTED]($pdo);
             $hasTrain = false;
             foreach ($segments as $s){ if (strtolower((string)($s['mode']??''))==='train') { $hasTrain = true; break; } }
             if ($hasTrain && isset($origin_lat,$origin_lon,$dest_lat,$dest_lon)){
@@ -2216,7 +2216,7 @@ try {
                     array_unshift($segments, [
                         'mode'=>'car','operator_name'=>'Taxi','from'=>$origin_name ?: 'Origin','to'=> ($pre['name'] ?: 'Nearest Station'),
                         'from_lat'=>$origin_lat,'from_lon'=>$origin_lon,'to_lat'=>(float)$pre['lat'],'to_lon'=>(float)$pre['lon'],
-                        'departure'=> fmt_time_add_minutes($cursor, -($mins_pre+$delay_pre)),
+                        'departure'=> [REDACTED]($cursor, -($mins_pre+$delay_pre)),
                         'arrival'  => $cursor,
                         'fare' => (int)round($dPre * 12),
                         'distance_km' => round($dPre,1),
@@ -2234,7 +2234,7 @@ try {
                         'mode'=>'car','operator_name'=>'Taxi','from'=> ($post['name'] ?: 'Arrival Station'),'to'=>$dest_name ?: 'Destination',
                         'from_lat'=>(float)$post['lat'],'from_lon'=>(float)$post['lon'],'to_lat'=>$dest_lat,'to_lon'=>$dest_lon,
                         'departure'=> $lastArr,
-                        'arrival'  => fmt_time_add_minutes($lastArr, $mins_post + $delay_post),
+                        'arrival'  => [REDACTED]($lastArr, $mins_post + $delay_post),
                         'fare' => (int)round($dPost * 12),
                         'distance_km' => round($dPost,1),
                         'duration_s' => ($mins_post + $delay_post)*60,
@@ -2263,7 +2263,7 @@ try {
             foreach ($segments as $i => $seg) {
                 $mode = strtolower((string)($seg['mode'] ?? ''));
                 if ($mode === 'car' && isset($seg['from_lat'],$seg['from_lon'],$seg['to_lat'],$seg['to_lon'])){
-                    $inst = tomtom_directions_instructions((float)$seg['from_lat'], (float)$seg['from_lon'], (float)$seg['to_lat'], (float)$seg['to_lon'], $TOMTOM_KEY, $depart_time ?? null);
+                    $inst = [REDACTED]((float)$seg['from_lat'], (float)$seg['from_lon'], (float)$seg['to_lat'], (float)$seg['to_lon'], $TOMTOM_KEY, $depart_time ?? null);
                     if ($inst) { $segments[$i]['instructions'] = $inst; }
                 }
             }
@@ -2432,7 +2432,7 @@ try {
             $url = 'http://localhost:8989/geocode?q='.urlencode($q).'&limit=1';
             try {
                 $ch = curl_init($url);
-                curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>3, CURLOPT_CONNECTTIMEOUT=>2]);
+                curl_setopt_array($ch, [[REDACTED]=>true, CURLOPT_TIMEOUT=>3, [REDACTED]=>2]);
                 $res = curl_exec($ch);
                 if ($res === false) return null;
                 $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -2459,7 +2459,7 @@ try {
             $url = 'https://nominatim.openstreetmap.org/search?q='.urlencode($q).'&format=json&limit=1';
             try {
                 $ch = curl_init($url);
-                curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>3, CURLOPT_CONNECTTIMEOUT=>2, CURLOPT_HTTPHEADER=>['User-Agent: Velora/1.0 (+https://example.com)']]);
+                curl_setopt_array($ch, [[REDACTED]=>true, CURLOPT_TIMEOUT=>3, [REDACTED]=>2, CURLOPT_HTTPHEADER=>['User-Agent: Velora/1.0 (+https://example.com)']]);
                 $res = curl_exec($ch);
                 if ($res === false) return null;
                 $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -2559,7 +2559,7 @@ try {
             $mode = $dist_km <= 300 ? 'bus' : ($dist_km <= 700 ? 'train' : 'flight');
             $speed = $mode==='bus'?40:($mode==='train'?70:700);
             $minutes = max(1, (int)round(($dist_km / max(1,$speed)) * 60));
-            $depart = '12:00'; $arrive = fmt_time_add_minutes($depart,$minutes);
+            $depart = '12:00'; $arrive = [REDACTED]($depart,$minutes);
             $fare = $mode==='bus'? max(20, (int)round($dist_km*0.8)) : ($mode==='train'? max(80,(int)round($dist_km*1.2)) : max(1500,(int)round($dist_km*10)));
             $segments=[[
                 'mode'=>$mode,
@@ -2684,7 +2684,7 @@ try {
             $mode = $dist_km <= 300 ? 'bus' : ($dist_km <= 700 ? 'train' : 'flight');
             $speed = $mode==='bus'?40:($mode==='train'?70:700);
             $minutes = max(1, (int)round(($dist_km / max(1,$speed)) * 60));
-            $depart = '12:00'; $arrive = fmt_time_add_minutes($depart,$minutes);
+            $depart = '12:00'; $arrive = [REDACTED]($depart,$minutes);
             $fare = $mode==='bus'? max(20, (int)round($dist_km*0.8)) : ($mode==='train'? max(80,(int)round($dist_km*1.2)) : max(1500,(int)round($dist_km*10)));
             $segments=[[
                 'mode'=>$mode,
@@ -2814,3 +2814,5 @@ try {
     echo json_encode(['success' => false, 'error' => 'Server error', 'details' => $e->getMessage()]);
 }
 
+
+/* v-sync seq: 71 */

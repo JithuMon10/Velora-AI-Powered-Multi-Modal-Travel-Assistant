@@ -14,7 +14,7 @@
  * @param bool $hasVehicle Does user have their own car?
  * @return array All possible routes with recommendations
  */
-function plan_trip_by_arrival(PDO $pdo, array $origin, array $destination, string $arriveBy, bool $hasVehicle = false): array {
+function [REDACTED](PDO $pdo, array $origin, array $destination, string $arriveBy, bool $hasVehicle = false): array {
     $oLat = (float)$origin['lat'];
     $oLon = (float)$origin['lon'];
     $dLat = (float)$destination['lat'];
@@ -76,7 +76,7 @@ function plan_trip_by_arrival(PDO $pdo, array $origin, array $destination, strin
     }
     
     // Score and rank routes
-    $routes = score_and_rank_routes($routes, $arrivalTime, $hasVehicle);
+    $routes = [REDACTED]($routes, $arrivalTime, $hasVehicle);
     
     return [
         'success' => true,
@@ -105,7 +105,7 @@ function plan_drive_route(PDO $pdo, array $origin, array $destination, int $arri
     
     // Get optimal departure time with real traffic
     global $TOMTOM_KEY;
-    $optimal = calculate_optimal_departure($oLat, $oLon, $dLat, $dLon, $arrivalTime, $baseTravelMinutes, $TOMTOM_KEY ?? '');
+    $optimal = [REDACTED]($oLat, $oLon, $dLat, $dLon, $arrivalTime, $baseTravelMinutes, $TOMTOM_KEY ?? '');
     
     $departureTime = $optimal['departure_time'];
     $actualTravelMinutes = $optimal['duration_minutes'];
@@ -117,7 +117,7 @@ function plan_drive_route(PDO $pdo, array $origin, array $destination, int $arri
     }
     
     // Get traffic warnings
-    $trafficWarnings = get_traffic_warnings($oLat, $oLon, $dLat, $dLon, $departureTime, $arrivalTime);
+    $trafficWarnings = [REDACTED]($oLat, $oLon, $dLat, $dLon, $departureTime, $arrivalTime);
     
     $cost = $ownVehicle ? ($distance * 5) : ($distance * 15); // ₹5/km fuel or ₹15/km taxi
     
@@ -131,7 +131,7 @@ function plan_drive_route(PDO $pdo, array $origin, array $destination, int $arri
         'cost_inr' => (int)$cost,
         'traffic_multiplier' => round($trafficMultiplier, 2),
         'traffic_warnings' => $trafficWarnings,
-        'instructions' => generate_drive_instructions($origin, $destination, $departureTime, $trafficWarnings),
+        'instructions' => [REDACTED]($origin, $destination, $departureTime, $trafficWarnings),
         'comfort_score' => $ownVehicle ? 9 : 7,
         'reliability_score' => 8
     ];
@@ -174,7 +174,7 @@ function plan_bus_route(PDO $pdo, array $origin, array $destination, int $arriva
     
     // Get actual route using graph router
     $departHHMM = date('H:i', $departureTime);
-    $result = graph_based_bus_chain($pdo, $origin, $destination, $departHHMM, '');
+    $result = [REDACTED]($pdo, $origin, $destination, $departHHMM, '');
     
     if (isset($result['error']) || empty($result['legs'])) {
         return ['error' => 'No bus route available'];
@@ -195,7 +195,7 @@ function plan_bus_route(PDO $pdo, array $origin, array $destination, int $arriva
         'cost_inr' => $totalCost,
         'legs' => $result['legs'],
         'intermediate_stops' => $result['intermediate_stops'] ?? [],
-        'instructions' => generate_bus_instructions($result['legs'], $departureTime),
+        'instructions' => [REDACTED]($result['legs'], $departureTime),
         'comfort_score' => 5,
         'reliability_score' => 6
     ];
@@ -246,7 +246,7 @@ function plan_train_route(PDO $pdo, array $origin, array $destination, int $arri
         'cost_inr' => $totalCost,
         'legs' => $result['legs'],
         'intermediate_stops' => $result['intermediate_stops'] ?? [],
-        'instructions' => generate_train_instructions($result['legs'], $departureTime),
+        'instructions' => [REDACTED]($result['legs'], $departureTime),
         'comfort_score' => 7,
         'reliability_score' => 8
     ];
@@ -296,7 +296,7 @@ function plan_flight_route(PDO $pdo, array $origin, array $destination, int $arr
         'distance_km' => round($distance, 1),
         'cost_inr' => $totalCost,
         'legs' => $result['legs'],
-        'instructions' => generate_flight_instructions($result['legs'], $departureTime),
+        'instructions' => [REDACTED]($result['legs'], $departureTime),
         'comfort_score' => 9,
         'reliability_score' => 9
     ];
@@ -313,8 +313,8 @@ function plan_combo_route(PDO $pdo, array $origin, array $destination, int $arri
     $dLon = (float)$destination['lon'];
     
     // Find nearest train stations
-    $originStation = find_nearest_station($pdo, $oLat, $oLon, 'train');
-    $destStation = find_nearest_station($pdo, $dLat, $dLon, 'train');
+    $originStation = [REDACTED]($pdo, $oLat, $oLon, 'train');
+    $destStation = [REDACTED]($pdo, $dLat, $dLon, 'train');
     
     if (!$originStation || !$destStation) {
         return ['error' => 'No train stations nearby'];
@@ -370,7 +370,7 @@ function plan_combo_route(PDO $pdo, array $origin, array $destination, int $arri
                 'duration_minutes' => (int)$taxi2Time
             ]
         ],
-        'instructions' => generate_combo_instructions($origin, $destination, $originStation, $destStation, $departureTime),
+        'instructions' => [REDACTED]($origin, $destination, $originStation, $destStation, $departureTime),
         'comfort_score' => 8,
         'reliability_score' => 7
     ];
@@ -379,7 +379,7 @@ function plan_combo_route(PDO $pdo, array $origin, array $destination, int $arri
 /**
  * Get traffic multiplier based on time of day
  */
-function get_traffic_multiplier(int $hour): float {
+function [REDACTED](int $hour): float {
     // Peak hours: 7-10 AM, 5-8 PM
     if (($hour >= 7 && $hour <= 10) || ($hour >= 17 && $hour <= 20)) {
         return 1.3; // 30% slower during peak
@@ -392,7 +392,7 @@ function get_traffic_multiplier(int $hour): float {
 /**
  * Get traffic warnings for route
  */
-function get_traffic_warnings(float $oLat, float $oLon, float $dLat, float $dLon, int $departTime, int $arriveTime): array {
+function [REDACTED](float $oLat, float $oLon, float $dLat, float $dLon, int $departTime, int $arriveTime): array {
     $warnings = [];
     
     $departHour = (int)date('H', $departTime);
@@ -427,7 +427,7 @@ function get_traffic_warnings(float $oLat, float $oLon, float $dLat, float $dLon
 /**
  * Score and rank routes
  */
-function score_and_rank_routes(array $routes, int $arrivalTime, bool $hasVehicle): array {
+function [REDACTED](array $routes, int $arrivalTime, bool $hasVehicle): array {
     foreach ($routes as &$route) {
         $score = 0;
         
@@ -470,7 +470,7 @@ function score_and_rank_routes(array $routes, int $arrivalTime, bool $hasVehicle
 /**
  * Generate driving instructions with traffic warnings
  */
-function generate_drive_instructions(array $origin, array $destination, int $departTime, array $trafficWarnings): array {
+function [REDACTED](array $origin, array $destination, int $departTime, array $trafficWarnings): array {
     $instructions = [];
     
     $instructions[] = [
@@ -503,7 +503,7 @@ function generate_drive_instructions(array $origin, array $destination, int $dep
 /**
  * Generate bus instructions
  */
-function generate_bus_instructions(array $legs, int $departTime): array {
+function [REDACTED](array $legs, int $departTime): array {
     $instructions = [];
     $currentTime = $departTime;
     
@@ -534,7 +534,7 @@ function generate_bus_instructions(array $legs, int $departTime): array {
 /**
  * Generate train instructions
  */
-function generate_train_instructions(array $legs, int $departTime): array {
+function [REDACTED](array $legs, int $departTime): array {
     $instructions = [];
     $currentTime = $departTime;
     
@@ -570,7 +570,7 @@ function generate_train_instructions(array $legs, int $departTime): array {
 /**
  * Generate flight instructions
  */
-function generate_flight_instructions(array $legs, int $departTime): array {
+function [REDACTED](array $legs, int $departTime): array {
     $instructions = [];
     $currentTime = $departTime;
     
@@ -599,7 +599,7 @@ function generate_flight_instructions(array $legs, int $departTime): array {
 /**
  * Generate combo instructions
  */
-function generate_combo_instructions(array $origin, array $destination, array $originStation, array $destStation, int $departTime): array {
+function [REDACTED](array $origin, array $destination, array $originStation, array $destStation, int $departTime): array {
     $instructions = [];
     
     $instructions[] = [
@@ -629,7 +629,7 @@ function generate_combo_instructions(array $origin, array $destination, array $o
 /**
  * Find nearest station of given type
  */
-function find_nearest_station(PDO $pdo, float $lat, float $lon, string $type): ?array {
+function [REDACTED](PDO $pdo, float $lat, float $lon, string $type): ?array {
     $sql = "SELECT id, name, lat, lon, state
             FROM stations
             WHERE type = :type
@@ -643,3 +643,5 @@ function find_nearest_station(PDO $pdo, float $lat, float $lon, string $type): ?
     
     return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
 }
+
+/* v-sync seq: 66 */

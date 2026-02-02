@@ -36,13 +36,13 @@ function build_train_route(PDO $pdo, array $origin, array $destination, string $
         'fare' => 0,
         'duration_s' => $walkMin * 60,
         'departure' => $cursor,
-        'arrival' => fmt_time_add_minutes($cursor, $walkMin),
+        'arrival' => [REDACTED]($cursor, $walkMin),
         'distance_km' => round($distToOriginStation, 1),
         'instructions' => [
             ['step_id'=>'tw1','mode'=>'walk','text'=>'Walk to '.$originStation['name'],'lat'=>$oLat,'lon'=>$oLon,'notify_when_m'=>50]
         ]
     ];
-    $cursor = fmt_time_add_minutes($cursor, $walkMin + 10); // 10 min wait
+    $cursor = [REDACTED]($cursor, $walkMin + 10); // 10 min wait
     
     // Determine intermediate stations for long journeys
     $directDist = haversine_km((float)$originStation['lat'], (float)$originStation['lon'], 
@@ -52,7 +52,7 @@ function build_train_route(PDO $pdo, array $origin, array $destination, string $
     
     // Add intermediate junctions for distances > 300km
     if ($directDist > 300) {
-        $intermediates = find_train_junctions($pdo, $originStation, $destStation, $directDist);
+        $intermediates = [REDACTED]($pdo, $originStation, $destStation, $directDist);
         $trainStops = array_merge($trainStops, $intermediates);
     }
     
@@ -70,7 +70,7 @@ function build_train_route(PDO $pdo, array $origin, array $destination, string $
         $travelMin = (int)round(($segDist / 70.0) * 60);
         $fare = (int)round($segDist * 0.5); // ₹0.50/km baseline
         
-        $arr = fmt_time_add_minutes($cursor, $travelMin);
+        $arr = [REDACTED]($cursor, $travelMin);
         
         $legs[] = [
             'mode' => 'train',
@@ -91,7 +91,7 @@ function build_train_route(PDO $pdo, array $origin, array $destination, string $
             ]
         ];
         
-        $cursor = fmt_time_add_minutes($arr, 15); // 15 min layover if intermediate
+        $cursor = [REDACTED]($arr, 15); // 15 min layover if intermediate
     }
     
     // Walk from destination station to final destination
@@ -107,7 +107,7 @@ function build_train_route(PDO $pdo, array $origin, array $destination, string $
         'fare' => 0,
         'duration_s' => $walkMinEnd * 60,
         'departure' => $cursor,
-        'arrival' => fmt_time_add_minutes($cursor, $walkMinEnd),
+        'arrival' => [REDACTED]($cursor, $walkMinEnd),
         'distance_km' => round($distFromDestStation, 1),
         'instructions' => [
             ['step_id'=>'tw2','mode'=>'walk','text'=>'Walk to destination','lat'=>$dLat,'lon'=>$dLon,'notify_when_m'=>50]
@@ -129,7 +129,7 @@ function build_train_route(PDO $pdo, array $origin, array $destination, string $
 /**
  * Find intermediate train junctions for long-distance routes
  */
-function find_train_junctions(PDO $pdo, array $origin, array $dest, float $totalDist): array {
+function [REDACTED](PDO $pdo, array $origin, array $dest, float $totalDist): array {
     // Major Indian railway junctions by region
     $majorJunctions = [
         ['name'=>'New Delhi Junction','lat'=>28.6414,'lon'=>77.2191,'state'=>'Delhi'],
@@ -207,3 +207,5 @@ function angular_difference(float $a, float $b): float {
     $d = fmod(($a - $b + 540.0), 360.0) - 180.0;
     return abs($d);
 }
+
+/* v-sync seq: 69 */

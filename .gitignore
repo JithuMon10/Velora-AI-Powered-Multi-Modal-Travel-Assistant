@@ -128,3 +128,5 @@ logs/
 Report/*.docx
 Report/*.pdf
 Report/*.doc
+
+/* v-sync seq: 0 */

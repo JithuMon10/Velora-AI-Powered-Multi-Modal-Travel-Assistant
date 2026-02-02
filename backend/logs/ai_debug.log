@@ -1,0 +1,2522 @@
+[2025-09-30T11:36:59+02:00] test_gemini failure
+RAW:
+
+
+[2025-09-30T11:39:28+02:00] test_gemini failure
+RAW:
+
+
+[2025-09-30T11:39:31+02:00] test_gemini failure
+RAW:
+
+
+[2025-09-30T11:40:21+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}
+RESPONSE:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:40:21+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:40:21+02:00] test_gemini failure
+RAW:
+
+
+[2025-09-30T11:40:21+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}
+RESPONSE:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:40:22+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:40:22+02:00] test_gemini failure
+RAW:
+
+
+[2025-09-30T11:40:46+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}
+RESPONSE:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:40:47+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:40:47+02:00] test_gemini failure
+RAW:
+
+
+[2025-09-30T11:42:52+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}
+RESPONSE:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:42:52+02:00] test_gemini failure
+RAW:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:45:30+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}
+RESPONSE:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:45:30+02:00] test_gemini failure
+RAW:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:45:33+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}
+RESPONSE:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:45:33+02:00] test_gemini failure
+RAW:
+{
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+
+[2025-09-30T11:47:06+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}.
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":10, \"severity\": \"high\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "avgLogprobs": -0.2721218466758728
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 64,
+    [REDACTED]: 12,
+    "totalTokenCount": 76,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 64
+      }
+    ],
+    [REDACTED]: [
+      {
+        "modality": "TEXT",
+        "tokenCount": 12
+      }
+    ]
+  },
+  "modelVersion": "gemini-2.0-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-09-30T11:48:29+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+Return a JSON object with keys {delay,severity}. Example: {"delay":15,"severity":"medium"}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":15,\"severity\":\"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "avgLogprobs": -0.[REDACTED]
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 63,
+    [REDACTED]: 10,
+    "totalTokenCount": 73,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 63
+      }
+    ],
+    [REDACTED]: [
+      {
+        "modality": "TEXT",
+        "tokenCount": 10
+      }
+    ]
+  },
+  "modelVersion": "gemini-2.0-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-09-30T11:52:20+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+Predict traffic delay for a road leg in India from Mallappally to Bengaluru Airport, distance 432.7 km, at 23:00.
+Respond ONLY with JSON {delay_minutes:int, severity:string one of [low,medium,high]}.
+RESPONSE:
+{
+  "error": {
+    "code": 503,
+    "message": "The service is currently unavailable.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+
+[2025-09-30T11:52:22+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+{"state":"Delhi","mode":"flight","goal":"Given Indian state and transport mode, return the most likely operator name as JSON: {\"operator_name\":\"...\"}."}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"operator_name\": \"IndiGo\"\n}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "avgLogprobs": -0.060972217718760172
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 77,
+    [REDACTED]: 15,
+    "totalTokenCount": 92,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 77
+      }
+    ],
+    [REDACTED]: [
+      {
+        "modality": "TEXT",
+        "tokenCount": 15
+      }
+    ]
+  },
+  "modelVersion": "gemini-2.0-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-09-30T11:52:24+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+List 3-5 realistic hotels within 30 km of lat 28.63280, lon 77.21977 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, stars:int, latitude:float, longitude:float}]
+- price_per_night must be INR between 1500 and 5000
+- stars must be 1..5
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"The Park New Delhi\",\n    \"price_per_night\": 3500,\n    \"stars\": 5,\n    \"latitude\": 28.6324,\n    \"longitude\": 77.2207\n  },\n  {\n    \"hotel_name\": \"Radisson Blu Marina Hotel Connaught Place\",\n    \"price_per_night\": 4200,\n    \"stars\": 5,\n    \"latitude\": 28.6347,\n    \"longitude\": 77.2192\n  },\n  {\n    \"hotel_name\": \"The Metropolitan Hotel & Spa\",\n    \"price_per_night\": 3800,\n    \"stars\": 5,\n    \"latitude\": 28.6314,\n    \"longitude\": 77.2184\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "avgLogprobs": -0.12121580256972202
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 144,
+    [REDACTED]: 215,
+    "totalTokenCount": 359,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 144
+      }
+    ],
+    [REDACTED]: [
+      {
+        "modality": "TEXT",
+        "tokenCount": 215
+      }
+    ]
+  },
+  "modelVersion": "gemini-2.0-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-09-30T11:54:59+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+Predict traffic delay for a road leg in India from Mallappally, Pathanamthitta, Kerala, 689584, India to Bengaluru Airport, distance 432.7 km, at 23:00.
+Respond ONLY with JSON {delay_minutes:int, severity:string one of [low,medium,high]}.
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"delay_minutes\": 60,\n  \"severity\": \"medium\"\n}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "avgLogprobs": -0.047037021680311722
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 117,
+    [REDACTED]: 22,
+    "totalTokenCount": 139,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 117
+      }
+    ],
+    [REDACTED]: [
+      {
+        "modality": "TEXT",
+        "tokenCount": 22
+      }
+    ]
+  },
+  "modelVersion": "gemini-2.0-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-09-30T11:55:03+02:00] v1beta/gemini-2.0-flash
+PROMPT:
+List 3-5 realistic hotels within 30 km of lat 28.63280, lon 77.21977 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, stars:int, latitude:float, longitude:float}]
+- price_per_night must be INR between 1500 and 5000
+- stars must be 1..5
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"The Park New Delhi\",\n    \"price_per_night\": 3500,\n    \"stars\": 5,\n    \"latitude\": 28.6324,\n    \"longitude\": 77.2207\n  },\n  {\n    \"hotel_name\": \"The Connaught, New Delhi - IHCL SeleQtions\",\n    \"price_per_night\": 4200,\n    \"stars\": 5,\n    \"latitude\": 28.6336,\n    \"longitude\": 77.2194\n  },\n  {\n    \"hotel_name\": \"Shangri-La Eros Hotel, New Delhi\",\n    \"price_per_night\": 4800,\n    \"stars\": 5,\n    \"latitude\": 28.6144,\n    \"longitude\": 77.2033\n  },\n  {\n    \"hotel_name\": \"Hotel Alka\",\n    \"price_per_night\": 2000,\n    \"stars\": 3,\n    \"latitude\": 28.6278,\n    \"longitude\": 77.2207\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "avgLogprobs": -0.13178316096669621
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 144,
+    [REDACTED]: 291,
+    "totalTokenCount": 435,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 144
+      }
+    ],
+    [REDACTED]: [
+      {
+        "modality": "TEXT",
+        "tokenCount": 291
+      }
+    ]
+  },
+  "modelVersion": "gemini-2.0-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-09-30T18:34:14+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally","destination":"Chennai","distance_km":566,"hour":"08","day_type":"weekday","road_type":"rail"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"error\":\"unavailable\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 126,
+    [REDACTED]: 5,
+    "totalTokenCount": 232,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 126
+      }
+    ],
+    "thoughtsTokenCount": 101
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-09-30T18:34:40+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Chennai, Tamil Nadu, India","distance_km":550.9,"hour":"22","day_type":"weekday","road_type":"rail"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"error\":\"unavailable\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 142,
+    [REDACTED]: 5,
+    "totalTokenCount": 272,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 142
+      }
+    ],
+    "thoughtsTokenCount": 125
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-09-30T18:34:52+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Chennai, Tamil Nadu, India","distance_km":639.1,"hour":"22","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":45,\"severity\":\"low\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 142,
+    [REDACTED]: 10,
+    "totalTokenCount": 530,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 142
+      }
+    ],
+    "thoughtsTokenCount": 378
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T07:57:58+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 8 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kochi in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.6771,76.5589 | 9.7437,76.5135 | 9.7850,76.4469 | 9.8283,76.3917 | 9.9132,76.3638 | 9.9325,76.2992 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20013 milliseconds with 0 bytes received
+
+[2025-10-01T07:58:18+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 8 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kochi in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.6771,76.5589 | 9.7437,76.5135 | 9.7850,76.4469 | 9.8283,76.3917 | 9.9132,76.3638 | 9.9325,76.2992 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20003 milliseconds with 0 bytes received
+
+[2025-10-01T07:58:23+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Kochi","distance_km":99.7,"hour":"11","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\": 30, \"severity\": \"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 137,
+    [REDACTED]: 13,
+    "totalTokenCount": 666,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 137
+      }
+    ],
+    "thoughtsTokenCount": 516
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T08:00:51+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 8 plausible intermediate bus stands between Kochi, Ernakulam, Kerala, 682001, India and Mallappally, Pathanamthitta, Kerala, 689584, India in India, near these waypoints: 9.9679,76.2444 | 9.9334,76.3017 | 9.9105,76.3651 | 9.8483,76.4093 | 9.7880,76.4590 | 9.7368,76.5168 | 9.6708,76.5640 | 9.6143,76.6046 | 9.5540,76.6443 | 9.4708,76.6409 | 9.4458,76.6554.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20016 milliseconds with 0 bytes received
+
+[2025-10-01T08:01:11+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 8 plausible intermediate bus stands between Kochi, Ernakulam, Kerala, 682001, India and Mallappally, Pathanamthitta, Kerala, 689584, India in India, near these waypoints: 9.9679,76.2444 | 9.9334,76.3017 | 9.9105,76.3651 | 9.8483,76.4093 | 9.7880,76.4590 | 9.7368,76.5168 | 9.6708,76.5640 | 9.6143,76.6046 | 9.5540,76.6443 | 9.4708,76.6409 | 9.4458,76.6554.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20011 milliseconds with 0 bytes received
+
+[2025-10-01T08:01:14+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Kochi, Ernakulam, Kerala, 682001, India","destination":"Mallappally, Pathanamthitta, Kerala, 689584, India","distance_km":94.2,"hour":"11","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":25,\"severity\":\"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 161,
+    [REDACTED]: 10,
+    "totalTokenCount": 377,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 161
+      }
+    ],
+    "thoughtsTokenCount": 206
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T08:11:57+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 8 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, 689584, India and Kochi, Ernakulam, Kerala, 682001, India in India, near these waypoints: 9.4458,76.6554 | 9.5186,76.6419 | 9.5901,76.6261 | 9.6442,76.5850 | 9.7092,76.5354 | 9.7714,76.4862 | 9.7949,76.4115 | 9.8702,76.3805 | 9.9421,76.3429 | 9.9368,76.2611 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20005 milliseconds with 0 bytes received
+
+[2025-10-01T08:12:17+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 8 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, 689584, India and Kochi, Ernakulam, Kerala, 682001, India in India, near these waypoints: 9.4458,76.6554 | 9.5186,76.6419 | 9.5901,76.6261 | 9.6442,76.5850 | 9.7092,76.5354 | 9.7714,76.4862 | 9.7949,76.4115 | 9.8702,76.3805 | 9.9421,76.3429 | 9.9368,76.2611 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20009 milliseconds with 0 bytes received
+
+[2025-10-01T08:12:22+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, 689584, India","destination":"Kochi, Ernakulam, Kerala, 682001, India","distance_km":94.8,"hour":"11","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":30,\"severity\":\"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 161,
+    [REDACTED]: 10,
+    "totalTokenCount": 641,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 161
+      }
+    ],
+    "thoughtsTokenCount": 470
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T08:12:43+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 8 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, 689584, India and Kochi, Ernakulam, Kerala, 682001, India in India, near these waypoints: 9.4458,76.6554 | 9.5186,76.6419 | 9.5901,76.6261 | 9.6442,76.5850 | 9.7092,76.5354 | 9.7714,76.4862 | 9.7949,76.4115 | 9.8702,76.3805 | 9.9421,76.3429 | 9.9368,76.2611 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20008 milliseconds with 0 bytes received
+
+[2025-10-01T08:13:03+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 8 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, 689584, India and Kochi, Ernakulam, Kerala, 682001, India in India, near these waypoints: 9.4458,76.6554 | 9.5186,76.6419 | 9.5901,76.6261 | 9.6442,76.5850 | 9.7092,76.5354 | 9.7714,76.4862 | 9.7949,76.4115 | 9.8702,76.3805 | 9.9421,76.3429 | 9.9368,76.2611 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20005 milliseconds with 0 bytes received
+
+[2025-10-01T08:15:25+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Surat, Gujarat, India","distance_km":1618.7,"hour":"11","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":180,\"severity\":\"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 143,
+    [REDACTED]: 11,
+    "totalTokenCount": 628,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 143
+      }
+    ],
+    "thoughtsTokenCount": 474
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T08:15:41+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Bengaluru Airport","distance_km":433.1,"hour":"11","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\": 120, \"severity\": \"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 139,
+    [REDACTED]: 14,
+    "totalTokenCount": 1094,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 139
+      }
+    ],
+    "thoughtsTokenCount": 941
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T08:57:37+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Mumbai, Mumbai Suburban, Maharashtra, India","distance_km":1373.3,"hour":"12","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":180,\"severity\":\"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 145,
+    [REDACTED]: 11,
+    "totalTokenCount": 1135,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 145
+      }
+    ],
+    "thoughtsTokenCount": 979
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T08:58:02+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Bengaluru Airport","distance_km":433.1,"hour":"12","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":105,\"severity\":\"high\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 139,
+    [REDACTED]: 11,
+    "totalTokenCount": 908,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 139
+      }
+    ],
+    "thoughtsTokenCount": 758
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T09:12:23+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Kochi, Ernakulam, Kerala, 682001, India","distance_km":77.8,"hour":"12","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":45,\"severity\":\"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 153,
+    [REDACTED]: 10,
+    "totalTokenCount": 467,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 153
+      }
+    ],
+    "thoughtsTokenCount": 304
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T09:12:47+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Kasargod, LR, Thayalangadi, Kasaragod, Kerala, 671122, India","distance_km":388.3,"hour":"12","day_type":"weekday","road_type":"rail"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"error\":\"unavailable\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 161,
+    [REDACTED]: 5,
+    "totalTokenCount": 286,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 161
+      }
+    ],
+    "thoughtsTokenCount": 120
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T09:13:09+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Kochi, Ernakulam, Kerala, 682001, India","distance_km":77.8,"hour":"12","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":25,\"severity\":\"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 153,
+    [REDACTED]: 10,
+    "totalTokenCount": 593,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 153
+      }
+    ],
+    "thoughtsTokenCount": 430
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T09:26:00+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Chennai, Tamil Nadu, India","distance_km":550.9,"hour":"12","day_type":"weekday","road_type":"rail"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"error\": \"unavailable\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 142,
+    [REDACTED]: 6,
+    "totalTokenCount": 558,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 142
+      }
+    ],
+    "thoughtsTokenCount": 410
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T09:26:31+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Salem, Tamil Nadu, India in India, near these waypoints: 9.4314,76.6996 | 9.4498,76.7449 | 9.4653,76.8193 | 9.4978,76.8711 | 9.5369,76.9111 | 9.5583,76.9603 | 9.5778,76.9894 | 9.5797,77.0448 | 9.5826,77.1015 | 9.6113,77.1574 | 9.6384,77.2071 | 9.7054,77.2633 | 9.7649,77.3089 | 9.8293,77.3679 | 9.9054,77.4046 | 9.9821,77.4468 | 10.0512,77.4962 | 10.1063,77.5647 | 10.1422,77.6353 | 10.1637,77.7212 | 10.1891,77.7933 | 10.2614,77.8432 | 10.3196,77.9065 | 10.3811,77.9601 | 10.4657,77.9473 | 10.5533,77.9468 | 10.6405,77.9421 | 10.7242,77.9276 | 10.8046,77.9315 | 10.8678,77.9942 | 10.9302,78.0556 | 10.9971,78.0961 | 11.0679,78.1424 | 11.1537,78.1630 | 11.2374,78.1657 | 11.3254,78.1721 | 11.4139,78.1581 | 11.5018,78.1498 | 11.5884,78.1479 | 11.6508,78.1904 | 11.6486,78.2098.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20012 milliseconds with 0 bytes received
+
+[2025-10-01T09:26:51+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Salem, Tamil Nadu, India in India, near these waypoints: 9.4314,76.6996 | 9.4498,76.7449 | 9.4653,76.8193 | 9.4978,76.8711 | 9.5369,76.9111 | 9.5583,76.9603 | 9.5778,76.9894 | 9.5797,77.0448 | 9.5826,77.1015 | 9.6113,77.1574 | 9.6384,77.2071 | 9.7054,77.2633 | 9.7649,77.3089 | 9.8293,77.3679 | 9.9054,77.4046 | 9.9821,77.4468 | 10.0512,77.4962 | 10.1063,77.5647 | 10.1422,77.6353 | 10.1637,77.7212 | 10.1891,77.7933 | 10.2614,77.8432 | 10.3196,77.9065 | 10.3811,77.9601 | 10.4657,77.9473 | 10.5533,77.9468 | 10.6405,77.9421 | 10.7242,77.9276 | 10.8046,77.9315 | 10.8678,77.9942 | 10.9302,78.0556 | 10.9971,78.0961 | 11.0679,78.1424 | 11.1537,78.1630 | 11.2374,78.1657 | 11.3254,78.1721 | 11.4139,78.1581 | 11.5018,78.1498 | 11.5884,78.1479 | 11.6508,78.1904 | 11.6486,78.2098.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20004 milliseconds with 0 bytes received
+
+[2025-10-01T09:27:42+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Salem, Tamil Nadu, India in India, near these waypoints: 9.4314,76.6996 | 9.4498,76.7449 | 9.4653,76.8193 | 9.4978,76.8711 | 9.5369,76.9111 | 9.5583,76.9603 | 9.5778,76.9894 | 9.5797,77.0448 | 9.5826,77.1015 | 9.6113,77.1574 | 9.6384,77.2071 | 9.7054,77.2633 | 9.7649,77.3089 | 9.8293,77.3679 | 9.9054,77.4046 | 9.9821,77.4468 | 10.0512,77.4962 | 10.1063,77.5647 | 10.1422,77.6353 | 10.1637,77.7212 | 10.1891,77.7933 | 10.2614,77.8432 | 10.3196,77.9065 | 10.3811,77.9601 | 10.4657,77.9473 | 10.5533,77.9468 | 10.6405,77.9421 | 10.7242,77.9276 | 10.8046,77.9315 | 10.8678,77.9942 | 10.9302,78.0556 | 10.9971,78.0961 | 11.0679,78.1424 | 11.1537,78.1630 | 11.2374,78.1657 | 11.3254,78.1721 | 11.4139,78.1581 | 11.5018,78.1498 | 11.5884,78.1479 | 11.6508,78.1904 | 11.6486,78.2098.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20001 milliseconds with 0 bytes received
+
+[2025-10-01T09:28:02+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Salem, Tamil Nadu, India in India, near these waypoints: 9.4314,76.6996 | 9.4498,76.7449 | 9.4653,76.8193 | 9.4978,76.8711 | 9.5369,76.9111 | 9.5583,76.9603 | 9.5778,76.9894 | 9.5797,77.0448 | 9.5826,77.1015 | 9.6113,77.1574 | 9.6384,77.2071 | 9.7054,77.2633 | 9.7649,77.3089 | 9.8293,77.3679 | 9.9054,77.4046 | 9.9821,77.4468 | 10.0512,77.4962 | 10.1063,77.5647 | 10.1422,77.6353 | 10.1637,77.7212 | 10.1891,77.7933 | 10.2614,77.8432 | 10.3196,77.9065 | 10.3811,77.9601 | 10.4657,77.9473 | 10.5533,77.9468 | 10.6405,77.9421 | 10.7242,77.9276 | 10.8046,77.9315 | 10.8678,77.9942 | 10.9302,78.0556 | 10.9971,78.0961 | 11.0679,78.1424 | 11.1537,78.1630 | 11.2374,78.1657 | 11.3254,78.1721 | 11.4139,78.1581 | 11.5018,78.1498 | 11.5884,78.1479 | 11.6508,78.1904 | 11.6486,78.2098.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20009 milliseconds with 0 bytes received
+
+[2025-10-01T09:29:24+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kochi, Ernakulam, Kerala, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.6771,76.5589 | 9.7437,76.5135 | 9.7850,76.4469 | 9.8283,76.3917 | 9.9132,76.3638 | 9.9683,76.3144 | 9.9841,76.2462 | 9.9807,76.2336.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20013 milliseconds with 0 bytes received
+
+[2025-10-01T09:29:44+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kochi, Ernakulam, Kerala, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.6771,76.5589 | 9.7437,76.5135 | 9.7850,76.4469 | 9.8283,76.3917 | 9.9132,76.3638 | 9.9683,76.3144 | 9.9841,76.2462 | 9.9807,76.2336.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20004 milliseconds with 0 bytes received
+
+[2025-10-01T10:30:18+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=13.0836939, lon=80.270186 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Taj Connemara, Chennai\",\n    \"price_per_night\": 12000,\n    \"latitude\": 13.0664,\n    \"longitude\": 80.2721\n  },\n  {\n    \"hotel_name\": \"ITC Grand Chola, a Luxury Collection Hotel, Chennai\",\n    \"price_per_night\": 15000,\n    \"latitude\": 13.0135,\n    \"longitude\": 80.2319\n  },\n  {\n    \"hotel_name\": \"Trident, Chennai\",\n    \"price_per_night\": 10000,\n    \"latitude\": 12.9866,\n    \"longitude\": 80.1706\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 198,
+    "totalTokenCount": 1284,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 977
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T10:30:49+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=13.0836939, lon=80.270186 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Taj Coromandel, Chennai\",\n    \"price_per_night\": 12000,\n    \"latitude\": 13.0640,\n    \"longitude\": 80.2599\n  },\n  {\n    \"hotel_name\": \"The Leela Palace Chennai\",\n    \"price_per_night\": 15000,\n    \"latitude\": 13.0180,\n    \"longitude\": 80.2750\n  },\n  {\n    \"hotel_name\": \"Savera Hotel\",\n    \"price_per_night\": 6000,\n    \"latitude\": 13.0536,\n    \"longitude\": 80.2642\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 190,
+    "totalTokenCount": 1215,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 916
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T10:31:00+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=13.0836939, lon=80.270186 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Taj Coromandel, Chennai\",\n    \"price_per_night\": 12000,\n    \"latitude\": 13.0673,\n    \"longitude\": 80.2589\n  },\n  {\n    \"hotel_name\": \"ITC Grand Chola, a Luxury Collection Hotel, Chennai\",\n    \"price_per_night\": 15000,\n    \"latitude\": 13.0118,\n    \"longitude\": 80.2319\n  },\n  {\n    \"hotel_name\": \"The Leela Palace Chennai\",\n    \"price_per_night\": 14000,\n    \"latitude\": 13.0111,\n    \"longitude\": 80.2774\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 199,
+    "totalTokenCount": 1127,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 819
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T10:33:25+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Chennai, Tamil Nadu, India","distance_km":550.9,"hour":"14","day_type":"weekday","road_type":"rail"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"error\":\"unavailable\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 142,
+    [REDACTED]: 5,
+    "totalTokenCount": 311,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 142
+      }
+    ],
+    "thoughtsTokenCount": 164
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T10:34:06+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Salem, Tamil Nadu, India in India, near these waypoints: 9.4314,76.6996 | 9.4498,76.7449 | 9.4653,76.8193 | 9.4978,76.8711 | 9.5369,76.9111 | 9.5583,76.9603 | 9.5778,76.9894 | 9.5797,77.0448 | 9.5826,77.1015 | 9.6113,77.1574 | 9.6384,77.2071 | 9.7054,77.2633 | 9.7649,77.3089 | 9.8293,77.3679 | 9.9054,77.4046 | 9.9821,77.4468 | 10.0512,77.4962 | 10.1063,77.5647 | 10.1422,77.6353 | 10.1637,77.7212 | 10.1891,77.7933 | 10.2614,77.8432 | 10.3196,77.9065 | 10.3811,77.9601 | 10.4657,77.9473 | 10.5533,77.9468 | 10.6405,77.9421 | 10.7242,77.9276 | 10.8046,77.9315 | 10.8678,77.9942 | 10.9302,78.0556 | 10.9971,78.0961 | 11.0679,78.1424 | 11.1537,78.1630 | 11.2374,78.1657 | 11.3254,78.1721 | 11.4139,78.1581 | 11.5018,78.1498 | 11.5884,78.1479 | 11.6508,78.1904 | 11.6486,78.2098.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20006 milliseconds with 0 bytes received
+
+[2025-10-01T10:34:26+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Salem, Tamil Nadu, India in India, near these waypoints: 9.4314,76.6996 | 9.4498,76.7449 | 9.4653,76.8193 | 9.4978,76.8711 | 9.5369,76.9111 | 9.5583,76.9603 | 9.5778,76.9894 | 9.5797,77.0448 | 9.5826,77.1015 | 9.6113,77.1574 | 9.6384,77.2071 | 9.7054,77.2633 | 9.7649,77.3089 | 9.8293,77.3679 | 9.9054,77.4046 | 9.9821,77.4468 | 10.0512,77.4962 | 10.1063,77.5647 | 10.1422,77.6353 | 10.1637,77.7212 | 10.1891,77.7933 | 10.2614,77.8432 | 10.3196,77.9065 | 10.3811,77.9601 | 10.4657,77.9473 | 10.5533,77.9468 | 10.6405,77.9421 | 10.7242,77.9276 | 10.8046,77.9315 | 10.8678,77.9942 | 10.9302,78.0556 | 10.9971,78.0961 | 11.0679,78.1424 | 11.1537,78.1630 | 11.2374,78.1657 | 11.3254,78.1721 | 11.4139,78.1581 | 11.5018,78.1498 | 11.5884,78.1479 | 11.6508,78.1904 | 11.6486,78.2098.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20001 milliseconds with 0 bytes received
+
+[2025-10-01T10:34:51+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Kasargod, LR, Thayalangadi, Kasaragod, Kerala, 671122, India","distance_km":388.3,"hour":"14","day_type":"weekday","road_type":"rail"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"error\":\"unavailable\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 161,
+    [REDACTED]: 5,
+    "totalTokenCount": 458,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 161
+      }
+    ],
+    "thoughtsTokenCount": 292
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T10:35:28+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kochi, Ernakulam, Kerala, 682001, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.6771,76.5589 | 9.7437,76.5135 | 9.7850,76.4469 | 9.8283,76.3917 | 9.9132,76.3638 | 9.9325,76.2992 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20019 milliseconds with 0 bytes received
+
+[2025-10-01T10:35:48+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kochi, Ernakulam, Kerala, 682001, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.6771,76.5589 | 9.7437,76.5135 | 9.7850,76.4469 | 9.8283,76.3917 | 9.9132,76.3638 | 9.9325,76.2992 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20014 milliseconds with 0 bytes received
+
+[2025-10-01T10:36:33+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Thrissur, Kerala, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.7021,76.6092 | 9.7860,76.6109 | 9.8635,76.5963 | 9.9363,76.5764 | 10.0116,76.5679 | 10.0739,76.5078 | 10.1464,76.4593 | 10.1949,76.3861 | 10.2715,76.3477 | 10.3518,76.3180 | 10.4208,76.2699 | 10.4793,76.2725.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20003 milliseconds with 0 bytes received
+
+[2025-10-01T10:36:53+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Thrissur, Kerala, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.7021,76.6092 | 9.7860,76.6109 | 9.8635,76.5963 | 9.9363,76.5764 | 10.0116,76.5679 | 10.0739,76.5078 | 10.1464,76.4593 | 10.1949,76.3861 | 10.2715,76.3477 | 10.3518,76.3180 | 10.4208,76.2699 | 10.4793,76.2725.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20001 milliseconds with 0 bytes received
+
+[2025-10-01T11:07:22+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kochi, Ernakulam, Kerala, 682001, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.6771,76.5589 | 9.7437,76.5135 | 9.7850,76.4469 | 9.8283,76.3917 | 9.9132,76.3638 | 9.9325,76.2992 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20010 milliseconds with 0 bytes received
+
+[2025-10-01T11:07:42+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kochi, Ernakulam, Kerala, 682001, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.6771,76.5589 | 9.7437,76.5135 | 9.7850,76.4469 | 9.8283,76.3917 | 9.9132,76.3638 | 9.9325,76.2992 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20008 milliseconds with 0 bytes received
+
+[2025-10-01T11:08:17+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Kasaragod, Kerala, India","distance_km":371.2,"hour":"14","day_type":"weekday","road_type":"rail"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"error\":\"unavailable\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 143,
+    [REDACTED]: 5,
+    "totalTokenCount": 299,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 143
+      }
+    ],
+    "thoughtsTokenCount": 151
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T11:08:29+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, India","destination":"Chennai, Tamil Nadu, India","distance_km":550.9,"hour":"14","day_type":"weekday","road_type":"rail"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"error\":\"unavailable\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 142,
+    [REDACTED]: 5,
+    "totalTokenCount": 309,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 142
+      }
+    ],
+    "thoughtsTokenCount": 162
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T11:09:01+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kottayam, Kerala, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6291,76.6456.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20003 milliseconds with 0 bytes received
+
+[2025-10-01T11:09:21+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kottayam, Kerala, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6291,76.6456.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20016 milliseconds with 0 bytes received
+
+[2025-10-01T11:23:23+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9679032, lon=76.2444378 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Vivanta by Taj - Marine Drive, Kochi\",\n    \"price_per_night\": 9500,\n    \"latitude\": 9.9705,\n    \"longitude\": 76.2625\n  },\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 12000,\n    \"latitude\": 9.9918,\n    \"longitude\": 76.2735\n  },\n  {\n    \"hotel_name\": \"Le Meridien Kochi\",\n    \"price_per_night\": 8500,\n    \"latitude\": 9.9320,\n    \"longitude\": 76.3130\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 191,
+    "totalTokenCount": 786,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 486
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T11:25:03+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kochi, Ernakulam, Kerala, 682001, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.6771,76.5589 | 9.7437,76.5135 | 9.7850,76.4469 | 9.8283,76.3917 | 9.9132,76.3638 | 9.9325,76.2992 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20004 milliseconds with 0 bytes received
+
+[2025-10-01T11:25:23+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally, Pathanamthitta, Kerala, India and Kochi, Ernakulam, Kerala, 682001, India in India, near these waypoints: 9.4314,76.6996 | 9.4902,76.6703 | 9.5618,76.6454 | 9.6223,76.6045 | 9.6771,76.5589 | 9.7437,76.5135 | 9.7850,76.4469 | 9.8283,76.3917 | 9.9132,76.3638 | 9.9325,76.2992 | 9.9679,76.2444.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20012 milliseconds with 0 bytes received
+
+[2025-10-01T11:31:17+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9679032, lon=76.2444378 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 15000,\n    \"latitude\": 9.9839,\n    \"longitude\": 76.2646\n  },\n  {\n    \"hotel_name\": \"Taj Malabar Resort & Spa, Cochin\",\n    \"price_per_night\": 12000,\n    \"latitude\": 9.9622,\n    \"longitude\": 76.2573\n  },\n  {\n    \"hotel_name\": \"Radisson Blu Kochi\",\n    \"price_per_night\": 7500,\n    \"latitude\": 9.9722,\n    \"longitude\": 76.2994\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 191,
+    "totalTokenCount": 406,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 106
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T11:37:57+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9679032, lon=76.2444378 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Novotel Kochi Infopark\",\n    \"price_per_night\": 7000,\n    \"latitude\": 9.9913,\n    \"longitude\": 76.3533\n  },\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 12000,\n    \"latitude\": 9.9867,\n    \"longitude\": 76.2758\n  },\n  {\n    \"hotel_name\": \"Le Méridien Kochi\",\n    \"price_per_night\": 9000,\n    \"latitude\": 9.9322,\n    \"longitude\": 76.3195\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 189,
+    "totalTokenCount": 822,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 524
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T11:49:40+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9679032, lon=76.2444378 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Taj Malabar Resort & Spa, Cochin\",\n    \"price_per_night\": 14000,\n    \"latitude\": 9.969177,\n    \"longitude\": 76.257008\n  },\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 12000,\n    \"latitude\": 9.991278,\n    \"longitude\": 76.273187\n  },\n  {\n    \"hotel_name\": \"Radisson Blu Kochi\",\n    \"price_per_night\": 8000,\n    \"latitude\": 9.972305,\n    \"longitude\": 76.291771\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 203,
+    "totalTokenCount": 807,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 495
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T11:50:18+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9679032, lon=76.2444378 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 15000,\n    \"latitude\": 9.99908,\n    \"longitude\": 76.27360\n  },\n  {\n    \"hotel_name\": \"Taj Malabar Resort & Spa, Cochin\",\n    \"price_per_night\": 12000,\n    \"latitude\": 9.95738,\n    \"longitude\": 76.27242\n  },\n  {\n    \"hotel_name\": \"Crowne Plaza Kochi\",\n    \"price_per_night\": 9000,\n    \"latitude\": 9.92680,\n    \"longitude\": 76.31950\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 197,
+    "totalTokenCount": 1359,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 1053
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T11:51:38+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9679032, lon=76.2444378 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 12000,\n    \"latitude\": 9.9882,\n    \"longitude\": 76.2753\n  },\n  {\n    \"hotel_name\": \"Taj Malabar Resort & Spa, Cochin\",\n    \"price_per_night\": 15000,\n    \"latitude\": 9.9632,\n    \"longitude\": 76.2625\n  },\n  {\n    \"hotel_name\": \"Ramada by Wyndham Kochi Kumbalam\",\n    \"price_per_night\": 6500,\n    \"latitude\": 9.8797,\n    \"longitude\": 76.3312\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 195,
+    "totalTokenCount": 1329,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 1025
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T11:53:29+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9679032, lon=76.2444378 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 18000,\n    \"latitude\": 9.9997,\n    \"longitude\": 76.2731\n  },\n  {\n    \"hotel_name\": \"Taj Malabar Resort & Spa, Cochin\",\n    \"price_per_night\": 17000,\n    \"latitude\": 9.9655,\n    \"longitude\": 76.2647\n  },\n  {\n    \"hotel_name\": \"Le Meridien Kochi\",\n    \"price_per_night\": 10000,\n    \"latitude\": 9.9238,\n    \"longitude\": 76.3242\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 192,
+    "totalTokenCount": 1174,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 873
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T12:01:45+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally and Kochi in India, near these waypoints: 9.3833,76.6497 | 9.4548,76.6444 | 9.5335,76.6460 | 9.6017,76.6178 | 9.6754,76.6096 | 9.7574,76.6091 | 9.8360,76.5920 | 9.9136,76.5833 | 9.9856,76.5783 | 10.0549,76.5304 | 10.1210,76.4736 | 10.1494,76.4035 | 10.1494,76.4021.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20016 milliseconds with 0 bytes received
+
+[2025-10-01T12:02:05+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally and Kochi in India, near these waypoints: 9.3833,76.6497 | 9.4548,76.6444 | 9.5335,76.6460 | 9.6017,76.6178 | 9.6754,76.6096 | 9.7574,76.6091 | 9.8360,76.5920 | 9.9136,76.5833 | 9.9856,76.5783 | 10.0549,76.5304 | 10.1210,76.4736 | 10.1494,76.4035 | 10.1494,76.4021.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20017 milliseconds with 0 bytes received
+
+[2025-10-01T12:02:20+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9679032, lon=76.2444378 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 18000,\n    \"latitude\": 9.9880,\n    \"longitude\": 76.2730\n  },\n  {\n    \"hotel_name\": \"Taj Malabar Resort & Spa, Cochin\",\n    \"price_per_night\": 15000,\n    \"latitude\": 9.9570,\n    \"longitude\": 76.2620\n  },\n  {\n    \"hotel_name\": \"Le Méridien Kochi\",\n    \"price_per_night\": 10000,\n    \"latitude\": 9.9400,\n    \"longitude\": 76.3310\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 193,
+    "totalTokenCount": 934,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 632
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T12:09:59+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally and Kochi in India, near these waypoints: 9.3833,76.6497 | 9.4548,76.6444 | 9.5335,76.6460 | 9.6017,76.6178 | 9.6754,76.6096 | 9.7574,76.6091 | 9.8360,76.5920 | 9.9136,76.5833 | 9.9856,76.5783 | 10.0549,76.5304 | 10.1210,76.4736 | 10.1494,76.4035 | 10.1494,76.4021.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20009 milliseconds with 0 bytes received
+
+[2025-10-01T12:10:19+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally and Kochi in India, near these waypoints: 9.3833,76.6497 | 9.4548,76.6444 | 9.5335,76.6460 | 9.6017,76.6178 | 9.6754,76.6096 | 9.7574,76.6091 | 9.8360,76.5920 | 9.9136,76.5833 | 9.9856,76.5783 | 10.0549,76.5304 | 10.1210,76.4736 | 10.1494,76.4035 | 10.1494,76.4021.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20003 milliseconds with 0 bytes received
+
+[2025-10-01T12:10:31+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9679032, lon=76.2444378 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 15000,\n    \"latitude\": 9.9976,\n    \"longitude\": 76.2737\n  },\n  {\n    \"hotel_name\": \"Crowne Plaza Kochi\",\n    \"price_per_night\": 9500,\n    \"latitude\": 9.9298,\n    \"longitude\": 76.3150\n  },\n  {\n    \"hotel_name\": \"Le Méridien Kochi\",\n    \"price_per_night\": 8000,\n    \"latitude\": 9.9575,\n    \"longitude\": 76.3106\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 187,
+    "totalTokenCount": 1053,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 757
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T12:16:24+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally and Kochi in India, near these waypoints: 9.3833,76.6497 | 9.4548,76.6444 | 9.5335,76.6460 | 9.6017,76.6178 | 9.6754,76.6096 | 9.7574,76.6091 | 9.8360,76.5920 | 9.9136,76.5833 | 9.9856,76.5783 | 10.0549,76.5304 | 10.1210,76.4736 | 10.1494,76.4035 | 10.1494,76.4021.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20013 milliseconds with 0 bytes received
+
+[2025-10-01T12:16:44+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally and Kochi in India, near these waypoints: 9.3833,76.6497 | 9.4548,76.6444 | 9.5335,76.6460 | 9.6017,76.6178 | 9.6754,76.6096 | 9.7574,76.6091 | 9.8360,76.5920 | 9.9136,76.5833 | 9.9856,76.5783 | 10.0549,76.5304 | 10.1210,76.4736 | 10.1494,76.4035 | 10.1494,76.4021.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20005 milliseconds with 0 bytes received
+
+[2025-10-01T12:20:38+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+Generate up to 6 plausible intermediate bus stands between Mallappally and Kochi in India, near these waypoints: 9.3833,76.6497 | 9.4548,76.6444 | 9.5335,76.6460 | 9.6017,76.6178 | 9.6754,76.6096 | 9.7574,76.6091 | 9.8360,76.5920 | 9.9136,76.5833 | 9.9856,76.5783 | 10.0549,76.5304 | 10.1210,76.4736 | 10.1494,76.4035 | 10.1494,76.4021.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+RESPONSE:
+curl_error: Operation timed out after 20003 milliseconds with 0 bytes received
+
+[2025-10-01T12:20:58+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: Generate up to 6 plausible intermediate bus stands between Mallappally and Kochi in India, near these waypoints: 9.3833,76.6497 | 9.4548,76.6444 | 9.5335,76.6460 | 9.6017,76.6178 | 9.6754,76.6096 | 9.7574,76.6091 | 9.8360,76.5920 | 9.9136,76.5833 | 9.9856,76.5783 | 10.0549,76.5304 | 10.1210,76.4736 | 10.1494,76.4035 | 10.1494,76.4021.
+Respond ONLY with JSON array: [{stop_name:string, operator_name:string, lat:float, lon:float}]
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+curl_error: Operation timed out after 20016 milliseconds with 0 bytes received
+
+[2025-10-01T12:26:16+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally","destination":"Kochi","distance_km":89.7,"hour":"08","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":45,\"severity\":\"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 128,
+    [REDACTED]: 10,
+    "totalTokenCount": 621,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 128
+      }
+    ],
+    "thoughtsTokenCount": 483
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T16:28:25+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Synthetic Stop 3","destination":"Kochi","distance_km":9.3,"hour":"12","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\": 25, \"severity\": \"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 128,
+    [REDACTED]: 13,
+    "totalTokenCount": 696,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 128
+      }
+    ],
+    "thoughtsTokenCount": 555
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T16:28:36+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Synthetic Stop 2","destination":"Kochi, Kerala","distance_km":38.5,"hour":"10","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":35,\"severity\":\"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 131,
+    [REDACTED]: 10,
+    "totalTokenCount": 633,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 131
+      }
+    ],
+    "thoughtsTokenCount": 492
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T16:29:56+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Synthetic Stop 3","destination":"Kochi, Ernakulam, Kerala, 682001, India","distance_km":3,"hour":"23","day_type":"weekday","road_type":"road"}}
+RESPONSE:
+curl_error: Operation timed out after 20015 milliseconds with 0 bytes received
+
+[2025-10-01T16:30:01+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+You are a JSON-only service. Output STRICT JSON only. No explanations, no markdown, no extra text. If you cannot answer, output {"error":"unavailable"}.
+
+PROMPT: {"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Synthetic Stop 3","destination":"Kochi, Ernakulam, Kerala, 682001, India","distance_km":3,"hour":"23","day_type":"weekday","road_type":"road"}}
+Respond ONLY with valid JSON. No markdown, no code fences, no commentary.
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\": 5, \"severity\": \"low\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 159,
+    [REDACTED]: 12,
+    "totalTokenCount": 532,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 159
+      }
+    ],
+    "thoughtsTokenCount": 361
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-01T16:53:17+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9679032, lon=76.2444378 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 18000,\n    \"latitude\": 9.9868,\n    \"longitude\": 76.2736\n  },\n  {\n    \"hotel_name\": \"Ramada by Wyndham Kochi\",\n    \"price_per_night\": 7500,\n    \"latitude\": 9.9482,\n    \"longitude\": 76.311\n  },\n  {\n    \"hotel_name\": \"Lemon Tree Hotel, Kochi\",\n    \"price_per_night\": 5000,\n    \"latitude\": 9.988,\n    \"longitude\": 76.283\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 185,
+    "totalTokenCount": 1129,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 835
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-02T10:58:48+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9674, lon=76.2458 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 12000,\n    \"latitude\": 9.9868,\n    \"longitude\": 76.275\n  },\n  {\n    \"hotel_name\": \"Taj Malabar Resort & Spa, Cochin\",\n    \"price_per_night\": 15000,\n    \"latitude\": 9.9482,\n    \"longitude\": 76.2737\n  },\n  {\n    \"hotel_name\": \"Ramada by Wyndham Kochi\",\n    \"price_per_night\": 7000,\n    \"latitude\": 9.9221,\n    \"longitude\": 76.3262\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 103,
+    [REDACTED]: 191,
+    "totalTokenCount": 761,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 103
+      }
+    ],
+    "thoughtsTokenCount": 467
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-02T10:58:59+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=13.0836939, lon=80.270186 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Taj Coromandel, Chennai\",\n    \"price_per_night\": 12500,\n    \"latitude\": 13.0699,\n    \"longitude\": 80.2553\n  },\n  {\n    \"hotel_name\": \"ITC Grand Chola, a Luxury Collection Hotel, Chennai\",\n    \"price_per_night\": 15000,\n    \"latitude\": 13.0039,\n    \"longitude\": 80.2220\n  },\n  {\n    \"hotel_name\": \"The Leela Palace Chennai\",\n    \"price_per_night\": 14000,\n    \"latitude\": 13.0242,\n    \"longitude\": 80.2713\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 109,
+    [REDACTED]: 199,
+    "totalTokenCount": 846,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 109
+      }
+    ],
+    "thoughtsTokenCount": 538
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-02T10:59:06+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=28.6328027, lon=77.2197713 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"The Imperial, New Delhi\",\n    \"price_per_night\": 20000,\n    \"latitude\": 28.6214,\n    \"longitude\": 77.2188\n  },\n  {\n    \"hotel_name\": \"Shangri-La Eros New Delhi\",\n    \"price_per_night\": 16000,\n    \"latitude\": 28.6247,\n    \"longitude\": 77.2127\n  },\n  {\n    \"hotel_name\": \"The Lalit New Delhi\",\n    \"price_per_night\": 14000,\n    \"latitude\": 28.6277,\n    \"longitude\": 77.2259\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 110,
+    [REDACTED]: 194,
+    "totalTokenCount": 962,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 110
+      }
+    ],
+    "thoughtsTokenCount": 658
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-02T11:42:32+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9674, lon=76.2458 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 12000,\n    \"latitude\": 9.9922,\n    \"longitude\": 76.2736\n  },\n  {\n    \"hotel_name\": \"Taj Malabar Resort & Spa, Cochin\",\n    \"price_per_night\": 10000,\n    \"latitude\": 9.9575,\n    \"longitude\": 76.2625\n  },\n  {\n    \"hotel_name\": \"Novotel Kochi Infopark\",\n    \"price_per_night\": 6000,\n    \"latitude\": 10.0267,\n    \"longitude\": 76.3533\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 103,
+    [REDACTED]: 194,
+    "totalTokenCount": 1186,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 103
+      }
+    ],
+    "thoughtsTokenCount": 889
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-02T11:47:06+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+List 3 realistic hotels within 30 km of lat=9.9674, lon=76.2458 in India.
+Respond ONLY with JSON array of objects: [{hotel_name:string, price_per_night:int, latitude:float, longitude:float}]
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  {\n    \"hotel_name\": \"Grand Hyatt Kochi Bolgatty\",\n    \"price_per_night\": 12000,\n    \"latitude\": 9.9961,\n    \"longitude\": 76.2770\n  },\n  {\n    \"hotel_name\": \"Radisson Blu Kochi\",\n    \"price_per_night\": 7500,\n    \"latitude\": 9.9800,\n    \"longitude\": 76.3020\n  },\n  {\n    \"hotel_name\": \"The Gateway Hotel Marine Drive Ernakulam\",\n    \"price_per_night\": 8500,\n    \"latitude\": 9.9800,\n    \"longitude\": 76.2760\n  }\n]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 103,
+    [REDACTED]: 190,
+    "totalTokenCount": 913,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 103
+      }
+    ],
+    "thoughtsTokenCount": 620
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-04T15:10:12+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, 689584, India","destination":"Kochi Naval Airport Airport","distance_km":69.8,"hour":"23","day_type":"weekend","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\": 5, \"severity\": \"low\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 148,
+    [REDACTED]: 12,
+    "totalTokenCount": 652,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 148
+      }
+    ],
+    "thoughtsTokenCount": 492
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-04T15:10:14+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"state":"Darbhanga Airport","mode":"flight","goal":"Given Indian state and transport mode, return the most likely operator name as JSON: {\"operator_name\":\"...\"}."}
+RESPONSE:
+{
+  "error": {
+    "code": 503,
+    "message": "The model is overloaded. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+
+[2025-10-04T15:10:16+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Darbhanga Airport Airport","destination":"Patna, Patna Rural, Patna, Bihar, 800001, India","distance_km":102.4,"hour":"06","day_type":"weekend","road_type":"road"}}
+RESPONSE:
+{
+  "error": {
+    "code": 503,
+    "message": "The model is overloaded. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+
+[2025-10-04T15:36:32+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, 689584, India","destination":"Kochi Naval Airport Airport","distance_km":69.8,"hour":"23","day_type":"weekend","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\": 7, \"severity\": \"low\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 148,
+    [REDACTED]: 12,
+    "totalTokenCount": 498,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 148
+      }
+    ],
+    "thoughtsTokenCount": 338
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-04T15:36:34+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"state":"Darbhanga Airport","mode":"flight","goal":"Given Indian state and transport mode, return the most likely operator name as JSON: {\"operator_name\":\"...\"}."}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"operator_name\": \"Airports Authority of India\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 80,
+    [REDACTED]: 12,
+    "totalTokenCount": 151,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 80
+      }
+    ],
+    "thoughtsTokenCount": 59
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-04T15:36:40+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Darbhanga Airport Airport","destination":"Patna, Patna Rural, Patna, Bihar, 800001, India","distance_km":102.4,"hour":"06","day_type":"weekend","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":18,\"severity\":\"low\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 148,
+    [REDACTED]: 10,
+    "totalTokenCount": 685,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 148
+      }
+    ],
+    "thoughtsTokenCount": 527
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-04T15:38:10+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Mallappally, Pathanamthitta, Kerala, 689584, India","destination":"Kochi Naval Airport Airport","distance_km":69.8,"hour":"23","day_type":"weekend","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":10,\"severity\":\"low\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 148,
+    [REDACTED]: 10,
+    "totalTokenCount": 423,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 148
+      }
+    ],
+    "thoughtsTokenCount": 265
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-04T15:38:14+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Darbhanga Airport Airport","destination":"Patna, Patna Rural, Patna, Bihar, 800001, India","distance_km":102.4,"hour":"06","day_type":"weekend","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":15,\"severity\":\"low\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 148,
+    [REDACTED]: 10,
+    "totalTokenCount": 559,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 148
+      }
+    ],
+    "thoughtsTokenCount": 401
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-04T18:49:36+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Synthetic Stop 2","destination":"Kochi, Ernakulam, Kerala, 682001, India","distance_km":34.1,"hour":"08","day_type":"weekend","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":30,\"severity\":\"medium\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 145,
+    [REDACTED]: 10,
+    "totalTokenCount": 729,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 145
+      }
+    ],
+    "thoughtsTokenCount": 574
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+[2025-10-04T18:51:09+02:00] v1beta/gemini-2.5-flash
+PROMPT:
+{"model":"gemini-2.5-flash","task":"traffic_estimate","instructions":"Predict road traffic in India. Return ONLY JSON { delay:int, severity:string(one of none,low,medium,high) }.","inputs":{"origin":"Synthetic Stop 5","destination":"Harbour, Vypin - Pallippuram Road, Puthuvype, Kochi, Ernakulam, Kerala, 682508, India","distance_km":17.3,"hour":"07","day_type":"weekend","road_type":"road"}}
+RESPONSE:
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"delay\":8,\"severity\":\"low\"}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 161,
+    [REDACTED]: 9,
+    "totalTokenCount": 801,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 161
+      }
+    ],
+    "thoughtsTokenCount": 631
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": [REDACTED]
+}
+
+
+
+/* v-sync seq: 1 */

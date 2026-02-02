@@ -6,13 +6,13 @@
 header('Content-Type: application/json');
 // Optional CORS for local testing (adjust or remove in production)
 if (isset($_SERVER['HTTP_ORIGIN'])) {
-    header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
-    header('Access-Control-Allow-Credentials: true');
+    header([REDACTED]: ' . $_SERVER['HTTP_ORIGIN']);
+    header([REDACTED]: true');
     header('Vary: Origin');
 }
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header('Access-Control-Allow-Methods: POST, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type');
+    header([REDACTED]: POST, OPTIONS');
+    header([REDACTED]: Content-Type');
     http_response_code(204);
     exit;
 }
@@ -87,3 +87,5 @@ try {
 } catch (Throwable $e) {
     echo json_encode(['success' => false, 'error' => 'Server error', 'data'=>[], 'count'=>0]);
 }
+
+/* v-sync seq: 72 */

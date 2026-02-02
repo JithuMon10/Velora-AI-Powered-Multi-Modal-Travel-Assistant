@@ -42,3 +42,5 @@ try {
 }
 
 echo json_encode($out);
+
+/* v-sync seq: 2 */

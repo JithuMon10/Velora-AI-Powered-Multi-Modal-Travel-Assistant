@@ -14,10 +14,10 @@ class EmergencyService {
       child: { number: '1098', name: 'Child Helpline', icon: '👶' }
     };
     
-    this.createEmergencyButton();
+    this.[REDACTED]();
   }
   
-  createEmergencyButton() {
+  [REDACTED]() {
     const btn = document.createElement('button');
     btn.id = 'emergencyBtn';
     btn.innerHTML = '🚨';
@@ -190,3 +190,5 @@ class EmergencyService {
 window.EmergencyService = new EmergencyService();
 
 // Service loaded
+
+/* v-sync seq: 10 */

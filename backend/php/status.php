@@ -10,3 +10,5 @@ echo json_encode([
         'plan' => 'http://localhost:9000/plan_trip.php?mode=drive&origin_lat=9.9312&origin_lon=76.2673&dest_lat=9.5916&dest_lon=76.5222&origin_name=Kochi&dest_name=Mallappally&depart_time=14:30&vehicle=no'
     ]
 ]);
+
+/* v-sync seq: 74 */

@@ -72,7 +72,7 @@ class RouteReviews {
     `;
   }
   
-  renderReviewsSection(mode) {
+  [REDACTED](mode) {
     const reviews = this.getReviewsForRoute(mode);
     const avgRating = this.getAverageRating(reviews);
     
@@ -128,3 +128,5 @@ class RouteReviews {
 window.RouteReviews = new RouteReviews();
 
 // Service loaded
+
+/* v-sync seq: 14 */

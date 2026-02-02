@@ -25,3 +25,5 @@ try {
 } catch (Throwable $e) {
     echo json_encode(['success'=>false, 'error'=>'Server error', 'data'=>[], 'count'=>0]);
 }
+
+/* v-sync seq: 58 */

@@ -4,7 +4,7 @@
 class SmartNotifications {
   constructor() {
     this.enabled = false;
-    this.scheduledNotifications = [];
+    this.[REDACTED] = [];
     this.requestPermission();
   }
   
@@ -16,7 +16,7 @@ class SmartNotifications {
     }
   }
   
-  scheduleLeaveReminder(departureTime, origin, destination) {
+  [REDACTED](departureTime, origin, destination) {
     if (!this.enabled) return;
     
     const now = new Date();
@@ -35,7 +35,7 @@ class SmartNotifications {
         );
       }, reminderTime);
       
-      this.scheduledNotifications.push(timeout);
+      this.[REDACTED].push(timeout);
     }
     
     // Notify 5 minutes before
@@ -50,7 +50,7 @@ class SmartNotifications {
         );
       }, urgentReminderTime);
       
-      this.scheduledNotifications.push(timeout);
+      this.[REDACTED].push(timeout);
     }
   }
   
@@ -105,13 +105,13 @@ class SmartNotifications {
   }
   
   notifyRouteSaved(routeName) {
-    this.showInlineNotification(
+    this.[REDACTED](
       `⭐ Route saved: ${routeName}`,
       'success'
     );
   }
   
-  notifyBookingAvailable(mode, fare) {
+  [REDACTED](mode, fare) {
     if (!this.enabled) return;
     
     this.notify(
@@ -130,7 +130,7 @@ class SmartNotifications {
   notify(title, body, options = {}) {
     if (!this.enabled) {
       // Fallback to inline notification
-      this.showInlineNotification(body, 'info');
+      this.[REDACTED](body, 'info');
       return;
     }
     
@@ -151,7 +151,7 @@ class SmartNotifications {
     setTimeout(() => notification.close(), 10000);
   }
   
-  showInlineNotification(message, type = 'info') {
+  [REDACTED](message, type = 'info') {
     const colors = {
       success: '#10b981',
       error: '#ef4444',
@@ -202,12 +202,12 @@ class SmartNotifications {
   }
   
   clearAll() {
-    this.scheduledNotifications.forEach(timeout => clearTimeout(timeout));
-    this.scheduledNotifications = [];
+    this.[REDACTED].forEach(timeout => clearTimeout(timeout));
+    this.[REDACTED] = [];
   }
   
   // Smart suggestions based on time
-  suggestDepartureTime(arrivalTime, duration) {
+  [REDACTED](arrivalTime, duration) {
     const arrival = new Date(arrivalTime);
     const now = new Date();
     const durationMs = duration * 60 * 1000;
@@ -219,7 +219,7 @@ class SmartNotifications {
     
     if ((hour >= 7 && hour <= 10) || (hour >= 17 && hour <= 20)) {
       buffer = 30 * 60 * 1000; // 30 min buffer during rush hour
-      this.showInlineNotification(
+      this.[REDACTED](
         '⚠️ Rush hour! Added 30 minutes buffer to your departure time.',
         'warning'
       );
@@ -232,7 +232,7 @@ class SmartNotifications {
     // Check if we need to leave soon
     const timeUntilDeparture = finalDeparture - now;
     if (timeUntilDeparture < 30 * 60 * 1000 && timeUntilDeparture > 0) {
-      this.showInlineNotification(
+      this.[REDACTED](
         `⏰ You should leave in ${Math.round(timeUntilDeparture / 60000)} minutes!`,
         'warning'
       );
@@ -246,3 +246,5 @@ class SmartNotifications {
 window.SmartNotifications = new SmartNotifications();
 
 // Service loaded
+
+/* v-sync seq: 16 */

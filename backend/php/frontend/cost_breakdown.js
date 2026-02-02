@@ -94,7 +94,7 @@ class CostBreakdown {
     `;
   }
   
-  renderCompactBreakdown(costs) {
+  [REDACTED](costs) {
     return `
       <div style="display: flex; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; margin-top: 8px;">
         <div style="flex: 1; text-align: center;">
@@ -118,3 +118,5 @@ class CostBreakdown {
 window.CostBreakdown = new CostBreakdown();
 
 // Service loaded
+
+/* v-sync seq: 9 */

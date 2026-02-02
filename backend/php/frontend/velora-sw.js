@@ -82,3 +82,5 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
+/* v-sync seq: 51 */

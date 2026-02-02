@@ -37,13 +37,13 @@ function build_flight_route(PDO $pdo, array $origin, array $destination, string 
         'fare' => $transferFare,
         'duration_s' => $transferMin * 60,
         'departure' => $cursor,
-        'arrival' => fmt_time_add_minutes($cursor, $transferMin),
+        'arrival' => [REDACTED]($cursor, $transferMin),
         'distance_km' => round($distToOriginAirport, 1),
         'instructions' => [
             ['step_id'=>'tx1','mode'=>'taxi','text'=>'Take taxi to '.$originAirport['name'],'lat'=>$oLat,'lon'=>$oLon,'notify_when_m'=>100]
         ]
     ];
-    $cursor = fmt_time_add_minutes($cursor, $transferMin + rand(75, 105)); // 75-105 min check-in/security/boarding
+    $cursor = [REDACTED]($cursor, $transferMin + rand(75, 105)); // 75-105 min check-in/security/boarding
     
     // Flight leg
     $flightDist = haversine_km((float)$originAirport['lat'], (float)$originAirport['lon'], 
@@ -56,7 +56,7 @@ function build_flight_route(PDO $pdo, array $origin, array $destination, string 
     // Determine airline by region
     $airline = determine_airline($originAirport, $destAirport);
     
-    $arr = fmt_time_add_minutes($cursor, $flightMin);
+    $arr = [REDACTED]($cursor, $flightMin);
     
     $legs[] = [
         'mode' => 'flight',
@@ -77,7 +77,7 @@ function build_flight_route(PDO $pdo, array $origin, array $destination, string 
         ]
     ];
     
-    $cursor = fmt_time_add_minutes($arr, rand(25, 40)); // 25-40 min baggage/exit/customs
+    $cursor = [REDACTED]($arr, rand(25, 40)); // 25-40 min baggage/exit/customs
     
     // Taxi from destination airport to final destination
     $distFromDestAirport = haversine_km((float)$destAirport['lat'], (float)$destAirport['lon'], $dLat, $dLon);
@@ -94,7 +94,7 @@ function build_flight_route(PDO $pdo, array $origin, array $destination, string 
         'fare' => $transferFareEnd,
         'duration_s' => $transferMinEnd * 60,
         'departure' => $cursor,
-        'arrival' => fmt_time_add_minutes($cursor, $transferMinEnd),
+        'arrival' => [REDACTED]($cursor, $transferMinEnd),
         'distance_km' => round($distFromDestAirport, 1),
         'instructions' => [
             ['step_id'=>'tx2','mode'=>'taxi','text'=>'Take taxi to destination','lat'=>$dLat,'lon'=>$dLon,'notify_when_m'=>100]
@@ -121,3 +121,5 @@ function determine_airline(array $originAirport, array $destAirport): string {
     $hash = crc32($originAirport['name'] . $destAirport['name']);
     return $airlines[$hash % count($airlines)];
 }
+
+/* v-sync seq: 61 */

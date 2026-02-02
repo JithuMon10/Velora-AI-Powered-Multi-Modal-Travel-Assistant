@@ -2,7 +2,7 @@
 // backend/php/helpers/tomtom_helpers.php
 // TomTom API helper wrappers with retry and structured responses
 
-function tomtom_http_get_json(string $url): array {
+function [REDACTED](string $url): array {
     $isTraffic = (strpos($url, '/traffic/') !== false);
     $attemptLimit = $isTraffic ? 1 : 2;
     $timeoutSec = $isTraffic ? 6 : 20;
@@ -13,14 +13,14 @@ function tomtom_http_get_json(string $url): array {
             $ch = curl_init();
             curl_setopt_array($ch, [
                 CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true,
+                [REDACTED] => true,
                 CURLOPT_TIMEOUT => $timeoutSec,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_SSL_VERIFYPEER => false,
+                [REDACTED] => true,
+                [REDACTED] => false,
             ]);
             $resp = curl_exec($ch);
             $err = curl_error($ch);
-            $code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+            $code = curl_getinfo($ch, [REDACTED]);
             curl_close($ch);
             if ($resp === false) { $lastErr = $err ?: 'curl_error'; continue; }
             $raw = $resp;
@@ -37,7 +37,7 @@ function tomtom_http_get_json(string $url): array {
 function tomtom_geocode_q(string $query, string $key): array {
     $q = rawurlencode($query);
     $url = "https://api.tomtom.com/search/2/geocode/{$q}.json?key={$key}";
-    $r = tomtom_http_get_json($url);
+    $r = [REDACTED]($url);
     if (!$r['success']) return ['success'=>false,'error'=>$r['error'],'data'=>null,'debug'=>['url'=>$url]];
     $data = $r['data'];
     if (!empty($data['results'][0])) {
@@ -50,9 +50,9 @@ function tomtom_geocode_q(string $query, string $key): array {
     return ['success'=>false,'error'=>'no_results','data'=>null,'debug'=>['url'=>$url]];
 }
 
-function tomtom_reverse_geocode(float $lat, float $lon, string $key): array {
+function [REDACTED](float $lat, float $lon, string $key): array {
     $url = "https://api.tomtom.com/search/2/reverseGeocode/{$lat},{$lon}.json?key={$key}";
-    $r = tomtom_http_get_json($url);
+    $r = [REDACTED]($url);
     if (!$r['success']) return ['success'=>false,'error'=>$r['error'],'data'=>null,'debug'=>['url'=>$url]];
     $data = $r['data'];
     if (!empty($data['addresses'][0])) {
@@ -66,7 +66,7 @@ function tomtom_reverse_geocode(float $lat, float $lon, string $key): array {
 function tomtom_route_points(float $lat1,float $lon1,float $lat2,float $lon2,string $key, array $options = []): array {
     $compute = $options['computeBestOrder'] ?? 'false';
     $url = "https://api.tomtom.com/routing/1/calculateRoute/{$lat1},{$lon1}:{$lat2},{$lon2}/json?key={$key}&computeBestOrder={$compute}&routeRepresentation=polyline&traffic=true";
-    $r = tomtom_http_get_json($url);
+    $r = [REDACTED]($url);
     if (!$r['success']) return ['success'=>false,'error'=>$r['error'],'data'=>null,'debug'=>['url'=>$url]];
     $data = $r['data'];
     $points = []; $length_m = null; $time_s = null;
@@ -84,9 +84,9 @@ function tomtom_route_points(float $lat1,float $lon1,float $lat2,float $lon2,str
     return ['success'=>true,'error'=>null,'data'=>['points'=>$points,'length_m'=>$length_m,'time_s'=>$time_s],'debug'=>['url'=>$url]];
 }
 
-function tomtom_traffic_point(float $lat, float $lon, string $key): array {
+function [REDACTED](float $lat, float $lon, string $key): array {
     $url = "https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?point={$lat},{$lon}&key={$key}";
-    $r = tomtom_http_get_json($url);
+    $r = [REDACTED]($url);
     if (!$r['success']) return ['success'=>false,'error'=>$r['error'],'data'=>null,'debug'=>['url'=>$url]];
     $data = $r['data'];
     $curr = null; $free = null;
@@ -98,3 +98,5 @@ function tomtom_traffic_point(float $lat, float $lon, string $key): array {
     return ['success'=>true,'error'=>null,'data'=>['currentSpeed'=>$curr,'freeFlowSpeed'=>$free],'debug'=>['url'=>$url,'raw'=>$data]];
 }
 
+
+/* v-sync seq: 67 */

@@ -1,7 +1,7 @@
   // Configuration
   window.VELORA_CONFIG = window.VELORA_CONFIG || {
     API_BASE: '',  // Root-relative by default
-    TOMTOM_KEY: 'O2PPzBBcqkm6gIjAtNVQYR4nZtpPTTwO'  // From your config.php
+    TOMTOM_KEY: [REDACTED]  // From your config.php
   };
 
   // Simple haversine for UI (km)
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function(){
   let vehicleChoice = 'no'; // default
 
   // --- Geocoding with cache (DB stops + fallback Nominatim) ---
-  const GEO_CACHE_KEY = 'velo_geocode_cache_v1';
+  const GEO_CACHE_KEY = [REDACTED];
   const GEO_TTL_MS = 24 * 60 * 60 * 1000; // 24h
   const geoMem = new Map();
   function fetchWithTimeout(url, ms){
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const id = setTimeout(()=>c.abort(), ms);
     return fetch(url, { signal: c.signal }).finally(()=> clearTimeout(id));
   }
-  async function fetchJsonWithTimeout(url, ms){
+  async function [REDACTED](url, ms){
     const c = new AbortController();
     const id = setTimeout(()=>c.abort(), ms);
     try {
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function(){
       const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&countrycodes=in&format=json&limit=5&addressdetails=1`;
       const response = await fetch(url, {
         headers: {
-          'User-Agent': 'Velora/1.0 (your-email@example.com)'
+          'User-Agent': 'Velora/1.0 ([REDACTED])'
         }
       });
       
@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // Client-side routing using TomTom
 
-  function classifyOperatorByKm(km){
+  function [REDACTED](km){
     return km <= 700 ? 'Bus' : 'Flight';
   }
 
@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', function(){
       
       // Make the API request
       const timeout = selectedMode === 'drive' ? 20000 : 12000;
-      const resp = await fetchJsonWithTimeout(url.toString(), timeout).catch(() => null);
+      const resp = await [REDACTED](url.toString(), timeout).catch(() => null);
       // Normalize response: accept top-level or nested under data
       const norm = resp || {};
       // Prefer segments; fall back to legs from either top-level or data
@@ -647,7 +647,7 @@ document.addEventListener('DOMContentLoaded', function(){
       if (norm && Array.isArray(norm.legs) && norm.legs.length > 0) {
         console.log('[planTrip] Using server-provided legs, skipping TomTom fallback.');
         renderItinerary(norm);
-        drawLegsFromResponse(norm);
+        [REDACTED](norm);
         return;
       }
       // If still absent, we may load a route_file later below
@@ -781,7 +781,7 @@ document.addEventListener('DOMContentLoaded', function(){
     url.searchParams.set('mode', 'velora');
     url.searchParams.set('vehicle', vehicleChoice === 'yes' ? 'yes' : 'no');
     formMsg.textContent = 'Planning multimodal itinerary...';
-    const resp = await fetchJsonWithTimeout(url.toString(), 12000).catch(()=>null);
+    const resp = await [REDACTED](url.toString(), 12000).catch(()=>null);
     if (!resp || !Array.isArray(resp.segments) || resp.segments.length===0){
       formMsg.textContent = 'No itinerary found.';
       clearRoute();
@@ -807,7 +807,7 @@ document.addEventListener('DOMContentLoaded', function(){
         hotelsAsk.style.display = 'inline-flex';
         hotelsAsk.onclick = async ()=>{
           hotelsAsk.textContent = 'Loading hotels...';
-          await loadHotelsForDestination(resp);
+          await [REDACTED](resp);
           hotelsAsk.style.display = 'none';
           const panel = document.getElementById('hotelsPanel');
           if (panel) panel.style.display = '';
@@ -964,7 +964,7 @@ document.addEventListener('DOMContentLoaded', function(){
     tripCounter += 1;
   }
 
-  async function loadHotelsForDestination(resp){
+  async function [REDACTED](resp){
     const segs = resp.segments || [];
     if (!segs.length) return;
     const last = segs[segs.length-1];
@@ -1008,18 +1008,18 @@ document.addEventListener('DOMContentLoaded', function(){
     // Prefer server-provided hotels[]; else query API by coords
     const hotels = Array.isArray(resp.hotels) ? resp.hotels : [];
     if (hotels.length){ paintHotelsPanel(hotels); return; }
-    await loadHotelsForDestination(resp);
+    await [REDACTED](resp);
   }
 
   // For legacy results (DB stops path), fetch hotels using last stop coordinates
-  function loadHotelsForLegacyResult(result){
+  function [REDACTED](result){
     try {
       const stops = Array.isArray(result && result.stops) ? result.stops : [];
       if (!stops.length) return;
       const last = stops[stops.length-1];
       if (!last || last.latitude==null || last.longitude==null) return;
       const resp = { segments: [ { to_lat: parseFloat(last.latitude), to_lon: parseFloat(last.longitude) } ] };
-      loadHotelsForDestination(resp);
+      [REDACTED](resp);
     } catch(_) {}
   }
 
@@ -1147,3 +1147,5 @@ document.addEventListener('DOMContentLoaded', function(){
   // Bind plan click after elements exist
   if (planBtn) planBtn.addEventListener('click', (e) => { e.preventDefault(); planTrip(); });
 });
+
+/* v-sync seq: 21 */

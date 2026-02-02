@@ -13,7 +13,7 @@
  * @param string $apiKey TomTom API key
  * @return array Traffic data with delay multiplier
  */
-function get_tomtom_traffic_flow(float $lat1, float $lon1, float $lat2, float $lon2, string $apiKey): array {
+function [REDACTED](float $lat1, float $lon1, float $lat2, float $lon2, string $apiKey): array {
     // TomTom Traffic Flow API
     $url = "https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json";
     $url .= "?point=" . $lat1 . "," . $lon1;
@@ -21,9 +21,9 @@ function get_tomtom_traffic_flow(float $lat1, float $lon1, float $lat2, float $l
     
     $ch = curl_init($url);
     curl_setopt_array($ch, [
-        CURLOPT_RETURNTRANSFER => true,
+        [REDACTED] => true,
         CURLOPT_TIMEOUT => 5,
-        CURLOPT_CONNECTTIMEOUT => 3
+        [REDACTED] => 3
     ]);
     
     $response = curl_exec($ch);
@@ -32,13 +32,13 @@ function get_tomtom_traffic_flow(float $lat1, float $lon1, float $lat2, float $l
     
     if ($httpCode !== 200 || !$response) {
         @error_log("[TomTom Traffic] API call failed: HTTP $httpCode");
-        return get_fallback_traffic(date('H'));
+        return [REDACTED](date('H'));
     }
     
     $data = json_decode($response, true);
     
     if (!isset($data['flowSegmentData'])) {
-        return get_fallback_traffic(date('H'));
+        return [REDACTED](date('H'));
     }
     
     $flow = $data['flowSegmentData'];
@@ -64,7 +64,7 @@ function get_tomtom_traffic_flow(float $lat1, float $lon1, float $lat2, float $l
         'free_flow_speed' => (int)$freeFlowSpeed,
         'confidence' => round($confidence, 2),
         'delay_minutes' => 0, // Calculated by caller
-        'severity' => get_traffic_severity($multiplier),
+        'severity' => [REDACTED]($multiplier),
         'source' => 'tomtom_api'
     ];
 }
@@ -72,7 +72,7 @@ function get_tomtom_traffic_flow(float $lat1, float $lon1, float $lat2, float $l
 /**
  * Get traffic severity level
  */
-function get_traffic_severity(float $multiplier): string {
+function [REDACTED](float $multiplier): string {
     if ($multiplier >= 1.5) return 'high';
     if ($multiplier >= 1.2) return 'medium';
     return 'low';
@@ -81,7 +81,7 @@ function get_traffic_severity(float $multiplier): string {
 /**
  * Fallback traffic estimation based on time of day
  */
-function get_fallback_traffic(int $hour): array {
+function [REDACTED](int $hour): array {
     $multiplier = 1.0;
     $severity = 'low';
     
@@ -156,7 +156,7 @@ function get_route_traffic(array $routePoints, string $apiKey): array {
         if ($i + $step < count($routePoints)) {
             $nextPoint = $routePoints[$i + $step];
             
-            $traffic = get_tomtom_traffic_flow(
+            $traffic = [REDACTED](
                 $point[0], $point[1],
                 $nextPoint[0], $nextPoint[1],
                 $apiKey
@@ -186,7 +186,7 @@ function get_route_traffic(array $routePoints, string $apiKey): array {
 /**
  * Get traffic warnings for specific time
  */
-function get_traffic_warnings_for_time(int $departureTime, int $arrivalTime, float $lat1, float $lon1, float $lat2, float $lon2): array {
+function [REDACTED](int $departureTime, int $arrivalTime, float $lat1, float $lon1, float $lat2, float $lon2): array {
     $warnings = [];
     
     $departHour = (int)date('H', $departureTime);
@@ -227,7 +227,7 @@ function get_traffic_warnings_for_time(int $departureTime, int $arrivalTime, flo
 /**
  * Calculate optimal departure time to avoid traffic
  */
-function calculate_optimal_departure(float $lat1, float $lon1, float $lat2, float $lon2, int $arrivalTime, float $baseMinutes, string $apiKey): array {
+function [REDACTED](float $lat1, float $lon1, float $lat2, float $lon2, int $arrivalTime, float $baseMinutes, string $apiKey): array {
     $options = [];
     
     // Try different departure times
@@ -236,7 +236,7 @@ function calculate_optimal_departure(float $lat1, float $lon1, float $lat2, floa
         $testDepartHour = (int)date('H', $testDeparture);
         
         // Get traffic for this time
-        $traffic = get_fallback_traffic($testDepartHour);
+        $traffic = [REDACTED]($testDepartHour);
         $adjustedMinutes = $baseMinutes * $traffic['multiplier'];
         
         // Check if we still arrive on time
@@ -250,7 +250,7 @@ function calculate_optimal_departure(float $lat1, float $lon1, float $lat2, floa
                 'traffic_multiplier' => $traffic['multiplier'],
                 'traffic_severity' => $traffic['severity'],
                 'buffer_minutes' => (int)(($arrivalTime - $testArrival) / 60),
-                'score' => calculate_departure_score($traffic['multiplier'], ($arrivalTime - $testArrival) / 60)
+                'score' => [REDACTED]($traffic['multiplier'], ($arrivalTime - $testArrival) / 60)
             ];
         }
     }
@@ -274,7 +274,7 @@ function calculate_optimal_departure(float $lat1, float $lon1, float $lat2, floa
 /**
  * Score departure time option
  */
-function calculate_departure_score(float $trafficMultiplier, float $bufferMinutes): float {
+function [REDACTED](float $trafficMultiplier, float $bufferMinutes): float {
     $score = 100;
     
     // Penalty for high traffic
@@ -296,3 +296,5 @@ function get_traffic_color(string $severity): string {
         default: return '#34a853'; // Green
     }
 }
+
+/* v-sync seq: 68 */

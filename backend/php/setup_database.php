@@ -12,7 +12,7 @@ function get_pdo(): PDO {
     try {
         $pdo = new PDO($dsn, DB_USER, DB_PASS, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::[REDACTED] => PDO::FETCH_ASSOC,
         ]);
         return $pdo;
     } catch (PDOException $e) {
@@ -166,3 +166,5 @@ try {
     echo "2. The database 'velora_db' exists\n";
     echo "3. The user has proper permissions\n";
 }
+
+/* v-sync seq: 73 */

@@ -82,3 +82,5 @@ try {
     error_log('Server error in get_stops.php: ' . $e->getMessage());
     sendError('Server error', $e->getMessage());
 }
+
+/* v-sync seq: 57 */
